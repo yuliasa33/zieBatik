@@ -1,0 +1,88 @@
+<!-- <div class="eventnya flex flex-col w-screen h-screen">
+    <div class="flex flex-row justify-center">
+        <div class="flex flex-col p-2 gap-3">
+            <p class="text-6xl text-gray-600 font-bold">Events</p>
+        </div>
+    </div>
+    <div class="flex flex-row w-full h-full">
+        <div class="flex flex-row w-7/12">
+            <div class="flex flex-col h-full w-full p-4  rounded-lg gap-0">
+                <div class="image-content flex flex-col w-full h-3/6 p-3 my-2 mx-2">
+                    <img src="../../../assets/images/batikhuman.jpg" class="w-full h-full">
+                </div>
+                <div class="title mx-2">
+                    <p class="text-3xl underline text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, atque.</p>
+                </div>
+                <div class="subtitle mx-2">
+                    <p class="text-lg text-end underline text-gray-700">
+                        tanggal
+                    </p>
+                    </div>
+                <div class="body mx-2">
+                    <div class="article-container">
+                        <p class="article-content" [class.expanded]="isExpanded">{{ content }}</p>
+                        <div class="flex flex-col justify-end">
+                            <button (click)="toggleContent()" >
+                                {{ isExpanded ? 'Lihat Lebih Sedikit' : 'Lihat Selengkapnya' }}
+                              </button>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-row w-5/12">
+            <div class="flex flex-col h-full p-4 w-full">
+                <div class=" flex-col h-full p-4 mx-3 my-3  shadow-lg bg-opacity-10 bg-gray-300">
+                    <div class="header-title w-full">
+                        <p class="text-xl font-semibold text-gray-600 ml-6 p-2 border-b-2">TOP NEWS</p>
+                    </div>
+                    <div class="content_news"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    </div> -->
+
+    <div class="eventnya flex flex-col w-screen h-screen p-4">
+        <div class="flex flex-row justify-center mb-4">
+          <div class="flex flex-col p-2 gap-3">
+            <p class="text-3xl md:text-6xl text-gray-600 font-bold">Events</p>
+          </div>
+        </div>
+        <div class="flex flex-col lg:flex-row w-full h-full">
+          <div class="flex flex-col w-full lg:w-7/12 mb-4 lg:mb-0">
+            <div class="flex flex-col h-full w-full p-4  gap-0 bg-white">
+              <div class="image-content flex flex-col w-full h-64 lg:h-3/6 p-3 my-2 mx-2">
+                <img src="../../../assets/images/batikhuman.jpg" class="w-full h-full object-cover rounded-lg">
+              </div>
+              <div class="title mx-2 mt-2">
+                <p class="text-xl md:text-3xl hover:underline text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, atque.</p>
+              </div>
+              <div class="subtitle mx-2 mt-1">
+                <p class="text-sm md:text-lg text-end underline text-gray-700">
+                  tanggal
+                </p>
+              </div>
+              <div class="body mx-2 mt-2">
+                <div class="article-container">
+                  <p class="article-content" [class.expanded]="isExpanded">{{ content }}</p>
+                  <div class="flex flex-col justify-end mt-2">
+                    <button (click)="toggleContent()" class="text-blue-500 hover:text-blue-700 transition">
+                      {{ isExpanded ? 'Lihat Lebih Sedikit' : 'Lihat Selengkapnya' }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col w-full lg:w-5/12">
+            <div class="flex flex-col h-full p-4 shadow-lg bg-opacity-10 bg-gray-300 rounded-lg">
+              <div class="header-title w-full mb-4">
+                <p class="text-lg md:text-xl font-semibold text-gray-600 ml-2 md:ml-6 p-2 border-b-2">TOP NEWS</p>
+              </div>
+              <div class="content_news"></div>
+            </div>
+          </div>
+        </div>
+      </div>

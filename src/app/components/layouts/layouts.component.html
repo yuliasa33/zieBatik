@@ -1,0 +1,44 @@
+<section id="layouts" class="flex flex-col lg:flex-col w-screen  justify-end  mr-0">
+ 
+    <div class="container lg:container w-screen">
+    <div class="flex flex-col lg:flex-col lg h-screen lg:h-screen  ">
+        <div class="flex flex-row w-screen fixed bg-white lg:flex-row  img-bg  lg:fixed top-0 z-50 justify-start items-center h-20 lg:bg-white navbar shadow-xl " [class.scrolled]="isScrolled">
+            <div class="flex flex-col w-full h-full mt-4 items-center p-3">
+              <div class="flex flex-row w-full mx-5 h-full items-center p-3">
+                <div>
+                  <p class="text-2xl font-bold text-gray-100">INI LOGO</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col w-full">
+              <div class="flex flex-row w-full mx-5  justify-end">
+                <div class="flex flex-col transition-all items-center text-end cursor-pointer p-3"
+                    *ngFor="let nav of navbarMenu">
+                    <div>
+                  </div>
+                  <div *ngIf="largeScreen" #largeScreen>
+                    <button (click)="handleClickNavbar($event)"><p class="text-lg text-end p-3 font-bold">{{nav.label}}</p></button>
+                  </div>
+                </div>
+                <ng-container *ngIf="isSmallScreen || largeScreen == false">
+                    <button (click)="toggleSidebar()"><i [class]="'pi pi-align-justify mt-2 mx-5'"></i></button>
+                  </ng-container>
+              </div>
+            </div>
+          </div>
+    
+        <div class="flex w-screen h-full lg:h-full lg:flex my-0">
+           
+            <ng-content>
+              
+            </ng-content>
+        </div>
+    </div>
+ 
+    
+   
+    
+</div>
+
+</section>
+

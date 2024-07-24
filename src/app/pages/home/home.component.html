@@ -1,0 +1,383 @@
+<app-layouts>
+    <div class="flex flex-col w-screen h-screen lg:h-screen lg:flex mt-20 p-0 my-0" @fadeIn>
+
+        <!-- <div class="container h-full mx-0 ">
+            <div class="flex w-screen lg:h-screen lg:w-screen lg:flex h-80 m-0">
+                <div class="w-full " @fadeInComponents>
+                    <div class="carousel w-full h-full">
+                        <div id="slide1" class="carousel-item relative w-full">
+                            <img src="../../../assets/images/batik3.jpg"
+                                class="w-full" />
+                            <div
+                                class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+                                <a href="#slide4" class="btn btn-circle">❮</a>
+                                <a href="#slide2" class="btn btn-circle">❯</a>
+                            </div>
+                        </div>
+                        <div id="slide2" class="carousel-item relative w-full">
+                            <img src="../../../assets/images/batik5.jpg"
+                                class="w-full" />
+                            <div
+                                class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+                                <a href="#slide1" class="btn btn-circle">❮</a>
+                                <a href="#slide3" class="btn btn-circle">❯</a>
+                            </div>
+                        </div>
+                        <div id="slide3" class="carousel-item relative w-full">
+                            <img src="../../../assets/images/batikhuman.jpg"
+                                class="w-full" />
+                            <div
+                                class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+                                <a href="#slide2" class="btn btn-circle">❮</a>
+                                <a href="#slide4" class="btn btn-circle">❯</a>
+                            </div>
+                        </div>
+                        <div id="slide4" class="carousel-item relative w-full">
+                            <img src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.jpg"
+                                class="w-full" />
+                            <div
+                                class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+                                <a href="#slide3" class="btn btn-circle">❮</a>
+                                <a href="#slide1" class="btn btn-circle">❯</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="w-6/12 p-3 gap-2" @fadeInComponents>
+                    <div class="flex flex-col w-full h-4/6 justify-center text-center items-center">
+                        <div class="test">
+                            <p class="text-xl">FASHION of</p>
+                            <p class="text-md">STYLE</p>
+                        </div>
+    
+                    </div>
+                </div> -->
+        <!-- </div>
+        </div> -->
+
+        <div class="sliderAx h-screen">
+            <div id="slider-1" class="slide  mx-auto w-screen lg:h-screen h-5/6 " [ngClass]="{'hidden': currentSlide !== 0}">
+                <div class="bg-cover bg-center w-full  h-full text-white py-24 px-10  object-fill "
+                    style="background-image: url('../../../assets/images/batikhuman.jpg');">
+                    <div class="md:w-1/2">
+                        <p class="font-bold text-sm uppercase">Services</p>
+                        <p class="text-3xl font-bold">Hello world</p>
+                        <p class="text-2xl mb-10 leading-none">Carousel with TailwindCSS and jQuery</p>
+                        <a href="#"
+                            class="bg-purple-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">Contact
+                            us</a>
+                    </div>
+                </div> <!-- container -->
+                <br>
+            </div>
+
+            <div id="slider-2" class="slide mx-auto lg:h-screen h-5/6" [ngClass]="{'hidden': currentSlide !== 1}">
+                <div class="bg-cover bg-top w-full  h-full text-white py-24 px-10 object-fill"
+                    style="background-image: url('../../../assets/images/batiktulis.jpg')">
+
+                    <p class="font-bold text-sm uppercase">Services</p>
+                    <p class="text-3xl font-bold">Hello world</p>
+                    <p class="text-2xl mb-10 leading-none">Carousel with TailwindCSS and jQuery</p>
+                    <a href="#"
+                        class="bg-purple-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">Contact
+                        us</a>
+
+                </div> <!-- container -->
+                <br>
+            </div>
+        </div>
+        <div class="flex justify-between w-12 mx-auto pb-2 mt-3">
+            <button id="sButton1" (click)="sliderButton1()" class="bg-purple-400 rounded-full w-4 pb-2 "></button>
+            <button id="sButton2" (click)="sliderButton2() " class="bg-purple-400 rounded-full w-4 p-2"></button>
+        </div>
+
+
+        <div class="container w-full h-screen">
+            <app-about></app-about>
+
+        </div>
+        <!-- <div class="flex flex-col w-screen h-full">
+            <div class="grid lg:grid-cols-2 grid-cols-1 w-screen h-screen p-3">
+                <div class="flex flex-row w-full h-full  items-center ">
+                    <div class="flex flex-col w-full  items-center p-16 mx-7 ">
+                        <div class="card-about flex flex-col h-full ">
+                            <p class="font-bold lg:text-6xl lg:mb-5 text-2xl text-gray-600">About Us</p>
+                            <p class="font-normal lg:text-xl text-md text-slate-500">Driven by a passion for seamless user
+                                experiences,we've meticulously curated pagedone to empower creators, designers, and
+                                developers
+                                alike. Our mission is to provice a compregensive toolkit, enabling you to build
+                                intuitive
+                                beautiful interfaces that resonate with users on every interaction</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-row w-full h-full items-center ">
+                    <div class="flex flex-col w-full  items-center p-16 mx-7 ">
+                        <div class="card-about flex flex-col h-full ">
+                            <p class="font-bold text-4xl mb-5">INI FOTONYA</p>
+                            <p class="font-normal text-xl text-slate-500"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="flex flex-col w-screen h-full">
+            <div class="grid grid-cols-1 md:grid-cols-2 w-screen h-screen p-3">
+              <div class="flex flex-row w-full h-full items-center">
+                <div class="flex flex-col w-full items-center p-4 md:p-16 mx-3 md:mx-7">
+                  <div class="card-about flex flex-col h-full">
+                    <p class="font-bold text-2xl md:text-4xl lg:text-6xl mb-5 text-gray-600">About Us</p>
+                    <p class="font-normal text-sm md:text-md lg:text-xl text-slate-500">
+                      Driven by a passion for seamless user experiences, we've meticulously curated
+                      pages to empower creators, designers, and developers alike. Our mission is to
+                      provide a comprehensive toolkit, enabling you to build intuitive beautiful
+                      interfaces that resonate with users on every interaction.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-row w-full h-full items-center">
+                <div class="flex flex-col w-full items-center p-4 md:p-16 mx-3 md:mx-7">
+                  <div class="card-about flex flex-col h-full">
+                    <!-- <p class="font-bold text-2xl md:text-4xl lg:text-4xl mb-5">INI FOTONYA</p> -->
+                     <img src="../../../assets/images/batikgreyscale.jpg" class="rounded-3xl shadow-3xl" alt="">
+                    <p class="font-normal text-sm md:text-xl text-slate-500"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="sidebar flex flex-row w-4/12 h-screen fixed top-0 right-0 justify-end mt-28 bg-white transition-all duration-500"
+            *ngIf="layoutService.showSidebar$ | async">
+            <div class="sidebar-content text-center justify-center">
+                <div *ngFor="let nav of navbarMenu" class="sidebar-item  opacity-100">
+                    <p class="text-lg p-3 font-bold  opacity-100">{{nav.label}}</p>
+                </div>
+            </div>
+            <!-- <button class="close-btn" (click)="toggleSidebar()">Close</button> -->
+        </div>
+        <div class="container w-screen h-screen">
+            <div class="grid grid-cols-1 lg:grid-cols-2 w-full">
+              <div class="h-64 lg:h-screen lg:w-full">
+                <div class="flex flex-col w-full items-center justify-center p-4 h-full">
+                  <div class="flex flex-row h-full lg:h-5/6 w-10/12 rounded-3xl">
+                    <img src="../../../assets/images/womanwritebatik.jpg" class="h-full lg:h-5/6 w-full rounded-3xl shadow-xl object-cover" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="h-auto lg:h-screen">
+                <div class="flex flex-col w-full items-center justify-center p-4 h-full">
+                  <div class="flex flex-row h-auto lg:h-5/6 w-10/12 rounded-3xl">
+                    <div class="flex flex-col gap-5">
+                      <p class="font-semibold text-3xl lg:text-6xl text-gray-600">Precision and <br>Quality</p>
+                      <p class="font-semibold text-lg lg:text-2xl text-gray-400 mt-5">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ipsam placeat reprehenderit velit in neque, cum tenetur dicta numquam non est praesentium ad molestias ducimus ex voluptates. Animi quisquam earum dolorum laboriosam unde? Delectus modi veritatis vel velit? Debitis, quae!
+                      </p>
+                      <div class="text-center lg:text-end px-4 mx-4 mt-5">
+                        <button class="button">Learn More...</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- <div class="containter w-full h-full">
+            <div class="grid grid-cols-2  w-full">
+                <div class=" h-64 lg:h-screen">
+                    test
+                </div>
+                <div class="bg-gray-200">
+                    test
+                </div>
+            </div>
+        </div> -->
+
+        <div class="container w-full h-full">
+            <app-events></app-events>
+        </div>
+
+
+
+        <div class="container w-screen h-full my-5 p-3 lg:w-screen">
+            <div class="grid grid-cols-3 ml-3 h-96 justify-center items-center w-screen">
+                <div class="flex flex-col w-full justify-center text-center">
+                    <div class="flex flex-row w-full justify-center">
+                        <div class="circle w-14 h-14 lg:w-24 lg:h-24 rounded-full bg-slate-800">
+                            <div class="flex flex-col w-full h-full justify-center p-2 items-center">
+                                <i class="pi pi-headphones text-white icon-large "></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-slate-800 lg:text-xl text-md font-bold mt-5">CUSTOMER SUPPORT</p>
+                    <p class="text-slate-800 text-sm lg:text-md font-normal mt-3">Hubungi no WhatsApp kami di:+62 373
+                        127 381 2</p>
+                </div>
+                <div class="flex flex-col w-full justify-center text-center">
+                    <div class="flex flex-row w-full justify-center ">
+                        <div class="circle w-14 h-14 lg:w-24 lg:h-24 rounded-full bg-slate-800">
+                            <div class="flex flex-col w-full h-full justify-center p-2 items-center">
+                                <i class="pi pi-money-bill text-white icon-large "></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-slate-800 lg:text-xl text-md font-bold mt-5">FASTEST PAYMENT</p>
+                    <p class="text-slate-800 text-sm lg:text-md font-normal mt-3">Hubungi no WhatsApp kami di:+62 373
+                        127 381 2</p>
+                </div>
+                <div class="flex flex-col w-full justify-center text-center ">
+                    <div class="flex flex-row w-full justify-center">
+                        <div class="circle w-14 h-14 lg:w-24 lg:h-24 rounded-full bg-slate-800">
+                            <div class="flex flex-col w-full h-full justify-center p-2 items-center">
+                                <i class="pi pi-truck text-white icon-large "></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-slate-800 lg:text-xl text-md font-bold mt-5">ANY SHIPPING METHOD</p>
+                    <p class="text-slate-800 lg:text-md text-sm font-normal mt-3">Hubungi no WhatsApp kami di:+62 373
+                        127 381 2</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container w-full h-full mt-2 p-3">
+            <div class="flex flex-col h-fit lg:w-screen lg:h-screen ">
+                <div class="flex-row w-full h-20 p-0 ml-4 justify-center items-end text-center">
+                    <p class="text-6xl md:text-7xl font-bold mb-5 text-gray-600">Our New Product</p>
+                </div>
+                <div class="flex flex-row justify-center h-full lg:w-full p-3 m-0 lg:h-full h-screen ">
+                    <div class="flex flex-col w-full lg:h-fit mb-5 p-4 h-4/6 ">
+                        <div
+                            class="inline-flex lg:w-full lg:h-fit h-full gap-2  w-full  overflow-x-auto overflow-y-hidden">
+                            <div *ngFor="let item of loopitem">
+                                <div class="card-items w-fit mx-1 p-3 my-4 h-20 lg:h-full lg:w-96 ">
+                                    <div
+                                        class="w-full hover:scale-105 transition-all duration-200 hover:shadow-lg max-w-sm bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
+                                        <a href="#">
+                                            <img class="p-8 rounded-t-lg  w-full images"
+                                                src="../../../assets/images/image1.png" style="text-align: center;"
+                                                alt="product image" />
+                                        </a>
+                                        <div class="px-5 pb-5">
+                                            <a href="#">
+                                                <h5
+                                                    class="text-xl font-semibold text-center tracking-tight text-gray-900 dark:text-white">
+                                                    Batik Projo</h5>
+                                            </a>
+                                            <div class="flex items-center justify-center mt-2.5 mb-5">
+                                                <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                                                    <div class="rating">
+                                                        <input type="radio" name="rating-2"
+                                                            class="mask mask-star-2 bg-orange-400" />
+                                                        <input type="radio" name="rating-2"
+                                                            class="mask mask-star-2 bg-orange-400" />
+                                                        <input type="radio" name="rating-2"
+                                                            class="mask mask-star-2 bg-orange-400" />
+                                                        <input type="radio" name="rating-2"
+                                                            class="mask mask-star-2 bg-orange-400" />
+                                                        <input type="radio" name="rating-2"
+                                                            class="mask mask-star-2 bg-orange-400" checked="checked" />
+                                                    </div>
+                                                </div>
+                                                <span
+                                                    class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
+                                            </div>
+                                            <div class="flex flex-col items-center gap-3 justify-between">
+                                                <span
+                                                    class="text-md lg:text-2xl font-bold text-gray-900 dark:text-white">Rp.299.000</span>
+                                                <a href="#"
+                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
+                                                    to cart <i class="pi pi-cart-plus"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <app-testimonial></app-testimonial>
+
+
+
+
+
+
+        <!-- <div class="flex flex-col h-full lg:w-screen lg:h-screen">
+            <div class="flex-row w-full h-full p-3 ml-4 my-4 justify-center text-center">
+                <p class="font-bold">OUR NEW PRODUCT</p>
+            </div>
+            </div> -->
+            <div class="flex flex-row w-screen">
+                <app-gallery></app-gallery>
+            </div>
+         
+        <app-footer></app-footer>
+        
+      
+
+
+        <!-- <div class="flex flex-row w-full h-full border shadow-md rounded-lg mb-4 p-4 mt-3 mx-3">
+            <div class="flex flex-col w-full h-full justify-center text-center">
+                <p class="text-xl underline">Our Product Best Saller</p>
+                <div class="flex-row w-full p-3">
+                    <div class="grid grid-cols-4 w-full">
+                         <div class="card-items mx-2 p-3 " @fadeInComponents>
+                            <div
+                                class="w-full hover:scale-105 transition-all duration-200 hover:shadow-lg max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                <a href="#">
+                                    <img class="p-8 rounded-t-lg  w-full" src="../../../assets/images/image1.png"
+                                        style="height:calc(100vh - 25rem);text-align: center;" alt="product image" />
+                                </a>
+                                <div class="px-5 pb-5">
+                                    <a href="#">
+                                        <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                                            Batik Projo</h5>
+                                    </a>
+                                    <div class="flex items-center justify-center mt-2.5 mb-5">
+                                        <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                                            <div class="rating">
+                                                <input type="radio" name="rating-2"
+                                                    class="mask mask-star-2 bg-orange-400" />
+                                                <input type="radio" name="rating-2"
+                                                    class="mask mask-star-2 bg-orange-400"  />
+                                                <input type="radio" name="rating-2"
+                                                    class="mask mask-star-2 bg-orange-400" />
+                                                <input type="radio" name="rating-2"
+                                                    class="mask mask-star-2 bg-orange-400" />
+                                                <input type="radio" name="rating-2"
+                                                    class="mask mask-star-2 bg-orange-400" checked="checked"/>
+                                            </div>
+                                        </div>
+                                        <span
+                                            class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-3 justify-between">
+                                        <span class="text-3xl font-bold text-gray-900 dark:text-white">Rp.299.000</span>
+                                        <a href="#"
+                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
+                                            to cart <i class="pi pi-cart-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div> -->
+        <!-- <app-about></app-about> -->
+
+
+    </div>
+</app-layouts>

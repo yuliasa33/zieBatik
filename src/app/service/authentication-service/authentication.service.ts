@@ -1,0 +1,65 @@
+import { TitleCasePipe } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, catchError, map, Observable, tap } from 'rxjs';
+import { UtilityService } from '../utility/utility.service';
+import { HttpOperationService } from '../httpOperation/http-operation.service';
+import { environment } from 'src/environment/environment';
+import { Router } from '@angular/router';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthenticationService {
+
+  isLogin$ = new BehaviorSubject<any>(false)
+  isLoginState = this.isLogin$.asObservable()
+
+  constructor(private httpOperationService:HttpOperationService,
+              private utilityService:UtilityService,
+              private router:Router
+  ){
+
+  }
+
+  SignInService(data:any):Observable<any>{
+    return this.httpOperationService.onPostRequest(`${environment.url}customer/login`,data)
+    .pipe(
+      tap((result) => {
+        console.log(result)
+        if (result.status =='success') {
+            const data = {
+              id_customer:result.user.id_customer,
+              nama: result.user.nama,
+              email: result.user.email,
+              phone: result.user.phone,
+              gender:result.user.gender,
+              image: result.user.image,
+              bearer:result.authorisation.token,
+              type:result.authorisation.type,
+            }
+            this.isLogin$.next(true)
+            this.handleSignIn(data);
+        }
+    }),
+      catchError((error:any):any=>{
+      this.utilityService.onShowCustomAlert('error','Oops...',error.message)
+    }))
+  }
+
+  SignOut():void{
+    localStorage.clear()
+    this.utilityService.onShowCustomAlert('success','Berhasil','LogOut Success')
+    .then(()=>{
+      this.router.navigateByUrl('')
+    })
+    
+  }
+
+
+   handleSignIn(data:any):void{
+    localStorage.clear()
+    localStorage.setItem("BATIK_",JSON.stringify(data));
+  }
+
+}

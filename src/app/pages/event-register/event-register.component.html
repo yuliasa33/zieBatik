@@ -1,0 +1,35 @@
+<app-layouts>
+    <div class="flex flex-col w-screen h-screen gap-2">
+        <div class="image-event w-full h-5/6">
+          <img src="" alt="" class="h-full w-full object-cover">
+        </div>
+        <div class="flex flex-col w-full h-full gap-3 p-4">
+          <div class="judul">
+            <p class="text-2xl md:text-4xl lg:text-5xl text-gray-600 text-center md:text-left">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus, quam?
+            </p>
+          </div>
+          <div class="content">
+            <p class="text-sm md:text-base lg:text-lg text-justify">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat eos necessitatibus aliquam mollitia, voluptatum cupiditate optio voluptas saepe, magnam obcaecati sint repudiandae placeat rem nisi tempora nulla voluptates, ducimus ratione temporibus nostrum dolorem cum excepturi illum! Officia sapiente quo incidunt amet suscipit fugiat laudantium sed vitae officiis dignissimos, ullam repellendus eaque laborum facere ipsum minima, nihil, pariatur numquam? Labore ducimus inventore fuga, quasi dolorem architecto provident. Ratione sint perferendis quidem aliquam nemo ut doloremque nam sed incidunt, laboriosam, magnam eum beatae voluptates! Ut blanditiis fuga, sed beatae in earum illo rerum doloribus nesciunt harum quae ad sit libero, odit quisquam.
+            </p>
+          </div>
+          <div class="bottom mt-3 p-3 text-center">
+            <button class="btn btn-neutral hover:scale-105 hover:shadow-md transition-all duration-150">
+              Daftar Event Sekarang ...
+            </button>
+          </div>
+        </div>
+        <app-footer></app-footer>
+      </div>
+
+      <div class="sidebar flex flex-row w-4/12 h-screen fixed top-0 right-0 justify-end mt-28 bg-white transition-all duration-500"
+            *ngIf="layoutService.showSidebar$ | async">
+            <div class="sidebar-content text-center justify-center">
+                <div *ngFor="let nav of navbarMenu" class="sidebar-item  opacity-100">
+                    <p class="text-lg p-3 font-bold  opacity-100">{{nav.label}}</p>
+                </div>
+            </div>
+            <!-- <button class="close-btn" (click)="toggleSidebar()">Close</button> -->
+        </div>
+</app-layouts>

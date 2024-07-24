@@ -1,0 +1,28 @@
+.article-container {
+    width: 100%;
+    /* max-width: 600px; */
+    /* margin: 0 auto; */
+  }
+  
+  .article-content {
+    overflow: hidden;
+    /* max-height: 100px; */
+    transition: max-height 0.3s ease;
+  }
+  
+  .article-content.expanded {
+    max-height: 1000px; /* atau nilai yang cukup besar untuk menampilkan seluruh konten */
+  }
+  
+  button {
+    background-color: #4f4f4f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #d1d1d1;
+  }

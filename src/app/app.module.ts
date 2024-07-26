@@ -18,6 +18,8 @@ import { EventRegisterComponent } from './pages/event-register/event-register.co
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DetailProductComponent } from './pages/detail-product/detail-product.component';
+
 
 
 @NgModule({
@@ -25,7 +27,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     LoadingScreenComponent,
     AuthenticationComponent,
-
   ],
   imports: [
     BrowserModule,

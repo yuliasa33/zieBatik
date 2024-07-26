@@ -4,6 +4,7 @@ import { AuthenticationComponent } from "./pages/authentication/authentication.c
 import { ProductComponent } from "./pages/product/product.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { EventRegisterComponent } from "./pages/event-register/event-register.component";
+import { DetailProductComponent } from "./pages/detail-product/detail-product.component";
 
 const routes:Routes = [
     {
@@ -20,6 +21,10 @@ const routes:Routes = [
         path:'Product',
         component:ProductComponent,
         data:{title:"Product"}
+    },
+    {
+        path:'detail_product/:id',
+        component:DetailProductComponent
     },
     {
         path:'event-register',

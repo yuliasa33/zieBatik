@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
     {label:'Service'},
   ]
 
-  loopitem:any[] = [1,2,3,4,5,6,7,8]
+  loopitem:any[] = [1,2,3,4,5]
 
 
   constructor(public layoutService:LayoutService,

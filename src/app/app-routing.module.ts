@@ -5,6 +5,7 @@ import { ProductComponent } from "./pages/product/product.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { EventRegisterComponent } from "./pages/event-register/event-register.component";
 import { DetailProductComponent } from "./pages/detail-product/detail-product.component";
+import { ShoppingChartComponent } from "./pages/shopping-chart/shopping-chart.component";
 
 const routes:Routes = [
     {
@@ -29,6 +30,10 @@ const routes:Routes = [
     {
         path:'event-register',
         component:EventRegisterComponent
+    },
+    {
+        path:'shoping-chart',
+        component:ShoppingChartComponent
     }
 ]
 

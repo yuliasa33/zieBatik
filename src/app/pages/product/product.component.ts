@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LayoutsComponent } from 'src/app/components/layouts/layouts.component';
 import { FooterComponent } from "../footer/footer.component";
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product',
@@ -10,12 +11,15 @@ import { Router } from '@angular/router';
   standalone:true,
   imports: [
     LayoutsComponent,
-    FooterComponent
+    FooterComponent,
+    CommonModule
 ]
 })
 export class ProductComponent implements OnInit {
 
   item:any =1
+
+  stars = [1, 2, 3, 4, 5];
 
   constructor(private router:Router){}
 

@@ -27,4 +27,31 @@ export class ProdukService {
     return this.httpOperationService.onPostRequest(environment.url+'cart/create',data);
   }
 
+  getcart():Observable<any>{
+    return this.httpOperationService.getRequest(environment.url+'cart/getall/1');
+  }
+  hapuscart(id:any):Observable<any>{
+    return this.httpOperationService.getRequest(environment.url+'cart/delete/'+id);
+  }
+  updatecart(data:any):Observable<any>{
+    return this.httpOperationService.onPutRequest(environment.url+'cart/update',data);
+  }
+  tambah_alamat(data:any):Observable<any>{
+    return this.httpOperationService.onPostRequest(environment.url+'cart/update',data);
+  }
+  get_alamat():Observable<any>{
+    return this.httpOperationService.getRequest(environment.url+'customer/getAllAlamatCustomer/1');
+  }
+  hapus_alamat():Observable<any>{
+    return this.httpOperationService.getRequest(environment.url+'cart/update');
+  }
+  provinsi():Observable<any>{
+    return this.httpOperationService.getRequest(environment.url+'rajaongkir/getProvinsi');
+  }
+  kota(id_provinsi:any):Observable<any>{
+    return this.httpOperationService.getRequest(environment.url+'rajaongkir/getKota/'+id_provinsi);
+  }
+  kurir():Observable<any>{
+    return this.httpOperationService.getRequest(environment.url+'rajaongkir/getKurir');
+  }
 }

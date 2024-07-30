@@ -1,9 +1,30 @@
 <app-layouts>
     <div class="flex flex-col h-screen">
-        <div class="flex flex-col w-screen h-screen mt-10 p-3 overflow-y-auto">
-           <div class="card"></div>
+        <div class="flex flex-col w-screen h-screen mt-20 p-3 overflow-y-auto overflow-x-hidden">
+            <div class="grid grid-cols-2 gap-5 w-full h-auto">
+                <div class="list-chart h-auto border w-full my-3 p-3 mx-7 mr-5">
+                    <div class="flex flex-row w-full h-full p-3 items-center gap-3">
+                        <input type="checkbox" name="" id="">
+                        <img src="../../../assets/images/batiktulis.jpg" class="w-40 h-40" alt="">
+                    </div>
+                </div>
+                <div class="invoice">
+                    <div class="flex flex-col w-full h-max p-3">
+                        <div class="card-body w-full h-full relative rounded-xl shadow-md mr-5 border-gray-500">
+                            <div class="flex flex-row mt-3 w-full h-auto items-center">
+                                <button
+                                    class="w-full rounded-sm border border-gray-500 h-16 hover:bg-gray-200 transtion-all duration-100">
+                                    <p class="text-2xl ">Bayar</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
         <app-footer></app-footer>
     </div>
-  
-    </app-layouts>
+
+</app-layouts>

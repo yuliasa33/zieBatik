@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DetailProductComponent } from './pages/detail-product/detail-product.component';
 import { ShoppingChartComponent } from './pages/shopping-chart/shopping-chart.component';
 import { VideoplayerComponent } from './pages/videoplayer/videoplayer.component';
+import { ListEventComponent } from './pages/list-event/list-event.component';
 
 
 

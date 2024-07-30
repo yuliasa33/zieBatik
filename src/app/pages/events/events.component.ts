@@ -18,6 +18,8 @@ export class EventsComponent implements OnInit {
   isExpanded = false;
   content = ``; // Ganti dengan konten artikel sebenarnya
 
+  evnet = [1,2,3,4,5,6,7,8]
+
   items = [{
     no: 1,
     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, aliquam.",
@@ -57,6 +59,10 @@ export class EventsComponent implements OnInit {
     this.imagesSelect = args.image
     this.titleSelect = args.title
     this.content = args.text
+  }
+
+  handleClickLihatLebihBanyak():void{
+    this.router.navigateByUrl('list-event')
   }
 
 }

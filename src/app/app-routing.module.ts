@@ -6,6 +6,7 @@ import { EventRegisterComponent } from "./pages/event-register/event-register.co
 import { HomeComponent } from "./pages/home/home.component";
 import { ProductComponent } from "./pages/product/product.component";
 import { ShoppingChartComponent } from "./pages/shopping-chart/shopping-chart.component";
+import { ListEventComponent } from "./pages/list-event/list-event.component";
 
 const routes:Routes = [
     {
@@ -34,6 +35,9 @@ const routes:Routes = [
     {
         path:'shoping-chart',
         component:ShoppingChartComponent
+    },{
+        path:'list-event',
+        component:ListEventComponent
     }
 ]
 

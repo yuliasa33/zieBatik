@@ -11,4 +11,7 @@ import { VideoplayerComponent } from "../videoplayer/videoplayer.component";
 })
 export class AboutComponent {
 
+
+  
+
 }

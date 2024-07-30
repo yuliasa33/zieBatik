@@ -14,6 +14,7 @@
     max-height: 1000px; /* atau nilai yang cukup besar untuk menampilkan seluruh konten */
   }
   
+
   button {
     background-color: #4f4f4f;
     color: white;
@@ -25,4 +26,12 @@
   
   button:hover {
     background-color: #d1d1d1;
+  }
+
+  .hide-scroll-bar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scroll-bar::-webkit-scrollbar {
+    display: none;
   }

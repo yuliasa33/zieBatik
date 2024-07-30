@@ -1,0 +1,42 @@
+<app-layouts>
+    <div class="flex flex-col w-screen h-screen gap-3 justify-normal" @fadeIn>
+        <div class="flex flex-row w-full h-20 justify-center mt-24">
+          <div class="header-box-product h-16 w-10/12 bg-base-200 shadow-lg rounded-sm">
+            <div class="flex flex-row h-full items-center p-3 mx-9">
+              <p class="text-3xl p-3 text-gray-600 font-semibold">Events ZieBatik</p>
+              <div class="dropdown dropdown-bottom ml-3">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="flex flex-row w-full justify-center gap-3 mt-3">
+          <div class="product-content flex flex-col gap-7 w-10/12 p-3 mx-8 justify-start">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 w-full">
+              <div *ngFor="let data of produk" class="items-per-content border shadow-lg rounded-lg flex flex-col gap-5 w-full">
+                <img [src]="data.image" [id]="" class="w-full h-32 lg:h-80 object-cover" alt="">
+                <div class="flex flex-col w-full mx-4">
+                  <p class="text-md font-semibold lg:mt-3"></p>
+                  <div class="rate">
+                    <!-- Rating content -->
+                  </div>
+                  <p class="text-lg mt-1 font-semibold ">JUDUL</p>
+                  <p class="text-md mb-3 text-gray-500 mt-3">TEXT</p>
+                  <div class="mt-3 flex flex-row w-full items-center justify-center my-3">
+                    <button type="button" (click)="detail(data.id_product)" class="h-12 border p-3 hover:bg-gray-400 hover:text-white transition-all duration-200">
+                      <p class="mx-4">Lihat Selengkapnya <i class="ml-5 pi pi-arrow-right"></i></p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="flex flex-row w-full mt-3">
+          <app-footer></app-footer>
+        </div>
+      </div>
+
+</app-layouts>

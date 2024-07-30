@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { LayoutsComponent } from 'src/app/components/layouts/layouts.component';
-import { FooterComponent } from "../footer/footer.component";
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { fadeInAnimation } from 'src/app/animations/animations';
+import { LayoutsComponent } from 'src/app/components/layouts/layouts.component';
+import { ProdukService } from 'src/app/service/produk/produk.service';
+import { FooterComponent } from "../footer/footer.component";
 
 @Component({
   selector: 'app-product',
@@ -25,20 +26,22 @@ export class ProductComponent implements OnInit {
 
   items = [1,2,3,4,5,6,7,8]
 
-  constructor(private router:Router){}
+  produk:any =[];
+
+  constructor(
+    private router:Router,
+    private produkService:ProdukService
+  ){}
 
   ngOnInit(): void {
-    
+    this.produkService.getallproduk().subscribe(result=>{
+      console.log(result)
+      this.produk = result.data
+    });
   }
 
-  handleLihatItem(args:any):void{
-    console.log(args)
-    let id = args
-    this.router.navigate(['detail_product',id])
-  }
-
-  handleCLickDD(args:any):void{
-    console.log(args)
+  detail(id:any):void{
+    this.router.navigateByUrl('product/'+id)
   }
 
 }

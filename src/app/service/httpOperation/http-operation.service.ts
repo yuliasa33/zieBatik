@@ -1,8 +1,7 @@
-import { TitleCasePipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UtilityService } from '../utility/utility.service';
 import { catchError, map, Observable } from 'rxjs';
+import { UtilityService } from '../utility/utility.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,7 @@ export class HttpOperationService {
 
     return this._httpClient.get<any>(url).pipe(
       map((result) => {
-        if (!result.responseResult) {
+        if (!result.status) {
           this._utilityService.onShowCustomAlert('error','Oops...',result.message)
         }
 
@@ -76,7 +75,7 @@ export class HttpOperationService {
     })
     return this._httpClient.put<any>(url,data,{headers})
     .pipe(map((result:any)=>{
-      if(result.responseResult){
+      if(result.status){
         return result
       }
       else{

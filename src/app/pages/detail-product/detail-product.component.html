@@ -4,53 +4,32 @@
             <div class="grid grid-cols-3 w-full h-full mt-10">
                 <div class="gambar">
                     <div class="flex flex-col w-full h-full p-3">
-                        <img src="../../../assets/images/batikgreyscale.jpg" alt="">
-                        <div class="flex flex-row mt-3 p-3 w-full h-1 gap-3">
+                        <img src="{{detail.image}}" alt="">
+                        <!-- <div class="flex flex-row mt-3 p-3 w-full h-1 gap-3">
                             <img src="../../../assets/images/beautyofbatik2.jpg" class="w-16 h-16" alt="">
                             <img src="../../../assets/images/beautyofbatik2.jpg" class="w-16 h-16" alt="">
                             <img src="../../../assets/images/beautyofbatik2.jpg" class="w-16 h-16" alt="">
                             <img src="../../../assets/images/beautyofbatik2.jpg" class="w-16 h-16" alt="">
                             <img src="../../../assets/images/beautyofbatik2.jpg" class="w-16 h-16" alt="">
                             <img src="../../../assets/images/beautyofbatik2.jpg" class="w-16 h-16" alt="">
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>
                 <div class="deskripsi">
                     <div class="flex flex-col w-full h-full p-3">
                         <p class="font-bold text-5xl">Batik Kemeja XL</p>
-                        <p class="text-lg text-gray-400">Terjual 100+</p>
-                        <p class="font-bold text-5xl my-4">Rp 789.000</p>
-                        <p class="font-semibold text-2xl mt-5 mb-3">Pilihan Warna:</p>
-                        <div class="grid grid-cols-3 gap-3 text-center">
-                            <div class="flex flex-row h-full items-center justify-center w-full border">
-                                <div
-                                    class="card cursor-pointer w-full h-full border rounded-xl border-green-400 items-center">
-                                    <p>Gray</p>
-                                </div>
-                            </div>
-                            <div class="card cursor-pointer w-full h-14 border rounded-xl border-green-400">Blue</div>
-                            <div class="card cursor-pointer w-full h-14 border rounded-xl border-green-400">Green</div>
-                            <div class="card cursor-pointer w-full h-14 border rounded-xl border-green-400">Midnight
-                            </div>
-                            <div class="card cursor-pointer w-full h-14 border rounded-xl border-green-400">Teal</div>
-                            <div class="card cursor-pointer w-full h-14 border rounded-xl border-green-400">Black</div>
-                            <div class="card cursor-pointer w-full h-14 border rounded-xl border-green-400">Black</div>
-                        </div>
+                        <p class="font-bold text-5xl my-4">Rp {{detail.harga}}</p>
+                        <p class="font-semibold text-2xl mt-5 mb-3">Kategori: {{detail.category.nama_category}}</p>
                         <div class="flex flex-row w-full border-b p-3 mt-4">
-                            <p class="font-semibold text-lg text-gray-700">Detail</p>
+                            <p class="font-semibold text-lg text-gray-700">deskripsi produk</p>
                         </div>
-                        <p class="description">Kondisi : Baru</p>
-                        <p class="description">Min Pemesanan: 1 Pcs</p>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-                            distinctio
-                            repellendus nihil soluta doloribus assumenda sit ratione sint, iste molestias.</p>
+                        <p class="description" [innerHTML]="detail.deskripsi_produk"> </p>
                     </div>
                 </div>
                 <div class="invoice">
                     <div class="flex flex-col w-full h-max p-3">
                         <div class="card-body w-full h-full relative rounded-xl shadow-md mr-5 border-gray-500">
-                            test
                             <div class="flex flex-row w-full h-auto gap-3 items-center">
                                 <div class="custom-number-input h-10 w-32">
                                     <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
@@ -68,7 +47,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <p class="text-gray-400 text-lg">Stok : 100</p>
+                                <p class="text-gray-400 text-lg">Stok : 20</p>
                             </div>
 
                             <div class="flex flex-row justify-between w-full h-full mt-5 p-3">
@@ -76,15 +55,9 @@
                                 <p class="text-4xl">Rp. {{subtotal}}</p>
                             </div>
                             <div class="flex flex-row mt-3 w-full h-auto items-center">
-                                <button
+                                <button (click)="addcart()"
                                     class="w-full rounded-sm border-gray-500 h-16 bg-gray-800 hover:bg-gray-500 transition-all duration-100">
                                     <p class="text-2xl text-white">+ Keranjang</p>
-                                </button>
-                            </div>
-                            <div class="flex flex-row mt-3 w-full h-auto items-center">
-                                <button
-                                    class="w-full rounded-sm border border-gray-500 h-16 hover:bg-gray-200 transtion-all duration-100">
-                                    <p class="text-2xl ">Beli</p>
                                 </button>
                             </div>
                         </div>

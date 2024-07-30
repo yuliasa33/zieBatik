@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AuthenticationComponent } from "./pages/authentication/authentication.component";
-import { ProductComponent } from "./pages/product/product.component";
-import { HomeComponent } from "./pages/home/home.component";
-import { EventRegisterComponent } from "./pages/event-register/event-register.component";
 import { DetailProductComponent } from "./pages/detail-product/detail-product.component";
+import { EventRegisterComponent } from "./pages/event-register/event-register.component";
+import { HomeComponent } from "./pages/home/home.component";
+import { ProductComponent } from "./pages/product/product.component";
 import { ShoppingChartComponent } from "./pages/shopping-chart/shopping-chart.component";
 
 const routes:Routes = [
@@ -24,7 +24,7 @@ const routes:Routes = [
         data:{title:"Product"}
     },
     {
-        path:'detail_product/:id',
+        path:'product/:id',
         component:DetailProductComponent
     },
     {

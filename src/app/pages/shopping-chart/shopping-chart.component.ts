@@ -11,4 +11,6 @@ import { FooterComponent } from "../footer/footer.component";
 })
 export class ShoppingChartComponent {
 
+  selectedAlamat:any = "Pilih Alamat"
+
 }

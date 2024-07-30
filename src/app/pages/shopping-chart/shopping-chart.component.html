@@ -4,8 +4,38 @@
             <div class="grid grid-cols-2 gap-5 w-full h-auto">
                 <div class="list-chart h-auto border w-full my-3 p-3 mx-7 mr-5">
                     <div class="flex flex-row w-full h-full p-3 items-center gap-3">
-                        <input type="checkbox" name="" id="">
-                        <img src="../../../assets/images/batiktulis.jpg" class="w-40 h-40" alt="">
+                        <table class="min-w-full border-collapse block md:table">
+                            <thead class="block md:table-header-group">
+                              <tr class="border border-gray-200 md:border-none md:table-row">
+                                <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">#</th>
+                                <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">Produk</th>
+                                <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">qty</th>
+                                <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">harga</th>
+                                <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">total</th>
+                              </tr>
+                            </thead>
+                            <tbody class="block md:table-row-group">
+                              <tr class="bg-white border border-gray-200 md:border-none md:table-row">
+                                <td class="p-2 block md:table-cell">
+                                    <input type="checkbox" name="" id="">
+                                </td>
+                                <td class="p-2 block md:table-cell">
+                                    <div class="flex items-center">
+                                        <img src="../../../assets/images/batiktulis.jpg" alt="Product" class="w-20 h-20 rounded mr-4">
+                                        <div>
+                                          <h2 class="text-lg font-semibold">Product Name</h2>
+                                          <p class="text-gray-500">Product Description</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-2 block md:table-cell">
+                                    <input type="number" value="1" class="w-20">
+                                </td>
+                                <td class="p-2 block md:table-cell">3000</td>
+                                <td class="p-2 block md:table-cell">3000</td>
+                              </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="invoice">
@@ -21,8 +51,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
         <app-footer></app-footer>
     </div>

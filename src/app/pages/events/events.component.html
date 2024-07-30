@@ -50,14 +50,14 @@
             <p class="text-3xl md:text-6xl text-gray-600 font-bold">Events</p>
           </div>
         </div>
-        <div class="flex flex-col lg:flex-row w-full h-full">
+        <div class="flex flex-col lg:flex-row w-full h-full" [@fadeIn]>
           <div class="flex flex-col w-full lg:w-7/12 mb-4 lg:mb-0">
             <div class="flex flex-col h-full w-full p-4  gap-0 bg-white">
               <div class="image-content flex flex-col w-full h-64 lg:h-3/6 p-3 my-2 mx-2">
-                <img src="../../../assets/images/batikhuman.jpg" class="w-full h-full object-cover rounded-lg">
+                <img [src]="imagesSelect" class="w-full h-full object-cover rounded-lg">
               </div>
               <div class="title mx-2 mt-2">
-                <p class="text-xl md:text-3xl hover:underline text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, atque.</p>
+                <p class="text-xl md:text-3xl hover:underline text-gray-600">{{titleSelect}}</p>
               </div>
               <div class="subtitle mx-2 mt-1">
                 <p class="text-sm md:text-lg text-end underline text-gray-700">
@@ -76,12 +76,21 @@
               </div>
             </div>
           </div>
-          <div class="flex flex-col w-full lg:w-5/12">
+          <div class="flex flex-col w-full lg:w-5/12" >
             <div class="flex flex-col h-full p-4 shadow-lg bg-opacity-10 bg-gray-300 rounded-lg">
               <div class="header-title w-full mb-4">
                 <p class="text-lg md:text-xl font-semibold text-gray-600 ml-2 md:ml-6 p-2 border-b-2">TOP NEWS</p>
               </div>
-              <div class="content_news"></div>
+              <div class="content_news">
+                <div *ngFor="let news of items" class="flex flex-row h-auto w-full gap-3 my-2 border-b-2">
+                  <p>{{news.no}}</p>
+                  <img [src]="news.image" class="w-32 h-32" alt="">
+                  <div class="flex flex-col w-full h-full ">
+                    <p class="text-lg font-bold hover:underline cursor-pointer" (click)="handlClickNews(news)">{{news.text}}</p>
+                    <p class="text-md">{{news.title}}</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -12,6 +12,7 @@ import { GalleryComponent } from '../gallery/gallery.component';
 import { EventsComponent } from "../events/events.component";
 import * as Aos from 'aos';
 import { AuthenticationService } from 'src/app/service/authentication-service/authentication.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -42,11 +43,12 @@ export class HomeComponent implements OnInit,AfterViewInit {
     {label:'Service'},
   ]
 
-  loopitem:any[] = [1,2,3,4,5,6,7,8,10,11,212,12,13,12,3123]
+  loopitem:any[] = [1,2,3,4,5,6,7,8]
 
 
   constructor(public layoutService:LayoutService,
-              private authenticationService:AuthenticationService
+              private authenticationService:AuthenticationService,
+              private router:Router
   ){
     document.addEventListener('DOMContentLoaded', () => {
     const items: CarouselItem[] = [
@@ -144,6 +146,10 @@ export class HomeComponent implements OnInit,AfterViewInit {
   sliderButton2(): void {
     this.currentSlide = 1;
     this.reinitLoop(4000);
+  }
+
+  handleClickLihatLebihBanyak():void{
+    this.router.navigateByUrl('Product')
   }
 
 }

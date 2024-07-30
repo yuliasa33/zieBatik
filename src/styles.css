@@ -18,4 +18,14 @@ body {
     scrollbar-width: thin;
     box-sizing: border-box;
     /* width: 90% !important;  */
+    background-color: rgb(255, 255, 255);
+}
+
+body::before{
+    background-image: url('./assets/images/bgmegamendung.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+    opacity: 0.5;
+    z-index: 1;
 }

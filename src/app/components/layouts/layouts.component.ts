@@ -106,4 +106,8 @@ export class LayoutsComponent implements OnInit {
 
   }
 
+  onClickChart():void{
+    this.router.navigateByUrl('shoping-chart')
+  }
+
 }

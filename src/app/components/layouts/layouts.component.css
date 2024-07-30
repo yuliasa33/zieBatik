@@ -115,7 +115,7 @@ p {
   }
   
   .svgIcon {
-    width: 12px;
+    width: 20px;
     transition-duration: 0.3s;
   }
   
@@ -127,7 +127,7 @@ p {
     width: 140px;
     border-radius: 50px;
     transition-duration: 0.3s;
-    background-color: rgb(181, 160, 255);
+    background-color: rgb(248, 176, 68);
     align-items: center;
   }
   
@@ -140,7 +140,7 @@ p {
   .button::before {
     position: absolute;
     bottom: -20px;
-    content: "Back to Top";
+    content: "Shop Now";
     color: white;
     /* transition-duration: .3s; */
     font-size: 0px;

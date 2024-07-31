@@ -20,8 +20,9 @@ export class ListEventComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.getall();  
   }
+
 
   event:any[] = []
 
@@ -31,7 +32,7 @@ export class ListEventComponent implements OnInit{
     this.router.navigateByUrl('product/'+id)
   }
 
-  getall(args:any):void{
+  getall():void{
     this.produkService.getevent().subscribe(result=>{
       this.event = result.data
     })

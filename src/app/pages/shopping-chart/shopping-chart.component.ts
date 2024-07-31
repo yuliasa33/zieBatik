@@ -190,14 +190,21 @@ export class ShoppingChartComponent implements OnInit {
   }
 
   handleClickBayar(args:any):void{
-    let length = 5;
-    let payload = {
-      "nomor_invoice" : Date.now(),
-      "payment" : args
-    }
-
-    this.orderService.OnPayMidtrans(payload).subscribe((result:any)=>{
-      window.snap.pay(result.data, {
+    this.orderService.OnPayMidtrans({
+      "id_customer" : 1,
+      "id_alamat_customer" : 1,
+      "total" : args,
+      "total_qty" : 1,
+      "id_type_payment" : 1,
+      "data_order" : [
+          {
+              "id_product" : 1,
+              "qty" : 2,
+              "subtotal" : 2000
+          }
+      ]
+  }).subscribe((result:any)=>{
+      window.snap.pay(result.snap.token, {
         onSuccess: function(result:any) {
           console.log('Success:', result);
         },

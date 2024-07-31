@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LayoutsComponent } from 'src/app/components/layouts/layouts.component';
+import { OrderService } from 'src/app/service/order/order.service';
 import { ProdukService } from 'src/app/service/produk/produk.service';
 import { FooterComponent } from "../footer/footer.component";
-import { OrderService } from 'src/app/service/order/order.service';
 
 @Component({
   selector: 'app-shopping-chart',
@@ -190,16 +190,14 @@ export class ShoppingChartComponent implements OnInit {
   }
 
   handleClickBayar(args:any):void{
-let payload = {
-  "nomor_invoice" : "INV-004",
-  "payment" : args
-}
+    let length = 5;
+    let payload = {
+      "nomor_invoice" : Date.now(),
+      "payment" : args
+    }
+
     this.orderService.OnPayMidtrans(payload).subscribe((result:any)=>{
-      const snapToken = result.snapToken
-
-
-       // Call the Snap Pay UI
-       window.snap.pay(snapToken, {
+      window.snap.pay(result.data, {
         onSuccess: function(result:any) {
           console.log('Success:', result);
         },
@@ -213,8 +211,31 @@ let payload = {
           console.log('Customer closed the popup without finishing the payment');
         }
       })
-
     })
   }
+  //   let payload = {
+  //     "nomor_invoice" : "INV-004",
+  //     "payment" : args
+  //   }
+  //   this.orderService.OnPayMidtrans(payload).subscribe((result:any)=>{
+  //     const snapToken = result.snapToken
 
+
+  //      // Call the Snap Pay UI
+  //      window.snap.pay(snapToken, {
+  //       onSuccess: function(result:any) {
+  //         console.log('Success:', result);
+  //       },
+  //       onPending: function(result:any) {
+  //         console.log('Pending:', result);
+  //       },
+  //       onError: function(result:any) {
+  //         console.log('Error:', result);
+  //       },
+  //       onClose: function() {
+  //         console.log('Customer closed the popup without finishing the payment');
+  //       }
+  //     })
+  //   })
+  // }
 }

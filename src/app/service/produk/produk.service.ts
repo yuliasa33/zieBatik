@@ -59,4 +59,12 @@ export class ProdukService {
     return this.httpOperationService.onPostRequest(environment.url+'rajaongkir/getCost',data)
   }
 
+  getevent():Observable<any>{
+    return this.httpOperationService.getRequest(environment.url+'event/getall');
+  }
+
+  geteventbyid(id:any):Observable<any>{
+    return this.httpOperationService.getRequest(environment.url+'event/getById/'+id);
+  }
+
 }

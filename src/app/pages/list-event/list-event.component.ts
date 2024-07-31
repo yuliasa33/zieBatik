@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { LayoutsComponent } from 'src/app/components/layouts/layouts.component';
-import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LayoutsComponent } from 'src/app/components/layouts/layouts.component';
+import { ProdukService } from 'src/app/service/produk/produk.service';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-list-event',
@@ -10,14 +12,30 @@ import { CommonModule } from '@angular/common';
   standalone:true,
   imports:[LayoutsComponent,FooterComponent,CommonModule]
 })
-export class ListEventComponent {
+export class ListEventComponent implements OnInit{
+  constructor(
+    private router:Router,
+    private produkService:ProdukService
+  ){
 
-  produk:any = [1,2,3,4,5,6,7,8]
+  }
+  ngOnInit(): void {
+    this.getall();  
+  }
+
+
+  event:any[] = []
 
   items = {}
 
-  detail(args:any):void{
+  detail(id:any):void{
+    this.router.navigateByUrl('product/'+id)
+  }
 
+  getall():void{
+    this.produkService.getevent().subscribe(result=>{
+      this.event = result.data
+    })
   }
 
 }

@@ -14,17 +14,17 @@
         <div class="flex flex-row w-full justify-center gap-3 mt-3">
           <div class="product-content flex flex-col gap-7 w-10/12 p-3 mx-8 justify-start">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 w-full">
-              <div *ngFor="let data of produk" class="items-per-content border shadow-lg rounded-lg flex flex-col gap-5 w-full">
-                <img [src]="data.image" [id]="" class="w-full h-32 lg:h-80 object-cover" alt="">
+              <div *ngFor="let data of event" class="items-per-content border shadow-lg rounded-lg flex flex-col gap-5 w-full">
+                <img [src]="data.path_foto" [id]="" class="w-full h-32 lg:h-80 object-cover" alt="">
                 <div class="flex flex-col w-full mx-4">
                   <p class="text-md font-semibold lg:mt-3"></p>
                   <div class="rate">
                     <!-- Rating content -->
                   </div>
-                  <p class="text-lg mt-1 font-semibold ">JUDUL</p>
-                  <p class="text-md mb-3 text-gray-500 mt-3">TEXT</p>
+                  <p class="text-lg mt-1 font-semibold ">{{data.nama_event}}</p>
+                  <p class="text-md mb-3 text-gray-500 mt-3">{{data.tgl_event}}</p>
                   <div class="mt-3 flex flex-row w-full items-center justify-center my-3">
-                    <button type="button" (click)="detail(data.id_product)" class="h-12 border p-3 hover:bg-gray-400 hover:text-white transition-all duration-200">
+                    <button type="button" (click)="detail(data.id_event)" class="h-12 border p-3 hover:bg-gray-400 hover:text-white transition-all duration-200">
                       <p class="mx-4">Lihat Selengkapnya <i class="ml-5 pi pi-arrow-right"></i></p>
                     </button>
                   </div>

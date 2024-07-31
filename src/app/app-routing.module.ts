@@ -3,10 +3,11 @@ import { RouterModule, Routes } from "@angular/router";
 import { AuthenticationComponent } from "./pages/authentication/authentication.component";
 import { DetailProductComponent } from "./pages/detail-product/detail-product.component";
 import { EventRegisterComponent } from "./pages/event-register/event-register.component";
+import { EventsComponent } from "./pages/events/events.component";
 import { HomeComponent } from "./pages/home/home.component";
+import { ListEventComponent } from "./pages/list-event/list-event.component";
 import { ProductComponent } from "./pages/product/product.component";
 import { ShoppingChartComponent } from "./pages/shopping-chart/shopping-chart.component";
-import { ListEventComponent } from "./pages/list-event/list-event.component";
 
 const routes:Routes = [
     {
@@ -38,7 +39,10 @@ const routes:Routes = [
     },{
         path:'list-event',
         component:ListEventComponent
-    }
+    },{
+        path:'event/:id',
+        component:EventsComponent
+    },
 ]
 
 @NgModule({

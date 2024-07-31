@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { fadeInAnimation } from 'src/app/animations/animations';
 
@@ -12,6 +13,8 @@ import { fadeInAnimation } from 'src/app/animations/animations';
   animations:[fadeInAnimation]
 })
 export class EventsComponent implements OnInit {
+
+  @Input("Events") Events:any
 
   imagesSelect: any = ""
   titleSelect: any = ""
@@ -39,11 +42,13 @@ export class EventsComponent implements OnInit {
     image: '../../../assets/images/beautyofbatik3.jpg'
   }]
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private domSanitizer:DomSanitizer
+  ) {
   }
 
   ngOnInit(): void {
-    
+      
   }
 
 

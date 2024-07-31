@@ -197,7 +197,7 @@
         </div> -->
 
         <div class="container w-full h-full">
-            <app-events></app-events>
+            <app-events [Events]="event"></app-events>
         </div>
 
 
@@ -297,18 +297,17 @@
                                 </div>
                             </div> -->
                             <div *ngFor="let data of loopitem" class="items-per-content mx-2 my-2 border shadow-lg rounded-lg flex flex-col gap-5 w-full">
-                                <img src="../../../assets/images/batiktulis.jpg" [id]="" class="w-full h-32 lg:h-80" alt="">
+                                <img [src]="data.image" [id]="" class="w-full h-32 lg:h-80" alt="">
                                 <div class="flex flex-col w-full mx-4">
-                                  <p class="text-md text-gray-400 font-semibold mt-3">Kemeja Batik Laki laki</p>
-                                  <p class="text-md font-semibold lg:mt-3">Kemeja Slimfit Batik Lengan Panjang</p>
+                                  <p class="text-md text-gray-400 font-semibold mt-3">{{data.nama_product}}</p>
+                                  <p class="text-md font-semibold lg:mt-3" [innerHTML]="data.deskripsi_product">{{data.deskripsi_product}}</p>
                                   <div class="rate">
                                     <!-- Rating content -->
                                   </div>
-                                  <p class="text-md mt-3 text-gray-500">Bahan: Cotton, Jerami</p>
                                   <p class="text-md mt-3 text-gray-500">Proses: Batik Tempel</p>
-                                  <p class="text-2xl font-semibold mt-3">Rp.500.000 - Rp.720.000</p>
+                                  <p class="text-2xl font-semibold mt-3">{{data.harga}}</p>
                                   <div class="mt-3 flex flex-row w-full items-center justify-center my-3">
-                                    <button type="button" class="h-12 border p-3 hover:bg-gray-400 hover:text-white transition-all duration-200" >
+                                    <button (click)="handleClickLihatOpsi(data.id_product)" type="button" class="h-12 border p-3 hover:bg-gray-400 hover:text-white transition-all duration-200" >
                                       <p class="mx-4">Lihat Opsi <i class="ml-5 pi pi-arrow-right"></i></p>
                                     </button>
                                   </div>

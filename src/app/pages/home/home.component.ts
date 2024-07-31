@@ -1,5 +1,5 @@
 import { Component , OnInit,AfterViewInit } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { LayoutsComponent } from 'src/app/components/layouts/layouts.component';
 import { AboutComponent } from '../about/about.component';
 import { fadeInAnimation, fadeInAnimationForComponent } from 'src/app/animations/animations';
@@ -13,6 +13,7 @@ import { EventsComponent } from "../events/events.component";
 import * as Aos from 'aos';
 import { AuthenticationService } from 'src/app/service/authentication-service/authentication.service';
 import { Router } from '@angular/router';
+import { ProdukService } from 'src/app/service/produk/produk.service';
 
 
 @Component({
@@ -36,6 +37,8 @@ export class HomeComponent implements OnInit,AfterViewInit {
   currentSlide = 0;
   interval: any;
 
+  event:any[] = []
+
   navbarMenu:any[] = [
     {label:'Home'},
     {label:'About'},
@@ -43,12 +46,14 @@ export class HomeComponent implements OnInit,AfterViewInit {
     {label:'Service'},
   ]
 
-  loopitem:any[] = [1,2,3,4,5]
+  loopitem:any[] = []
 
 
   constructor(public layoutService:LayoutService,
               private authenticationService:AuthenticationService,
-              private router:Router
+              private router:Router,
+              private produkService:ProdukService,
+              private domsanitizer: DomSanitizer,
   ){
     document.addEventListener('DOMContentLoaded', () => {
     const items: CarouselItem[] = [
@@ -111,6 +116,21 @@ export class HomeComponent implements OnInit,AfterViewInit {
     this.startLoop();
     Aos.init()
     console.log(this.authenticationService.isLoginState)
+    this.getAllProdukDashboard()
+  }
+
+  getAllProdukDashboard():void{
+    this.produkService.getAllDashbord().subscribe(result=>{
+      console.log(result)
+      result.data.product.forEach((result:any)=>{
+        result.deskripsi_product = this.domsanitizer.bypassSecurityTrustHtml(result.deskripsi_product)
+      })
+      result.data.event.forEach((el:any)=>{
+        el.deskripsi = this.domsanitizer.bypassSecurityTrustHtml(el.deskripsi)
+      })
+      this.event = result.data.event
+      this.loopitem = result.data.product
+    })
   }
 
   ngAfterViewInit(): void {
@@ -150,6 +170,10 @@ export class HomeComponent implements OnInit,AfterViewInit {
 
   handleClickLihatLebihBanyak():void{
     this.router.navigateByUrl('Product')
+  }
+
+  handleClickLihatOpsi(args:any):void{
+    this.router.navigate(['product/',args])
   }
 
 }

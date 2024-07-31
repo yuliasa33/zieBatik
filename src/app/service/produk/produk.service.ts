@@ -15,6 +15,10 @@ export class ProdukService {
     private router:Router
 ){}
   
+  getAllDashbord():Observable<any>{
+    return this.httpOperationService.getRequest(environment.url+'dashboard/getall')
+  }
+
   getallproduk():Observable<any>{
     return this.httpOperationService.getRequest(environment.url+'product/getall');
   }

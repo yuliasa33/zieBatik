@@ -49,7 +49,11 @@
                         <div class="flex flex-col w-full h-max p-3">
                             <div class="card-body w-full h-full relative rounded-xl shadow-md mr-5 border-gray-500">
                                 <button class="btn" onclick="my_modal_2.showModal()">
-                                    <p class="text-start"><i class="pi pi-map-marker mx-3"></i> {{selectedAlamat}}</p>
+                                    <div class="flex flex-row w-full h-auto items-center">
+                                        <i class="pi pi-map-marker mx-3"></i>
+                                        <p class="text-start p-3"> {{selectedAlamat}}</p>
+                                    </div>
+                                   
                                 </button>
                                 <dialog id="my_modal_2" class="modal w-full">
                                     <div class="modal-box w-11/12 max-w-5xl">
@@ -57,10 +61,10 @@
                                             <div class="list-alamat w-full border h-full">
                                                 <div class="flex flex-col w-full p-2 m-2">
                                                     <p class="text-lg">Alamat Saya</p>
-                                                    <div *ngFor="let almt of alamat"
+                                                    <div *ngFor="let almt of alamat" (dblclick)="onDoubleClick($event,almt)"
                                                         class="card-list mt-2 w-full border flex p-3 items-center hover:bg-gray-400 cursor-pointer transition-all duration-100">
                                                         <i class="pi pi-map-marker mx-4 p-2"></i>
-                                                        <p class="text-md font-semibold">{{almt.nama_lengkap}}, {{almt.alamat_lengkap}}, provinsi {{almt.provinsi}}, kota {{almt.kota}}, no hp {{almt.no_hp}}</p>
+                                                        <p class="text-md font-semibold" id="alamat_lengkap">{{almt.nama_lengkap}}, {{almt.alamat_lengkap}}, provinsi {{almt.provinsi}}, kota {{almt.kota}}, no hp {{almt.no_hp}}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -122,9 +126,9 @@
                                                             </div>
                                                             <div class="w-7/12">
                                                                 <div class="flex w-full">
-                                                                    <select 
+                                                                    <select (change)="handleChangeProvinsi($event)" [(ngModel)]="selectedProvinsi"
                                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                                        <option selected>Choose a country</option>
+                                                                        <option selected>Pilih Privovinsi</option>
                                                                         <option *ngFor="let prov of provinsi" [value]="prov.province_id">{{prov.province}}</option>
                                                                     </select>
                                                                 </div>  
@@ -140,11 +144,8 @@
                                                                 <div class="flex w-full">
                                                                     <select id="countries"
                                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                                        <option selected>Choose a country</option>
-                                                                        <option value="US">United States</option>
-                                                                        <option value="CA">Canada</option>
-                                                                        <option value="FR">France</option>
-                                                                        <option value="DE">Germany</option>
+                                                                        <option selected>Pilih Kota</option>
+                                                                        <option *ngFor="let city of kota" [value]="city.city_id">{{city.city_name}}</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -161,10 +162,78 @@
                                         </div>
                                     </div>
                                     <form method="dialog" class="modal-backdrop">
-                                        <button>close</button>
+                                        <button id="closeModal">close</button>
                                     </form>
                                 </dialog>
                                 <div class="grid grid-cols-1 w-full">
+                                   
+                                    <div class="flex flex-row w-full items-center p-2 h-auto">
+                                        <div class="w-5/12">
+                                            <p class="text-lg">Berat /Kg </p>
+                                        </div>
+                                        <div class="w-7/12">
+                                            <div class="flex w-full justify-end font-bold text-xl ">
+                                                <input type="number" value="1" id="visitors" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required />
+  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row w-full items-center p-2 h-auto">
+                                        <div class="w-5/12">
+                                            <p class="text-lg">Ekspedisi </p>
+                                        </div>
+                                        <div class="w-7/12">
+                                            <div class="flex w-full justify-end font-semibold text-xl">
+                                                <select id="countries" (change)="handleChangeEkspedisi($event)" [(ngModel)]="selectedEkspedisi"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                <option selected>Pilih Ekspedisi</option>
+                                                <option *ngFor="let ekspds of ekspedisi" [value]="ekspds.code">{{ekspds.description}}</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row w-full items-center p-2 h-auto">
+                                        <div class="w-5/12">
+                                            <p class="text-lg">Pilih Paket Kirim </p>
+                                        </div>
+                                        <div class="w-7/12">
+                                            <div class="flex w-full justify-end font-semibold text-xl">
+                                                <select id="countries" (change)="handleChangePaketKirim($event)" [(ngModel)]="selectedPaketKirim"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                <option selected>Pilih Paket Pengiriman</option>
+                                                <option *ngFor="let package of paketPengiriman" [ngValue]="package">{{package.name}}</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row w-full items-center p-2 h-auto">
+                                        <div class="w-5/12">
+                                            <p class="text-lg">Layanan Kirim </p>
+                                        </div>
+                                        <div class="w-7/12">
+                                            <div class="flex w-full justify-end font-semibold text-xl">
+                                                <select id="countries" (change)="handleChangeLayananKirim($event)" [(ngModel)]="selectedLayananKirim"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                <option selected>Pilih Layanan Pengiriman</option>
+                                                <option *ngFor="let ongkir of costOngkir" [ngValue]="ongkir">{{ongkir.description}}</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row w-full items-center p-2 h-auto">
+                                        <div class="w-5/12">
+                                            <p class="text-lg">Ongkos Kirim </p>
+                                        </div>
+                                        <div class="w-7/12">
+                                            <div class="flex w-full justify-end font-semibold text-xl">
+                                                <select id="countries" (change)="handleChangeOngkir()" [(ngModel)]="SelectedOngkir"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                <option selected>--Ongkir--</option>
+                                                <option *ngFor="let ongkir of selectedLayananKirim.cost" [ngValue]="ongkir">(Rp. {{ongkir.value}}) - {{ongkir.etd}} day</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="flex flex-row w-full items-center p-2 h-auto">
                                         <div class="w-5/12">
                                             <p class="text-lg">Harga </p>

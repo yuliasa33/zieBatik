@@ -54,4 +54,9 @@ export class ProdukService {
   kurir():Observable<any>{
     return this.httpOperationService.getRequest(environment.url+'rajaongkir/getKurir');
   }
+
+  cekOngkir(data:any):Observable<any>{
+    return this.httpOperationService.onPostRequest(environment.url+'rajaongkir/getCost',data)
+  }
+
 }

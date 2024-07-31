@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LayoutsComponent } from 'src/app/components/layouts/layouts.component';
 import { ProdukService } from 'src/app/service/produk/produk.service';
 import { FooterComponent } from "../footer/footer.component";
+import { OrderService } from 'src/app/service/order/order.service';
 
 @Component({
   selector: 'app-shopping-chart',
@@ -34,9 +35,11 @@ export class ShoppingChartComponent implements OnInit {
   selectedLayananKirim: any = {}
   costOngkir: any[] = []
   SelectedOngkir: any
+  berat:any = 1
   constructor(
     private router: Router,
-    private produkService: ProdukService
+    private produkService: ProdukService,
+    private orderService:OrderService
   ) { }
 
   ngOnInit(): void {
@@ -153,16 +156,16 @@ export class ShoppingChartComponent implements OnInit {
     let payload = {
       "origin": '1',
       "destination": "3",
-      "weight": 3,
+      "weight": this.berat,
       "courier": this.selectedEkspedisi
     }
 
     this.produkService.cekOngkir(payload).subscribe(result => {
       console.log(result)
       this.paketPengiriman = result.data.rajaongkir.results
-      result.data.rajaongkir.results.forEach((res: any) => {
-        this.costOngkir.push(...res.costs)
-      })
+      // result.data.rajaongkir.results.forEach((res: any) => {
+      //   this.costOngkir.push(...res.costs)
+      // })
     })
     console.log("COSTONGKIR==>", this.costOngkir)
   }
@@ -180,4 +183,38 @@ export class ShoppingChartComponent implements OnInit {
     this.biaya_kirim = this.SelectedOngkir.value
     this.hitung()
   }
+
+  handleChangeBerat(args:any):void{
+    console.log(args.target.value)
+    this.berat = args.target.value
+  }
+
+  handleClickBayar(args:any):void{
+let payload = {
+  "nomor_invoice" : "INV-004",
+  "payment" : args
+}
+    this.orderService.OnPayMidtrans(payload).subscribe((result:any)=>{
+      const snapToken = result.snapToken
+
+
+       // Call the Snap Pay UI
+       window.snap.pay(snapToken, {
+        onSuccess: function(result:any) {
+          console.log('Success:', result);
+        },
+        onPending: function(result:any) {
+          console.log('Pending:', result);
+        },
+        onError: function(result:any) {
+          console.log('Error:', result);
+        },
+        onClose: function() {
+          console.log('Customer closed the popup without finishing the payment');
+        }
+      })
+
+    })
+  }
+
 }

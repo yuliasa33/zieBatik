@@ -10,18 +10,18 @@ import { fadeInAnimation } from 'src/app/animations/animations';
   styleUrls: ['./events.component.css'],
   standalone: true,
   imports: [CommonModule],
-  animations:[fadeInAnimation]
+  animations: [fadeInAnimation]
 })
 export class EventsComponent implements OnInit {
 
-  @Input("Events") Events:any
+  @Input("Events") Events: any
 
   imagesSelect: any = ""
   titleSelect: any = ""
   isExpanded = false;
   content = ``; // Ganti dengan konten artikel sebenarnya
 
-  evnet = [1,2,3,4,5,6,7,8]
+  evnet = [1, 2, 3, 4, 5, 6, 7, 8]
 
   items = [{
     no: 1,
@@ -43,12 +43,12 @@ export class EventsComponent implements OnInit {
   }]
 
   constructor(private router: Router,
-              private domSanitizer:DomSanitizer
+    private domSanitizer: DomSanitizer
   ) {
   }
 
   ngOnInit(): void {
-      
+
   }
 
 
@@ -66,7 +66,7 @@ export class EventsComponent implements OnInit {
     this.content = args.text
   }
 
-  handleClickLihatLebihBanyak():void{
+  handleClickLihatLebihBanyak(): void {
     this.router.navigateByUrl('list-event')
   }
 

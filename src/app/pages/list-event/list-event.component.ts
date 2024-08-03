@@ -29,7 +29,7 @@ export class ListEventComponent implements OnInit{
   items = {}
 
   detail(id:any):void{
-    this.router.navigateByUrl('product/'+id)
+    this.router.navigateByUrl('event-register/'+id)
   }
 
   getall():void{

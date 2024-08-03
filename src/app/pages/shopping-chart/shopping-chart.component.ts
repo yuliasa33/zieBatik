@@ -1,18 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LayoutsComponent } from 'src/app/components/layouts/layouts.component';
 import { OrderService } from 'src/app/service/order/order.service';
 import { ProdukService } from 'src/app/service/produk/produk.service';
 import { FooterComponent } from "../footer/footer.component";
+import { UtilityService } from 'src/app/service/utility/utility.service';
 
 @Component({
   selector: 'app-shopping-chart',
   templateUrl: './shopping-chart.component.html',
   styleUrls: ['./shopping-chart.component.css'],
   standalone: true,
-  imports: [LayoutsComponent, FooterComponent, CommonModule, FormsModule]
+  imports: [LayoutsComponent, FooterComponent, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class ShoppingChartComponent implements OnInit {
 
@@ -21,8 +22,8 @@ export class ShoppingChartComponent implements OnInit {
   harga: number = 0;
   biaya_kirim: number = 0;
   total: number = 0;
-  provinsi: any[] = [];
-  kota: any[] = [];
+  prov: any[] = [];
+  city: any[] = [];
   alamat: any[] = []
   selectedProvinsi: any
   ekspedisi: any[] = []
@@ -35,20 +36,41 @@ export class ShoppingChartComponent implements OnInit {
   selectedLayananKirim: any = {}
   costOngkir: any[] = []
   SelectedOngkir: any
-  berat:any = 1
+  berat: any = 1
+
+
+  FormInputAlamat!: FormGroup
+
+
   constructor(
     private router: Router,
     private produkService: ProdukService,
-    private orderService:OrderService
+    private orderService: OrderService,
+    private formBuilder: FormBuilder,
+    private utilityService: UtilityService
   ) { }
 
   ngOnInit(): void {
     this.reload();
     this.produkService.provinsi().subscribe(result => {
-      this.provinsi = result.data.rajaongkir.results
+      this.prov = result.data.rajaongkir.results
     })
     this.reload_alamat();
     this.getEkspedisi()
+
+    this.setAtributeTambahAlamat()
+  }
+
+  setAtributeTambahAlamat(): void {
+    this.FormInputAlamat = this.formBuilder.group({
+      nama_lengkap: [""],
+      no_hp: [""],
+      alamat_lengkap: [""],
+      kota: [""],
+      provinsi: [""],
+      id_provinsi: [],
+      id_kota: []
+    })
   }
 
   handleChangeProvinsi(args: any): void {
@@ -59,7 +81,7 @@ export class ShoppingChartComponent implements OnInit {
 
   setkota(id_provinsi: any) {
     this.produkService.kota(id_provinsi).subscribe(result => {
-      this.kota = result.data.rajaongkir.results
+      this.city = result.data.rajaongkir.results
     })
   }
 
@@ -130,9 +152,10 @@ export class ShoppingChartComponent implements OnInit {
     let alamat = document.getElementById('alamat_lengkap') as HTMLElement
     console.log(alamat.innerHTML)
     console.log(almt)
+    console.log(args)
     this.selectKota = almt.id_kota
     this.selectProv = almt.id_provinsi
-    this.selectedAlamat = alamat.innerHTML
+    this.selectedAlamat = args.target.innerText
     close.click()
   }
 
@@ -184,44 +207,75 @@ export class ShoppingChartComponent implements OnInit {
     this.hitung()
   }
 
-  handleChangeBerat(args:any):void{
+  handleChangeBerat(args: any): void {
     console.log(args.target.value)
     this.berat = args.target.value
   }
 
-  handleClickBayar(args:any):void{
+  handleClickBayar(args: any): void {
     this.orderService.OnPayMidtrans({
-      "id_customer" : 1,
-      "id_alamat_customer" : 1,
-      "total" : args,
-      "total_qty" : 1,
-      "id_type_payment" : 1,
-      "data_order" : [
-          {
-              "id_product" : 1,
-              "qty" : 2,
-              "subtotal" : 2000
-          }
+      "id_customer": 1,
+      "id_alamat_customer": 1,
+      "total": args,
+      "total_qty": 1,
+      "id_type_payment": 1,
+      "data_order": [
+        {
+          "id_product": 1,
+          "qty": 2,
+          "subtotal": 2000
+        }
       ]
-  }).subscribe((result:any)=>{
+    }).subscribe((result: any) => {
       window.snap.pay(result.snap.token, {
-        onSuccess: function(result:any) {
+        onSuccess: function (result: any) {
           console.log('Success:', result);
         },
-        onPending: function(result:any) {
+        onPending: function (result: any) {
           console.log('Pending:', result);
         },
-        onError: function(result:any) {
+        onError: function (result: any) {
           console.log('Error:', result);
         },
-        onClose: function() {
+        onClose: function () {
           console.log('Customer closed the popup without finishing the payment');
         }
       })
     })
   }
+
+  handleTambahAlamat(Form: any): void {
+
+    const nama_prov = this.prov.find((el: any) => el.province_id === Form.id_provinsi)
+    const nama_city = this.city.find((el: any) => el.city_id === Form.id_kota)
+    Form.provinsi = nama_prov.province
+    Form.kota = nama_city.city_name
+    console.log("FORM ==> ", Form)
+    this.produkService.tambah_alamat(Form).subscribe(result => {
+      console.log(result)
+      if (result.status === "success") {
+        this.onResetForm()
+        this.reload_alamat()
+      } else {
+        this.utilityService.onShowCustomAlert('error', 'Oops...', result.message)
+      }
+    })
+  }
+
+  hapusAlamat(args: any): void {
+    let close = document.getElementById('closeModal') as HTMLInputElement
+    let open = document.getElementById('openModal') as HTMLElement
+    close.click()
+    this.utilityService.onShowConfirmationAlert('warning', 'Informasi', 'Apakah anda akan menghapus alamat ini ??', () => {
+      open.click()
+    }, () => { open.click() })
+  }
+
+  onResetForm(): void {
+    this.FormInputAlamat.reset()
+  }
   //   let payload = {
-  //     "nomor_invoice" : "INV-004",
+  //     "nomor_invoice INV-004",
   //     "payment" : args
   //   }
   //   this.orderService.OnPayMidtrans(payload).subscribe((result:any)=>{
@@ -245,4 +299,12 @@ export class ShoppingChartComponent implements OnInit {
   //     })
   //   })
   // }
+
+  get nama_lengkap(): AbstractControl { return this.FormInputAlamat.get('nama_lengkap') as AbstractControl }
+  get alamat_lengkap(): AbstractControl { return this.FormInputAlamat.get('alamat_lengkap') as AbstractControl }
+  get no_hp(): AbstractControl { return this.FormInputAlamat.get('no_hp') as AbstractControl }
+  get kota(): AbstractControl { return this.FormInputAlamat.get('kota') as AbstractControl }
+  get provinsi(): AbstractControl { return this.FormInputAlamat.get('provinsi') as AbstractControl }
+
+
 }

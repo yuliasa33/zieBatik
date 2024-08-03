@@ -41,7 +41,7 @@ export class ProdukService {
     return this.httpOperationService.onPutRequest(environment.url+'cart/update',data);
   }
   tambah_alamat(data:any):Observable<any>{
-    return this.httpOperationService.onPostRequest(environment.url+'cart/update',data);
+    return this.httpOperationService.onPostRequest(environment.url+'customer/tambahAlamat',data);
   }
   get_alamat():Observable<any>{
     return this.httpOperationService.getRequest(environment.url+'customer/getAllAlamatCustomer/1');

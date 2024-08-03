@@ -80,14 +80,14 @@
 
   <div class="flex flex-row w-screen gap-3 overflow-x-auto">
 
-    <div class="grid grid-cols-4 h-auto">
+    <div class="grid lg:grid-cols-4 grid-cols-2 h-auto w-screen">
       <div *ngFor="let news of Events">
-        <div class="card-items w-fit p-3 my-4 h-20 lg:h-max ">
+        <div class="card-items w-auto p-3 my-4 h-20 lg:h-max ">
           <div class="image-content flex flex-col w-full h-64 lg:h-3/6 p-3 my-2 mx-2">
             <img [src]="news.path_foto" class="w-full h-72 object-cover rounded-lg">
           </div>
           <div class="title mx-2">
-            <p class="text-3xl underline text-gray-600">{{news.nama_event}}</p>
+            <p class="text-3xl underline text-gray-800">{{news.nama_event}}</p>
           </div>
           <div class="subtitle mx-2">
             <p class="text-lg text-end underline text-gray-700">
@@ -96,7 +96,7 @@
           </div>
           <div class="body mx-2">
             <div class="article-container">
-              <p class="article-content" [class.expanded]="isExpanded" [innerHTML]="news.deskripsi">{{ news.deskripsi }}</p>
+              <!-- <p class="article-content" [class.expanded]="isExpanded" [innerHTML]="news.deskripsi">{{ news.deskripsi }}</p> -->
               <div class="flex flex-col justify-end">
                 <button (click)="toggleContent()">
                   {{ isExpanded ? 'Lihat Lebih Sedikit' : 'Lihat Selengkapnya' }}

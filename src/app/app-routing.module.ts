@@ -30,7 +30,7 @@ const routes:Routes = [
         component:DetailProductComponent
     },
     {
-        path:'event-register',
+        path:'event-register/:id',
         component:EventRegisterComponent
     },
     {

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { environment } from 'src/environment/environment';
 import { HttpOperationService } from '../httpOperation/http-operation.service';
 import { UtilityService } from '../utility/utility.service';
+import { MessageService } from 'primeng/api';
+import { ToastService } from '../taost/toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,8 @@ export class ProdukService {
 
   constructor(private httpOperationService:HttpOperationService,
     private utilityService:UtilityService,
-    private router:Router
+    private router:Router,
+    private toastService:ToastService
 ){}
   
   getAllDashbord():Observable<any>{
@@ -44,11 +47,22 @@ export class ProdukService {
     return this.httpOperationService.onPostRequest(environment.url+'customer/tambahAlamat',data);
   }
   get_alamat():Observable<any>{
-    return this.httpOperationService.getRequest(environment.url+'customer/getAllAlamatCustomer/1');
+    return this.httpOperationService.getRequestwithToken(environment.url+'customer/getAllAlamatCustomer');
   }
-  hapus_alamat():Observable<any>{
-    return this.httpOperationService.getRequest(environment.url+'cart/update');
+  hapus_alamat(id_alamat_customer:any):Observable<any>{
+    return this.httpOperationService.onDeleteRequest(environment.url+`customer/deleteAlamatCustomer/${id_alamat_customer}`)
+    .pipe(catchError((error:any):any=>{
+      this.toastService.showError(error.status,error.message)
+    }));
   }
+
+  Edit_alamat(data:any):Observable<any>{
+    return this.httpOperationService.onPutRequest(environment.url+'customer/updateAlamatCustomer',data)
+    .pipe(catchError((error:any):any=>{
+      this.toastService.showError(error.status,error.message)
+    }));
+  }
+
   provinsi():Observable<any>{
     return this.httpOperationService.getRequest(environment.url+'rajaongkir/getProvinsi');
   }

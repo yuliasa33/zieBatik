@@ -22,7 +22,8 @@ import { DetailProductComponent } from './pages/detail-product/detail-product.co
 import { ShoppingChartComponent } from './pages/shopping-chart/shopping-chart.component';
 import { VideoplayerComponent } from './pages/videoplayer/videoplayer.component';
 import { ListEventComponent } from './pages/list-event/list-event.component';
-
+import {ToastModule} from 'primeng/toast'
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -38,10 +39,12 @@ import { ListEventComponent } from './pages/list-event/list-event.component';
     CommonModule,
     LayoutsComponent,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastModule
 ],
   providers: [
-    {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true}
+    {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true},
+    MessageService
   ],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]

@@ -76,7 +76,10 @@
                                                             {{almt.nama_lengkap}}, {{almt.alamat_lengkap}}, provinsi
                                                             {{almt.provinsi}}, kota {{almt.kota}}, no hp ({{almt.no_hp}})
                                                         </p>
-                                                        <button class="btn p-3" (click)="hapusAlamat(almt.id_alamat_customer)">
+                                                        <button class="btn p-3 mx-2" (click)="EditAlamat(almt)">
+                                                            <i class="pi pi-file-edit text-yellow-500"></i>
+                                                        </button>
+                                                        <button  class="btn p-3" (click)="hapusAlamat(almt.id_alamat_customer)">
                                                             <i class="pi pi-trash text-red-500"></i>
                                                         </button>
                                                     
@@ -176,8 +179,12 @@
 
                                                             <div
                                                                 class="flex flex-row w-full h-full items-center justify-end  p-3">
-                                                                <button (click)="handleTambahAlamat(FormInputAlamat.value)" class="btn btn-success text-white mr-4">Tambah
-                                                                    Alamat +</button>
+                                                                <button  (click)="onResetForm()" class="btn btn-error text-white mr-4">
+                                                                    Reset <i class="pi pi-sync"></i></button>
+                                                                <button *ngIf="FormInputAlamatState == 'Edit'" (click)="HandleEditAlamat(FormInputAlamat.value)" class="btn btn-warning text-white mr-4">
+                                                                    Edit Alamat <i class="pi pi-file-edit"></i></button>
+                                                                <button *ngIf="FormInputAlamatState == 'Tambah'" (click)="handleTambahAlamat(FormInputAlamat.value)" class="btn btn-success text-white mr-4">Tambah
+                                                                    Alamat <i class="pi pi-plus"></i></button>
                                                             </div>
                                                         </div>
                                                     </div>

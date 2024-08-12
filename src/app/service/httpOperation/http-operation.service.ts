@@ -43,7 +43,7 @@ export class HttpOperationService {
       'Accept':'aplication/json',
       'Authorization':`Bearer ${data.token}` 
     })
-
+    console.log(headers)
     return this._httpClient.get(url,{headers})
     .pipe(map(res=>{
       if(res){
@@ -55,8 +55,18 @@ export class HttpOperationService {
   }
 
   onPostRequest(url:any,data:any){
+    const item = localStorage.getItem('BATIK_');
+    let token: any;
+
+    if (item) {
+      token = JSON.parse(item);
+    } else {
+      token = {}; // or any default value you want to assign
+    }
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization':`Bearer ${token.bearer}`,
+      'Accept':'application/json' 
     })
     return this._httpClient.post<any>(url,data,{headers})
     .pipe(map((result:any)=>{
@@ -79,6 +89,20 @@ export class HttpOperationService {
         return result
       }
       else{
+        return 0
+      }
+    }))
+  }
+
+  onDeleteRequest(url:any){
+    const headers = new HttpHeaders({
+      'Content-Type':'application/json'
+    })
+    return this._httpClient.delete<any>(url,{headers})
+    .pipe(map((result:any)=>{
+      if(result.status){
+        return result
+      }else{
         return 0
       }
     }))

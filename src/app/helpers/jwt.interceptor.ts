@@ -18,7 +18,7 @@ export class JwtInterceptor implements HttpInterceptor{
 
             const modifiedRequest = httpRequest.clone({
                 setHeaders: {
-                    Authorization: `Bearer ${UserData.token}`
+                    Authorization: `Bearer ${UserData.bearer}`
                 }
             });
             return next.handle(modifiedRequest);

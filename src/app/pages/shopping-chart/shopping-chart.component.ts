@@ -7,6 +7,7 @@ import { OrderService } from 'src/app/service/order/order.service';
 import { ProdukService } from 'src/app/service/produk/produk.service';
 import { FooterComponent } from "../footer/footer.component";
 import { UtilityService } from 'src/app/service/utility/utility.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-shopping-chart',
@@ -41,6 +42,7 @@ export class ShoppingChartComponent implements OnInit {
 
   FormInputAlamat!: FormGroup
 
+  FormInputAlamatState: 'Tambah' | 'Edit' ='Tambah'
 
   constructor(
     private router: Router,
@@ -63,6 +65,7 @@ export class ShoppingChartComponent implements OnInit {
 
   setAtributeTambahAlamat(): void {
     this.FormInputAlamat = this.formBuilder.group({
+      id_alamat_customer: [null],
       nama_lengkap: [""],
       no_hp: [""],
       alamat_lengkap: [""],
@@ -265,14 +268,83 @@ export class ShoppingChartComponent implements OnInit {
   hapusAlamat(args: any): void {
     let close = document.getElementById('closeModal') as HTMLInputElement
     let open = document.getElementById('openModal') as HTMLElement
+    console.log('DELETE ALAMAT ==>',args)
     close.click()
     this.utilityService.onShowConfirmationAlert('warning', 'Informasi', 'Apakah anda akan menghapus alamat ini ??', () => {
-      open.click()
+      this.requestHapusAlamat(args)
     }, () => { open.click() })
   }
 
+  requestHapusAlamat(id_alamat_customer:any):void{
+    let open = document.getElementById('openModal') as HTMLElement
+    this.utilityService.onShowLoadingBeforeSend()
+    this.produkService.hapus_alamat(id_alamat_customer).subscribe((result:any)=>{
+      if(result.status == 'success'){
+        Swal.close()
+        this.utilityService.onShowCustomAlert('success','Berhasil',result.message).then(()=>{
+          open.click()
+          this.reload_alamat()
+        })
+      }else{
+        Swal.close()
+        this.utilityService.onShowCustomAlert('error','Oops...',result.message)
+      }
+    })
+  }
+
+
+  EditAlamat(args:any):void{
+    console.log("EDIT==>",args)
+    delete args.id_customer
+    delete args.created_at
+    delete args.updated_at
+    this.FormInputAlamatState = 'Edit'
+    this.setkota(args.id_provinsi)
+    // this.nama_lengkap.setValue(args.nama_lengkap)
+    // this.no_hp.setValue(args.no_hp)
+    // this.alamat_lengkap.setValue(args.alamat_lengkap)
+    this.FormInputAlamat.setValue(args)
+  }
+
+  HandleEditAlamat(args:any):void{
+    // let payload = {
+    //     id_alamat_customer : 1,
+    //     nama_lengkap : "rahmat",
+    //     alamat_lengkap : "Jl. Bersama sama",
+    //     no_hp : "123123",
+    //     kota : "bandungan",
+    //     provinsi : "Jawa Tengah",
+    //     id_kota : 1,
+    //     id_provinsi: 2
+    // }
+    let close = document.getElementById('closeModal') as HTMLInputElement
+    let open = document.getElementById('openModal') as HTMLElement
+    close.click()
+    this.utilityService.onShowLoadingBeforeSend()
+    console.log("HANDLE EDIT ALAMAT ==>",args)
+    this.produkService.Edit_alamat(args).subscribe(result=>{
+      if(result.status == 'success'){
+        Swal.close()
+        this.utilityService.onShowCustomAlert('success','Berhasil',result.message)
+        .then(()=>{
+          this.reload_alamat()
+          open.click()
+          this.onResetForm()
+        })
+      }else{
+        Swal.close()
+        this.utilityService.onShowCustomAlert('error','Oops...',result.message)
+        .then(()=>{
+          open.click()
+        })
+      }
+    })
+  }
+
+
   onResetForm(): void {
     this.FormInputAlamat.reset()
+    this.FormInputAlamatState = 'Tambah'
   }
   //   let payload = {
   //     "nomor_invoice INV-004",

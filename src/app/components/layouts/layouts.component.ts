@@ -58,7 +58,7 @@ export class LayoutsComponent implements OnInit {
         { label: 'Home', icon: 'pi pi-home' },
         { label: 'About', icon: 'pi pi-users' },
         { label: 'Product', icon: 'pi pi-dollar' },
-        { label: 'Service', icon: 'pi pi-wrench' },
+        { label: 'Events', icon: 'pi pi-wrench' },
         { label: data?.nama },
         { label: 'Log Out', icon: 'pi pi-wrench' },
       ]

@@ -1,148 +1,98 @@
 <app-layouts>
     <div class="flex flex-col w-screen h-screen gap-2" @fadeIn>
         <div class="image-event w-full h-5/6">
-          <img src="" alt="" class="h-full w-full object-cover">
+            <img src="" alt="" class="h-full w-full object-cover">
         </div>
         <div class="flex flex-col w-full h-full gap-3 p-4">
-          <div class="judul">
-            <p class="text-2xl md:text-4xl lg:text-5xl text-gray-600 text-center md:text-left">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus, quam?
-            </p>
-          </div>
-          <div class="content">
-            <p class="text-sm md:text-base lg:text-lg text-justify">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat eos necessitatibus aliquam mollitia, voluptatum cupiditate optio voluptas saepe, magnam obcaecati sint repudiandae placeat rem nisi tempora nulla voluptates, ducimus ratione temporibus nostrum dolorem cum excepturi illum! Officia sapiente quo incidunt amet suscipit fugiat laudantium sed vitae officiis dignissimos, ullam repellendus eaque laborum facere ipsum minima, nihil, pariatur numquam? Labore ducimus inventore fuga, quasi dolorem architecto provident. Ratione sint perferendis quidem aliquam nemo ut doloremque nam sed incidunt, laboriosam, magnam eum beatae voluptates! Ut blanditiis fuga, sed beatae in earum illo rerum doloribus nesciunt harum quae ad sit libero, odit quisquam.
-            </p>
-          </div>
-          <div class="bottom mt-3 p-3 text-center">
-            <button class="btn btn-neutral hover:scale-105 hover:shadow-md transition-all duration-150"  id="openModal" onclick="my_modal_2.showModal()">
-              Daftar Event Sekarang ...
-            </button>
-          </div>
+            <div class="judul">
+                <p class="text-2xl md:text-4xl lg:text-5xl text-gray-600 text-center md:text-left">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus, quam?
+                </p>
+            </div>
+            <div class="content">
+                <p class="text-sm md:text-base lg:text-lg text-justify">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat eos necessitatibus aliquam mollitia,
+                    voluptatum cupiditate optio voluptas saepe, magnam obcaecati sint repudiandae placeat rem nisi
+                    tempora nulla voluptates, ducimus ratione temporibus nostrum dolorem cum excepturi illum! Officia
+                    sapiente quo incidunt amet suscipit fugiat laudantium sed vitae officiis dignissimos, ullam
+                    repellendus eaque laborum facere ipsum minima, nihil, pariatur numquam? Labore ducimus inventore
+                    fuga, quasi dolorem architecto provident. Ratione sint perferendis quidem aliquam nemo ut doloremque
+                    nam sed incidunt, laboriosam, magnam eum beatae voluptates! Ut blanditiis fuga, sed beatae in earum
+                    illo rerum doloribus nesciunt harum quae ad sit libero, odit quisquam.
+                </p>
+            </div>
+            <div class="bottom mt-3 p-3 text-center">
+                <button class="btn btn-neutral hover:scale-105 hover:shadow-md transition-all duration-150"
+                    id="openModal" onclick="my_modal_2.showModal()">
+                    Daftar Event Sekarang ...
+                </button>
+            </div>
         </div>
 
         <dialog id="my_modal_2" class="modal w-full">
 
-          <div class="modal-box w-11/12 max-w-5xl">
-        
-                  <div class="input-alamat w-full border h-full">
-                      <!-- <form [formGroup]="FormInputAlamat">
-                          <div class="flex flex-col w-full p-2 m-2">
-                              <p class="text-lg font-bold">Tambah Alamat Baru</p>
-                              <div class="flex flex-col w-full">
+            <div class="modal-box w-11/12 max-w-5xl">
 
-                                  <div class="flex flex-row w-full items-center p-2 h-auto">
-                                      <div class="w-5/12">
-                                          <p class="text-lg">
-                                              Nama Lengkap
-                                          </p>
-                                      </div>
-                                      <div class="w-7/12">
-                                          <div class="flex w-full">
-                                              <input type="text" id="first_name" formControlName="nama_lengkap"
-                                                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                  required />
-
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="flex flex-row w-full items-center p-2 h-auto">
-                                      <div class="w-5/12">
-                                          <p class="text-lg">
-                                              No Telpon
-                                          </p>
-                                      </div>
-                                      <div class="w-7/12">
-                                          <div class="flex w-full">
-                                              <input type="tel" id="phone" formControlName="no_hp"
-                                                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                  placeholder=""
-                                                  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                                                  required />
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="flex flex-row w-full items-center p-2 h-auto">
-                                      <div class="w-5/12">
-                                          <p class="text-lg">
-                                              Alamat Lengkap
-                                          </p>
-                                      </div>
-                                      <div class="w-7/12">
-                                          <div class="flex w-full">
-                                              <textarea id="message" rows="4" formControlName="alamat_lengkap"
-                                                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                  placeholder="Write your thoughts here..."></textarea>
-
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="flex flex-row w-full items-center p-2 h-auto">
-                                      <div class="w-5/12">
-                                          <p class="text-lg">
-                                              Provinsi
-                                          </p>
-                                      </div>
-                                      <div class="w-7/12">
-                                          <div class="flex w-full">
-                                              <select (change)="handleChangeProvinsi($event)" formControlName="id_provinsi"
-                                                  [(ngModel)]="selectedProvinsi"
-                                                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                  <option selected>Pilih Privovinsi</option>
-                                                  <option *ngFor="let prov of prov"
-                                                      [value]="prov.province_id">
-                                                      {{prov.province}}</option>
-                                              </select>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="flex flex-row w-full items-center p-2 h-auto">
-                                      <div class="w-5/12">
-                                          <p class="text-lg">
-                                              Kota
-                                          </p>
-                                      </div>
-                                      <div class="w-7/12">
-                                          <div class="flex w-full">
-                                              <select id="countries" formControlName="id_kota"
-                                                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                  <option selected>Pilih Kota</option>
-                                                  <option *ngFor="let city of city"
-                                                      [value]="city.city_id">
-                                                      {{city.city_name}}</option>
-                                              </select>
-                                          </div>
-                                      </div>
-                                  </div>
-
-                                  <div
-                                      class="flex flex-row w-full h-full items-center justify-end  p-3">
-                                      <button (click)="handleTambahAlamat(FormInputAlamat.value)" class="btn btn-success text-white mr-4">Tambah
-                                          Alamat +</button>
-                                  </div>
-                              </div>
-                          </div>
-                      </form> -->
-                  </div>
-                  </div>
-          <form method="dialog" class="modal-backdrop">
-              <button id="closeModal">close</button>
-          </form>
-      </dialog>
+                <div class="input-alamat w-full  h-full mb-10">
+                    <div class="flex flex-row w-full h-auto p-3 mb-12 justify-center">
+                        <p class="text-lg text-gray-800 font-bold">FORM PENDAFTARAN EVENT</p>
+                    </div>
+                    <div class="flex flex-col w-full">
+                        <form [formGroup]="FormInput">
+                            <div class="grid grid-cols-2 gap-3 w-9/12 h-auto mb-20">
+                                <div class="label flex ml-28 flex-row w-8/12 ">
+                                    <label for="">Nama</label>
+                                </div>
+                                <div class="field flex ">
+                                    <input type="text" id="first_name" formControlName="nama_lengkap"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required />
+                                </div>
+                                <div class="label flex ml-28 flex-row w-8/12 ">
+                                    <label for="">No Telpon</label>
+                                </div>
+                                <div class="field flex "> 
+                                    <input type="tel" id="first_name" formControlName="no_hp"  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required />
+                                </div>
+                                <div class="label flex ml-28 flex-row w-8/12 ">
+                                    <label for="">Gender</label>
+                                </div>
+                                <div class="field flex w-full">
+                                    <p-dropdown 
+                                    [options]="sex" 
+                                    optionLabel="label" 
+                                    [(ngModel)]="selectedSex"
+                                    placeholder="Jenis Kelamin" 
+                                    styleClass=" p-input-sm w-full" class=" p-input-sm w-full" formControlName="gender"  />
+                                </div>
+                            </div>
+                            <div class="flex flex-row w-9/12 justify-end">
+                                <p-button [label]="'Save'" (onClick)="handleSave(FormInput.value)" [icon]="'pi pi-save'" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button id="closeModal">close</button>
+            </form>
+        </dialog>
 
 
         <app-footer></app-footer>
-      </div>
+    </div>
 
-      
 
-      <div class="sidebar flex flex-row w-4/12 h-screen fixed top-0 right-0 justify-end mt-28 bg-white transition-all duration-500"
-            *ngIf="layoutService.showSidebar$ | async">
-            <div class="sidebar-content text-center justify-center">
-                <div *ngFor="let nav of navbarMenu" class="sidebar-item  opacity-100">
-                    <p class="text-lg p-3 font-bold  opacity-100">{{nav.label}}</p>
-                </div>
+
+    <div class="sidebar flex flex-row w-4/12 h-screen fixed top-0 right-0 justify-end mt-28 bg-white transition-all duration-500"
+        *ngIf="layoutService.showSidebar$ | async">
+        <div class="sidebar-content text-center justify-center">
+            <div *ngFor="let nav of navbarMenu" class="sidebar-item  opacity-100">
+                <p class="text-lg p-3 font-bold  opacity-100">{{nav.label}}</p>
             </div>
-            <!-- <button class="close-btn" (click)="toggleSidebar()">Close</button> -->
         </div>
+        <!-- <button class="close-btn" (click)="toggleSidebar()">Close</button> -->
+    </div>
 </app-layouts>

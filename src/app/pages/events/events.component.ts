@@ -53,10 +53,10 @@ export class EventsComponent implements OnInit {
 
 
 
-  toggleContent() {
+  toggleContent(args:any) {
     // this.isExpanded = !this.isExpanded;
-
-    this.router.navigateByUrl('event-register')
+    console.log(args)
+    this.router.navigate(['event-register/',args.id_event])
   }
 
   handlClickNews(args: any): void {

@@ -8,13 +8,13 @@
                             <table class="min-w-full border-collapse block md:table">
                                 <thead class="block md:table-header-group">
                                     <tr class="border border-gray-200 md:border-none md:table-row">
-                                        <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">#</th>
+                                        <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell"><i class="pi pi-check"></i></th>
                                         <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">Produk
                                         </th>
                                         <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">qty</th>
                                         <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">harga</th>
                                         <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">total</th>
-                                        <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">#</th>
+                                        <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell"><i class="pi pi-cog"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody class="block md:table-row-group">
@@ -38,11 +38,11 @@
                                             <input type="number" [(ngModel)]='item.qty' (change)="updateQty_(item,1)"
                                                 class="w-20">
                                         </td>
-                                        <td class="p-2 block md:table-cell">{{item.product.harga}}</td>
-                                        <td class="p-2 block md:table-cell">{{item.product.harga*item.qty}}</td>
+                                        <td class="p-2 block md:table-cell font-semibold">Rp. {{item.product.harga | number}}</td>
+                                        <td class="p-2 block md:table-cell font-semibold">Rp. {{item.product.harga*item.qty | number}}</td>
                                         <td class=" p-2 inline-flex md:table-cell text-red-500">
-                                            <p class="cursor-pointer" (click)="hapus(item.id_cart)">hapus</p> <i
-                                                class="pi pi-trash"></i>
+                                            <button class="cursor-pointer" (click)="hapus(item.id_cart)"><i
+                                                class="pi pi-trash"></i></button> 
                                         </td>
                                     </tr>
                                 </tbody>
@@ -284,7 +284,7 @@
                                         </div>
                                         <div class="w-7/12">
                                             <div class="flex w-full justify-end font-bold text-xl">
-                                                {{harga}}
+                                                RP. {{harga | number}}
                                             </div>
                                         </div>
                                     </div>
@@ -294,7 +294,7 @@
                                         </div>
                                         <div class="w-7/12">
                                             <div class="flex w-full justify-end font-bold text-xl">
-                                                {{biaya_kirim}}
+                                                Rp. {{biaya_kirim | number}}
                                             </div>
                                         </div>
                                     </div>
@@ -304,15 +304,15 @@
                                         </div>
                                         <div class="w-7/12">
                                             <div class="flex w-full justify-end font-bold text-xl">
-                                                {{total}}
+                                                Rp. {{total | number}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex flex-row mt-3 w-full h-auto items-center">
                                     <button (click)="handleClickBayar(total)"
-                                        class="w-full rounded-sm border border-gray-500 h-16 hover:bg-gray-200 transtion-all duration-100">
-                                        <p class="text-2xl ">Bayar</p>
+                                        class="w-full rounded-lg border border-gray-300 shadow-md h-16 hover:bg-gray-300  transtion-all duration-100 ">
+                                        <p class="text-2xl font-semibold">Bayar <i class="pi pi-credit-card text-2xl font-semibold"></i></p>
                                     </button>
                                 </div>
                             </div>

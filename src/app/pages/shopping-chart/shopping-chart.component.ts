@@ -96,8 +96,11 @@ export class ShoppingChartComponent implements OnInit {
 
   reload() {
     this.produkService.getcart().subscribe(result => {
+     
       this.cart = result.data
+     
       this.hitung();
+     
       console.log(result.data)
     })
 
@@ -152,26 +155,37 @@ export class ShoppingChartComponent implements OnInit {
 
   onDoubleClick(args: any, almt: any): void {
     let close = document.getElementById('closeModal') as HTMLInputElement
+   
     let alamat = document.getElementById('alamat_lengkap') as HTMLElement
-    console.log(alamat.innerHTML)
-    console.log(almt)
-    console.log(args)
+
     this.selectKota = almt.id_kota
+
     this.selectProv = almt.id_provinsi
+
     this.selectedAlamat = args.target.innerText
+
     close.click()
   }
 
   getEkspedisi(): void {
     this.produkService.kurir().subscribe(result => {
+      
       console.log(result)
+      
       let pos = []
+      
       pos.push(result.data.pos)
+      
       let tiki = []
+      
       tiki.push(result.data.tiki)
+      
       let jne = []
+      
       jne.push(result.data.jne)
+      
       this.ekspedisi.push(...tiki, ...jne, ...pos)
+      
       console.log(this.ekspedisi)
     })
   }
@@ -232,16 +246,27 @@ export class ShoppingChartComponent implements OnInit {
     }).subscribe((result: any) => {
       window.snap.pay(result.snap.token, {
         onSuccess: function (result: any) {
+        
           console.log('Success:', result);
+        
         },
+        
         onPending: function (result: any) {
+        
           console.log('Pending:', result);
+        
         },
+        
         onError: function (result: any) {
+        
           console.log('Error:', result);
+        
         },
+        
         onClose: function () {
+        
           console.log('Customer closed the popup without finishing the payment');
+        
         }
       })
     })
@@ -250,26 +275,41 @@ export class ShoppingChartComponent implements OnInit {
   handleTambahAlamat(Form: any): void {
 
     const nama_prov = this.prov.find((el: any) => el.province_id === Form.id_provinsi)
+
     const nama_city = this.city.find((el: any) => el.city_id === Form.id_kota)
+
     Form.provinsi = nama_prov.province
+
     Form.kota = nama_city.city_name
+
     console.log("FORM ==> ", Form)
+
     this.produkService.tambah_alamat(Form).subscribe(result => {
+    
       console.log(result)
+
       if (result.status === "success") {
+
         this.onResetForm()
+
         this.reload_alamat()
-      } else {
+
+      }else {
         this.utilityService.onShowCustomAlert('error', 'Oops...', result.message)
       }
     })
   }
 
   hapusAlamat(args: any): void {
+
     let close = document.getElementById('closeModal') as HTMLInputElement
+
     let open = document.getElementById('openModal') as HTMLElement
+
     console.log('DELETE ALAMAT ==>',args)
+    
     close.click()
+
     this.utilityService.onShowConfirmationAlert('warning', 'Informasi', 'Apakah anda akan menghapus alamat ini ??', () => {
       this.requestHapusAlamat(args)
     }, () => { open.click() })
@@ -277,17 +317,27 @@ export class ShoppingChartComponent implements OnInit {
 
   requestHapusAlamat(id_alamat_customer:any):void{
     let open = document.getElementById('openModal') as HTMLElement
+    
     this.utilityService.onShowLoadingBeforeSend()
+   
     this.produkService.hapus_alamat(id_alamat_customer).subscribe((result:any)=>{
+   
       if(result.status == 'success'){
+   
         Swal.close()
+   
         this.utilityService.onShowCustomAlert('success','Berhasil',result.message).then(()=>{
+   
           open.click()
+   
           this.reload_alamat()
         })
       }else{
+   
         Swal.close()
+   
         this.utilityService.onShowCustomAlert('error','Oops...',result.message)
+   
       }
     })
   }
@@ -295,14 +345,17 @@ export class ShoppingChartComponent implements OnInit {
 
   EditAlamat(args:any):void{
     console.log("EDIT==>",args)
+
     delete args.id_customer
+
     delete args.created_at
+
     delete args.updated_at
+
     this.FormInputAlamatState = 'Edit'
+
     this.setkota(args.id_provinsi)
-    // this.nama_lengkap.setValue(args.nama_lengkap)
-    // this.no_hp.setValue(args.no_hp)
-    // this.alamat_lengkap.setValue(args.alamat_lengkap)
+
     this.FormInputAlamat.setValue(args)
   }
 
@@ -318,24 +371,39 @@ export class ShoppingChartComponent implements OnInit {
     //     id_provinsi: 2
     // }
     let close = document.getElementById('closeModal') as HTMLInputElement
+    
     let open = document.getElementById('openModal') as HTMLElement
+    
     close.click()
+    
     this.utilityService.onShowLoadingBeforeSend()
+    
     console.log("HANDLE EDIT ALAMAT ==>",args)
+    
     this.produkService.Edit_alamat(args).subscribe(result=>{
+    
       if(result.status == 'success'){
+    
         Swal.close()
+    
         this.utilityService.onShowCustomAlert('success','Berhasil',result.message)
         .then(()=>{
+    
           this.reload_alamat()
+    
           open.click()
+    
           this.onResetForm()
         })
       }else{
+    
         Swal.close()
+    
         this.utilityService.onShowCustomAlert('error','Oops...',result.message)
         .then(()=>{
+    
           open.click()
+    
         })
       }
     })
@@ -343,34 +411,12 @@ export class ShoppingChartComponent implements OnInit {
 
 
   onResetForm(): void {
+    
     this.FormInputAlamat.reset()
+    
     this.FormInputAlamatState = 'Tambah'
+  
   }
-  //   let payload = {
-  //     "nomor_invoice INV-004",
-  //     "payment" : args
-  //   }
-  //   this.orderService.OnPayMidtrans(payload).subscribe((result:any)=>{
-  //     const snapToken = result.snapToken
-
-
-  //      // Call the Snap Pay UI
-  //      window.snap.pay(snapToken, {
-  //       onSuccess: function(result:any) {
-  //         console.log('Success:', result);
-  //       },
-  //       onPending: function(result:any) {
-  //         console.log('Pending:', result);
-  //       },
-  //       onError: function(result:any) {
-  //         console.log('Error:', result);
-  //       },
-  //       onClose: function() {
-  //         console.log('Customer closed the popup without finishing the payment');
-  //       }
-  //     })
-  //   })
-  // }
 
   get nama_lengkap(): AbstractControl { return this.FormInputAlamat.get('nama_lengkap') as AbstractControl }
   get alamat_lengkap(): AbstractControl { return this.FormInputAlamat.get('alamat_lengkap') as AbstractControl }

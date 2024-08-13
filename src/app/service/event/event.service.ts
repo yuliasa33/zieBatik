@@ -9,16 +9,23 @@ import { ToastService } from '../taost/toast.service';
 })
 export class EventService {
 
-  constructor(private httpOperationService:HttpOperationService,
-            private toastService:ToastService
+  constructor(private httpOperationService: HttpOperationService,
+    private toastService: ToastService
   ) { }
 
-  PostdaftarEvent(data:any):Observable<any>{
-    return  this.httpOperationService.onPostRequest(environment.url+'register_event/customerRegisterEvent',data).
-    pipe(catchError((error:any):any=>{
-      console.log(error)
-      this.toastService.showError(error.status,error.message)
-    }))
+  PostdaftarEvent(data: any): Observable<any> {
+    return this.httpOperationService.onPostRequest(environment.url + 'register_event/customerRegisterEvent', data).
+      pipe(catchError((error: any): any => {
+        console.log(error)
+        this.toastService.showError(error.status, error.message)
+      }))
+  }
+
+  getByIdEvent(id_event: any): Observable<any> {
+    return this.httpOperationService.getRequest(environment.url + `event/getById/${id_event}`)
+      .pipe(catchError((error: any): any => {
+        this.toastService.showError(error.status, error.message)
+      }))
   }
 
 }

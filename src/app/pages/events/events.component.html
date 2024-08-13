@@ -98,7 +98,7 @@
             <div class="article-container">
               <!-- <p class="article-content" [class.expanded]="isExpanded" [innerHTML]="news.deskripsi">{{ news.deskripsi }}</p> -->
               <div class="flex flex-col justify-end">
-                <button (click)="toggleContent()">
+                <button (click)="toggleContent(news)">
                   {{ isExpanded ? 'Lihat Lebih Sedikit' : 'Lihat Selengkapnya' }}
                 </button>
               </div>

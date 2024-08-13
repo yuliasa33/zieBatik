@@ -22,7 +22,7 @@
                     <!-- Rating content -->
                   </div>
                   <p class="text-md mt-1 text-gray-500">kategori: {{data.category.nama_category}}</p>
-                  <p class="text-xl mb-3 font-semibold mt-3">Rp.{{data.harga}}</p>
+                  <p class="text-xl mb-3 font-semibold mt-3">Rp.{{data.harga | number}}</p>
                   <div class="mt-3 flex flex-row w-full items-center justify-center my-3">
                     <button type="button" (click)="detail(data.id_product)" class="h-12 border p-3 hover:bg-gray-400 hover:text-white transition-all duration-200">
                       <p class="mx-4">Beli Sekarang <i class="ml-5 pi pi-arrow-right"></i></p>

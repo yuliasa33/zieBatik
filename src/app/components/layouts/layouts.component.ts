@@ -20,6 +20,7 @@ export class LayoutsComponent implements OnInit {
 
   isScrolled?: boolean = false
   User: any
+  ShowDropdown: any = false
 
   isSmallScreen?: boolean;
   largeScreen?: boolean
@@ -38,12 +39,13 @@ export class LayoutsComponent implements OnInit {
 
   constructor(public layoutService: LayoutService,
     private router: Router,
-    private authenticationService:AuthenticationService
+    private authenticationService: AuthenticationService
   ) {
     this.checkScreenSize()
   }
 
   ngOnInit(): void {
+
     this.isScrolled = window.scrollY > 50
     const item = localStorage.getItem('BATIK_');
     let data: any;
@@ -55,15 +57,25 @@ export class LayoutsComponent implements OnInit {
     }
     if (localStorage.getItem('BATIK_')) {
       this.navbarMenu = [
-        { label: 'Home', icon: 'pi pi-home' },
-        { label: 'About', icon: 'pi pi-users' },
-        { label: 'Product', icon: 'pi pi-dollar' },
-        { label: 'Events', icon: 'pi pi-wrench' },
-        { label: data?.nama },
-        { label: 'Log Out', icon: 'pi pi-wrench' },
+        { label: 'Home', },
+        // { label: 'About', },
+        { label: 'Product', },
+        { label: 'Events', },
+        {
+          icon: 'pi pi-user', label: data?.nama, children: [
+            { label: 'Profiles', icon: 'pi pi-user' },
+            { label: 'Log Out', icon: 'pi pi-power-off' }
+          ]
+        },
+
       ]
     }
 
+
+  }
+
+  toggleDropdown(): void {
+    this.ShowDropdown = !this.ShowDropdown
   }
 
   @HostListener('window:resize', ['$event'])
@@ -96,21 +108,29 @@ export class LayoutsComponent implements OnInit {
       this.router.navigateByUrl('')
     }
 
-    if(select == 'Events'){
+    if (select == 'Events') {
       this.router.navigateByUrl('list-event')
     }
 
-    if(select == 'Log Out'){
+    if (select == 'Log Out') {
       this.authenticationService.SignOut()
     }
 
-    if(select == 'Login'){
+    if (select == 'Login') {
       this.router.navigateByUrl('login')
     }
 
   }
 
-  onClickChart():void{
+  handleSignOut(): void {
+    this.authenticationService.SignOut()
+  }
+
+  handleClickProfiles():void{
+    this.router.navigateByUrl('profil')
+  }
+
+  onClickChart(): void {
     this.router.navigateByUrl('shoping-chart')
   }
 

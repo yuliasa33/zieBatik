@@ -38,7 +38,8 @@ export class ShoppingChartComponent implements OnInit {
   costOngkir: any[] = []
   SelectedOngkir: any
   berat: any = 1
-
+  isSmallScreen?:boolean
+  largeScreen?:boolean
 
   FormInputAlamat!: FormGroup
 
@@ -61,6 +62,7 @@ export class ShoppingChartComponent implements OnInit {
     this.getEkspedisi()
 
     this.setAtributeTambahAlamat()
+    this.checkScreenSize()
   }
 
   setAtributeTambahAlamat(): void {
@@ -163,6 +165,15 @@ export class ShoppingChartComponent implements OnInit {
     this.selectProv = almt.id_provinsi
 
     this.selectedAlamat = args.target.innerText
+
+    close.click()
+  }
+
+  onPilihAlamat(args:any,almt:any):void{
+    let alamat = document.getElementById('alamat_lengkap') as HTMLElement
+    let close = document.getElementById('closeModal') as HTMLInputElement
+
+    this.selectedAlamat = alamat.innerText
 
     close.click()
   }
@@ -416,6 +427,15 @@ export class ShoppingChartComponent implements OnInit {
     
     this.FormInputAlamatState = 'Tambah'
   
+  }
+
+  checkScreenSize() {
+    this.isSmallScreen = window.innerWidth <= 768;
+    if (window.innerWidth >= 768) {
+      this.largeScreen = true
+    } else {
+      this.largeScreen = false
+    }
   }
 
   get nama_lengkap(): AbstractControl { return this.FormInputAlamat.get('nama_lengkap') as AbstractControl }

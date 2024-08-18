@@ -8,6 +8,7 @@ import { HomeComponent } from "./pages/home/home.component";
 import { ListEventComponent } from "./pages/list-event/list-event.component";
 import { ProductComponent } from "./pages/product/product.component";
 import { ShoppingChartComponent } from "./pages/shopping-chart/shopping-chart.component";
+import { ProfilesComponent } from "./pages/profiles/profiles.component";
 
 const routes:Routes = [
     {
@@ -43,6 +44,10 @@ const routes:Routes = [
         path:'event/:id',
         component:EventsComponent
     },
+    {
+        path:'profil',
+        component:ProfilesComponent
+    }
 ]
 
 @NgModule({

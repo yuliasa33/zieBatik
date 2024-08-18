@@ -52,6 +52,7 @@ export class AuthenticationService {
     this.utilityService.onShowCustomAlert('success','Berhasil','LogOut Success')
     .then(()=>{
       this.router.navigateByUrl('')
+      window.location.reload()
     })
     
   }

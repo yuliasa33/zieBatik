@@ -196,7 +196,7 @@
             </div>
         </div> -->
 
-        <div class="container w-full h-full">
+        <div class="container w-full h-full mt-20 lg:mt-0">
             <app-events [Events]="event"></app-events>
         </div>
 
@@ -242,17 +242,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="container w-full h-auto mt-2 p-3">
-            <div class="flex flex-col h-screen lg:w-screen lg:h-max ">
-                <div class="flex-row w-full h-20 p-0 ml-4 justify-center items-end text-center">
-                    <p class="text-6xl md:text-6xl font-bold mb-5 text-gray-600">Our New Product</p>
-                </div>
-                <div class="flex flex-row justify-center h-full lg:w-full p-3 m-0 lg:h-full h-screen ">
-                    <div class="flex flex-col w-full lg:h-fit mb-5 p-4 h-4/6 ">
-                        <div
-                            class="grid grid-cols-5 lg:w-full lg:h-fit h-max gap-5  w-full ">
-                            <!-- <div *ngFor="let item of loopitem">
+  <!-- <div *ngFor="let item of loopitem">
                                 <div class="card-items w-fit p-3 my-4 h-20 lg:h-full lg:w-96 ">
                                     <div
                                         class="w-full hover:scale-105 transition-all duration-200 hover:shadow-lg max-w-sm bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
@@ -296,32 +286,94 @@
                                     </div>
                                 </div>
                             </div> -->
-                            <div *ngFor="let data of loopitem" class="items-per-content mx-2 my-2 border shadow-lg rounded-lg flex flex-col gap-5 w-full">
-                                <img [src]="data.image" [id]="" class="w-full h-32 lg:h-80" alt="">
-                                <div class="flex flex-col w-full mx-4">
-                                  <p class="text-md text-gray-400 font-semibold mt-3">{{data.nama_product}}</p>
-                                  <p class="text-md font-semibold lg:mt-3" [innerHTML]="data.deskripsi_product">{{data.deskripsi_product}}</p>
-                                  <div class="rate">
-                                    <!-- Rating content -->
-                                  </div>
-                                  <p class="text-md mt-3 text-gray-500">Proses: Batik Tulis</p>
-                                  <p class="text-2xl font-semibold mt-3">Rp. {{data.harga | number}}</p>
-                                  <div class="mt-3 flex flex-row w-full items-center justify-center my-3">
-                                    <button (click)="handleClickLihatOpsi(data.id_product)" type="button" class="h-12 border p-3 hover:bg-gray-400 hover:text-white transition-all duration-200" >
-                                      <p class="mx-4">Lihat Opsi <i class="ml-5 pi pi-arrow-right"></i></p>
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                        </div>
-                        <div class="flex flex-row w-full h-auto mt-4 p-3 justify-center">
-                            <button (click)="handleClickLihatLebihBanyak()" class="p-3 text-center bg-transparent border border-blue-400 text-gray-600 text-xl hover:bg-gray-100 transition-all duration-100">Lihat Lebih banyak +</button>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-        </div>
+
+                            <div class="container w-full h-auto mt-2 p-3" *ngIf="largeScreen == true" #LargeScreen>
+                                <div class="flex flex-col h-screen lg:w-screen lg:h-max ">
+                                    <div class="flex-row w-full h-20 p-0 ml-4 justify-center items-end text-center">
+                                        <p class="text-6xl md:text-6xl font-bold mb-5 text-gray-600">Our New Product</p>
+                                    </div>
+                                    <div class="flex flex-row justify-center h-full lg:w-full p-3 m-0 lg:h-full h-screen ">
+                                        <div class="flex flex-col w-full lg:h-fit mb-5 p-4 h-4/6 ">
+                                            <div
+                                                class="grid grid-cols-5 lg:w-full lg:h-fit h-max gap-5  w-full ">
+                                              
+                                                <div *ngFor="let data of loopitem" class="items-per-content mx-2 my-2 border shadow-lg rounded-lg flex flex-col gap-5 w-full">
+                                                    <img [src]="data.image" [id]="" class="w-full h-32 lg:h-80" alt="">
+                                                    <div class="flex flex-col w-full mx-4">
+                                                      <p class="text-md text-gray-400 font-semibold mt-3">{{data.nama_product}}</p>
+                                                      <p class="text-md font-semibold lg:mt-3" [innerHTML]="data.deskripsi_product">{{data.deskripsi_product}}</p>
+                                                      <div class="rate">
+                                                        <!-- Rating content -->
+                                                      </div>
+                                                      <p class="text-md mt-3 text-gray-500">Proses: Batik Tulis</p>
+                                                      <p class="text-2xl font-semibold mt-3">Rp. {{data.harga | number}}</p>
+                                                      <div class="mt-3 flex flex-row w-full items-center justify-center my-3">
+                                                        <button (click)="handleClickLihatOpsi(data.id_product)" type="button" class="h-12 border p-3 hover:bg-gray-400 hover:text-white transition-all duration-200" >
+                                                          <p class="mx-4">Lihat Opsi <i class="ml-5 pi pi-arrow-right"></i></p>
+                                                        </button>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                            </div>
+                                            <div class="flex flex-row w-full h-auto mt-4 p-3 justify-center">
+                                                <button (click)="handleClickLihatLebihBanyak()" class="p-3 text-center bg-transparent border border-blue-400 text-gray-600 text-xl hover:bg-gray-100 transition-all duration-100">Lihat Lebih banyak +</button>
+                                            </div>
+                                        </div>
+                    
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="container w-full h-auto mt-2 p-3" *ngIf="isSmallScreen" #SmallScreen>
+                                <div class="flex flex-col lg:flex-row h-auto lg:h-max">
+                                    <!-- Header Section -->
+                                    <div class="flex flex-col w-full lg:w-auto h-20 p-0 lg:ml-4 justify-center items-center lg:items-start text-center">
+                                        <p class="text-3xl sm:text-4xl lg:text-6xl font-bold mb-5 text-gray-600">
+                                            Our New Product
+                                        </p>
+                                    </div>
+                            
+                                    <!-- Product Grid Section -->
+                                    <div class="flex flex-col w-full lg:w-auto justify-center p-3">
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+                                            <div *ngFor="let data of loopitem" class="items-per-content border shadow-lg rounded-lg flex flex-col gap-5">
+                                                <img [src]="data.image" class="w-full h-auto lg:h-80 object-cover" alt="">
+                                                <div class="flex flex-col p-4">
+                                                    <p class="text-md text-gray-400 font-semibold mt-3">
+                                                        {{data.nama_product}}
+                                                    </p>
+                                                    <p class="text-md font-semibold lg:mt-3" [innerHTML]="data.deskripsi_product">
+                                                        {{data.deskripsi_product}}
+                                                    </p>
+                                                    <div class="rate">
+                                                        <!-- Rating content -->
+                                                    </div>
+                                                    <p class="text-md mt-3 text-gray-500">
+                                                        Proses: Batik Tulis
+                                                    </p>
+                                                    <p class="text-2xl font-semibold mt-3">
+                                                        Rp. {{data.harga | number}}
+                                                    </p>
+                                                    <div class="mt-3 flex flex-row justify-center">
+                                                        <button (click)="handleClickLihatOpsi(data.id_product)" type="button" class="h-12 border p-3 hover:bg-gray-400 hover:text-white transition-all duration-200">
+                                                            <p class="mx-4">Lihat Opsi <i class="ml-5 pi pi-arrow-right"></i></p>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Load More Button -->
+                                        <div class="flex justify-center mt-4">
+                                            <button (click)="handleClickLihatLebihBanyak()" class="p-3 bg-transparent border border-blue-400 text-gray-600 text-xl hover:bg-gray-100 transition-all duration-100">
+                                                Lihat Lebih banyak +
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
         <app-testimonial></app-testimonial>

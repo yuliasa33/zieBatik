@@ -1,70 +1,66 @@
 <app-layouts>
     <div class="flex flex-col">
-        <div class="flex flex-col mt-12 w-screen h-screen mr-5 ml-5">
-            <div class="grid grid-cols-3 w-full h-full mt-10">
-                <div class="gambar">
-                    <div class="flex flex-col w-full h-full p-3">
-                        <img src="{{detail.image}}" alt="">
-                        <!-- <div class="flex flex-row mt-3 p-3 w-full h-1 gap-3">
-                            <img src="../../../assets/images/beautyofbatik2.jpg" class="w-16 h-16" alt="">
-                            <img src="../../../assets/images/beautyofbatik2.jpg" class="w-16 h-16" alt="">
-                            <img src="../../../assets/images/beautyofbatik2.jpg" class="w-16 h-16" alt="">
-                            <img src="../../../assets/images/beautyofbatik2.jpg" class="w-16 h-16" alt="">
-                            <img src="../../../assets/images/beautyofbatik2.jpg" class="w-16 h-16" alt="">
-                            <img src="../../../assets/images/beautyofbatik2.jpg" class="w-16 h-16" alt="">
-                        </div> -->
-                    </div>
-
+        <div class="flex flex-col mt-12 w-full h-auto p-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full h-auto mt-10">
+              <!-- Image Section -->
+              <div class="gambar">
+                <div class="flex flex-col w-full h-full p-3">
+                  <img src="{{detail.image}}" alt="" class="w-full h-auto object-cover rounded-lg">
+                  <!-- Additional images (optional) -->
                 </div>
-                <div class="deskripsi">
-                    <div class="flex flex-col w-full h-full p-3">
-                        <p class="font-bold text-5xl">Batik Kemeja XL</p>
-                        <p class="font-bold text-5xl my-4">Rp {{detail.harga}}</p>
-                        <p class="font-semibold text-2xl mt-5 mb-3">Kategori: {{detail.category.nama_category}}</p>
-                        <div class="flex flex-row w-full border-b p-3 mt-4">
-                            <p class="font-semibold text-lg text-gray-700">deskripsi produk</p>
+              </div>
+          
+              <!-- Description Section -->
+              <div class="deskripsi">
+                <div class="flex flex-col w-full h-full p-3">
+                  <p class="font-bold text-2xl sm:text-3xl lg:text-5xl">Batik Kemeja XL</p>
+                  <p class="font-bold text-2xl sm:text-3xl lg:text-5xl my-4">Rp {{detail.harga}}</p>
+                  <p class="font-semibold text-xl sm:text-2xl mt-5 mb-3">Kategori: {{detail.category.nama_category}}</p>
+                  <div class="flex flex-row w-full border-b p-3 mt-4">
+                    <p class="font-semibold text-lg text-gray-700">Deskripsi Produk</p>
+                  </div>
+                  <p class="description mt-3" [innerHTML]="detail.deskripsi_produk"></p>
+                </div>
+              </div>
+          
+              <!-- Invoice Section -->
+              <div class="invoice">
+                <div class="flex flex-col w-full h-auto p-3">
+                  <div class="card-body w-full h-auto relative rounded-xl shadow-md border-gray-500 p-4">
+                    <div class="flex flex-row w-full h-auto gap-3 items-center">
+                      <div class="custom-number-input h-10 w-32">
+                        <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
+                          <button (click)="decrement($event)" [disabled]="qty_value == 1"
+                            class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer">
+                            <span class="m-auto text-2xl font-thin">−</span>
+                          </button>
+                          <input type="number" class="outline-none text-center w-full bg-gray-300 font-semibold text-md text-gray-700"
+                            [value]="qty_value">
+                          <button (click)="increment($event)"
+                            class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
+                            <span class="m-auto text-2xl font-thin">+</span>
+                          </button>
                         </div>
-                        <p class="description" [innerHTML]="detail.deskripsi_produk"> </p>
+                      </div>
+                      <p class="text-gray-400 text-lg">Stok: 20</p>
                     </div>
-                </div>
-                <div class="invoice">
-                    <div class="flex flex-col w-full h-max p-3">
-                        <div class="card-body w-full h-full relative rounded-xl shadow-md mr-5 border-gray-500">
-                            <div class="flex flex-row w-full h-auto gap-3 items-center">
-                                <div class="custom-number-input h-10 w-32">
-                                    <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
-                                        <button (click)="decrement($event)" [disabled]="qty_value == 1"
-                                            data-action="decrement"
-                                            class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
-                                            <span class="m-auto text-2xl font-thin">−</span>
-                                        </button>
-                                        <input type="number"
-                                            class="outline-none focus:outline-none text-center w-full bg-gray-300 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
-                                            name="custom-input-number" [value]="qty_value">
-                                        <button (click)="increment($event)" data-action="increment"
-                                            class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
-                                            <span class="m-auto text-2xl font-thin">+</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <p class="text-gray-400 text-lg">Stok : 20</p>
-                            </div>
-
-                            <div class="flex flex-row justify-between w-full h-full mt-5 p-3">
-                                <p class="text-gray-400 text-2xl">Subtotal</p>
-                                <p class="text-4xl">Rp. {{subtotal}}</p>
-                            </div>
-                            <div class="flex flex-row mt-3 w-full h-auto items-center">
-                                <button (click)="addcart()"
-                                    class="w-full rounded-sm border-gray-500 h-16 bg-gray-800 hover:bg-gray-500 transition-all duration-100">
-                                    <p class="text-2xl text-white">+ Keranjang</p>
-                                </button>
-                            </div>
-                        </div>
+          
+                    <div class="flex flex-row justify-between w-full mt-5">
+                      <p class="text-gray-400 text-xl sm:text-2xl">Subtotal</p>
+                      <p class="text-2xl sm:text-3xl">Rp. {{subtotal}}</p>
                     </div>
+          
+                    <div class="flex flex-row mt-3 w-full">
+                      <button (click)="addcart()"
+                        class="w-full rounded-sm h-12 sm:h-16 bg-gray-800 hover:bg-gray-500 transition-all duration-100">
+                        <p class="text-xl sm:text-2xl text-white">+ Keranjang</p>
+                      </button>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
+          </div>
         <app-footer></app-footer>
     </div>
 </app-layouts>

@@ -24,6 +24,7 @@ import { VideoplayerComponent } from './pages/videoplayer/videoplayer.component'
 import { ListEventComponent } from './pages/list-event/list-event.component';
 import {ToastModule} from 'primeng/toast'
 import { MessageService } from 'primeng/api';
+import { ProfilesComponent } from './pages/profiles/profiles.component';
 
 
 @NgModule({

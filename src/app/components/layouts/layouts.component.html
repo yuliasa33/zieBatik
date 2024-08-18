@@ -1,51 +1,79 @@
 <section id="layouts" class="flex flex-col lg:flex-col w-screen  justify-end  mr-0">
- 
-    <div class="container lg:container w-screen">
+
+  <div class="container lg:container w-screen">
     <div class="flex flex-col lg:flex-col lg h-screen lg:h-screen  ">
-        <div class="flex flex-row w-screen fixed bg-white lg:flex-row  img-bg  lg:fixed top-0 z-50 justify-start items-center h-20 lg:bg-white navbar shadow-xl " [class.scrolled]="isScrolled">
-            <div class="flex flex-col w-full h-full mt-4 items-center p-3">
-              <div class="flex flex-row w-full mx-5 h-full items-center mb-3 p-3">
-                <div>
-                  <p class="text-2xl font-bold text-amber-700">ZIE BATIK</p>
-                </div>
-              </div>
-            </div>
-            <div class="flex flex-col w-full">
-              <div class="flex flex-row w-full mx-5  justify-end">
-                <div class="flex flex-col transition-all items-center text-end cursor-pointer p-3"
-                    *ngFor="let nav of navbarMenu">
-                    <div>
-                  </div>
-                  <div *ngIf="largeScreen" #largeScreen>
-                    <button (click)="handleClickNavbar($event)"><p class="text-lg text-end p-3 font-bold">{{nav.label}}</p></button>
-                  </div>
-                </div>
-                <ng-container *ngIf="isSmallScreen || largeScreen == false">
-                    <button (click)="toggleSidebar()"><i [class]="'pi pi-align-justify mt-2 mx-5'"></i></button>
-                  </ng-container>
-              </div>
+      <div
+        class="flex flex-row w-screen fixed bg-white lg:flex-row  img-bg  lg:fixed top-0 z-50 justify-start items-center h-20 lg:bg-white navbar shadow-xl "
+        [class.scrolled]="isScrolled">
+        <div class="flex flex-col w-full h-full mt-4 items-center p-3">
+          <div class="flex flex-row w-full mx-5 h-full items-center mb-3 p-3">
+            <div>
+              <p class="text-2xl font-bold text-amber-700">ZIE BATIK</p>
             </div>
           </div>
-    
-        <div class="flex w-screen h-full lg:h-screen lg:flex my-0">
-           
-            <ng-content>
-              
-            </ng-content>
-          
         </div>
+        <div class="flex flex-col w-full">
+          <div class="flex flex-row w-full mx-5  justify-end">
+            <div class="flex flex-col transition-all items-center text-end cursor-pointer p-3"
+              *ngFor="let nav of navbarMenu">
 
-        <div class=" fixed bottom-0 right-0 mx-4 p-4 my-4">
-          <button class="button fixed bottom-0 right-0 mx-4 p-4 my-4" (click)="onClickChart()">
-            <svg class="svgIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>   </button>
+              <div *ngIf="largeScreen" #largeScreen>
+                <ul>
+                  <li> 
+                    <button (click)="handleClickNavbar($event)">
+                      <div class="flex flex-row w-full h-full items-center gap-3 hover:border-b hover:border-gray-500">
+                        <p class="text-lg text-end p-3 font-bold">{{nav.label}}</p>
+                        
+                        <button class="" *ngIf="nav.children" (click)="toggleDropdown()">
+                          <i [class]="nav.icon"></i>
+                        </button>
+                      </div>
+                    </button>
+                    <div id="dropdownNavbar" *ngIf="nav.children && ShowDropdown" class=" px-2 fixed top-20 right-2  bg-white text-base z-10 list-none divide-y divide-gray-100 rounded shadow w-44 ">
+                      <div class="flex flex-row items-center justify-center gap-3 w-full ">
+                        <a  class="text-lg text-gray-700  w-full py-2" (click)="handleClickProfiles()">Status Order</a>
+                        <i class="pi pi-shopping-bag"></i>
+                        </div>
+                      <div class="flex flex-row items-center justify-center gap-3 w-full">
+                      <a class="text-lg text-gray-700  w-full py-2" (click)="handleSignOut()">Sign out</a>
+                      <i class="pi pi-power-off"></i>
+                      </div>
+                  </div>
+                  </li>
+                </ul>
+
+
+              </div>
+
+            </div>
+            <ng-container *ngIf="isSmallScreen || largeScreen == false">
+              <button (click)="toggleSidebar()"><i [class]="'pi pi-align-justify mt-2 mx-5'"></i></button>
+            </ng-container>
+          </div>
         </div>
-    
+      </div>
+
+      <div class="flex w-screen h-full lg:h-screen lg:flex my-0">
+
+        <ng-content>
+
+        </ng-content>
+
+      </div>
+
+      <div class=" fixed bottom-0 right-0 mx-4 p-4 my-4">
+        <button class="button fixed bottom-0 right-0 mx-4 p-4 my-4" (click)="onClickChart()">
+          <svg class="svgIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path
+              d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z" />
+          </svg> </button>
+      </div>
+
     </div>
- 
-    
-   
-    
-</div>
+
+
+
+
+  </div>
 
 </section>
-

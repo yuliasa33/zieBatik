@@ -39,6 +39,9 @@ export class HomeComponent implements OnInit,AfterViewInit {
 
   event:any[] = []
 
+  isSmallScreen?:boolean
+  largeScreen?:boolean
+
   navbarMenu:any[] = [
     {label:'Home'},
     {label:'About'},
@@ -117,6 +120,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
     Aos.init()
     console.log(this.authenticationService.isLoginState)
     this.getAllProdukDashboard()
+    this.checkScreenSize()
   }
 
   getAllProdukDashboard():void{
@@ -131,6 +135,15 @@ export class HomeComponent implements OnInit,AfterViewInit {
       this.event = result.data.event
       this.loopitem = result.data.product
     })
+  }
+
+  checkScreenSize() {
+    this.isSmallScreen = window.innerWidth <= 768;
+    if (window.innerWidth >= 768) {
+      this.largeScreen = true
+    } else {
+      this.largeScreen = false
+    }
   }
 
   ngAfterViewInit(): void {

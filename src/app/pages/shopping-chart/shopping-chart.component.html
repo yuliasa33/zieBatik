@@ -1,24 +1,27 @@
 <app-layouts>
-    <div class="flex flex-col h-screen">
-        <div class="flex flex-col w-screen h-screen mt-20 p-3 ">
-            <div class="flex flex-row w-full h-auto">
-                <div class="w-8/12 m-3">
-                    <div class="list-chart h-auto border w-full my-3 p-3 mx-7 mr-5">
-                        <div class="flex flex-row w-full h-full p-3 items-center gap-3">
-                            <table class="min-w-full border-collapse block md:table">
+    <div class="flex flex-col h-max">
+        <div class="flex flex-col h-max min-h-screen">
+            <div class="flex flex-col lg:flex-row w-full h-auto mt-20 p-3">
+                <!-- Main Content Area -->
+                <div class="w-full lg:w-8/12 lg:m-3">
+                    <div class="list-chart h-auto border w-full my-3 p-3 mx-2 lg:mx-7 lg:mr-5">
+                        <div class="flex flex-col lg:flex-row w-full h-full p-3 items-center gap-3">
+                            <!-- <table class="min-w-full border-collapse inline lg:block md:table">
                                 <thead class="block md:table-header-group">
                                     <tr class="border border-gray-200 md:border-none md:table-row">
-                                        <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell"><i class="pi pi-check"></i></th>
-                                        <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">Produk
-                                        </th>
+                                        <!-- Table Headers -->
+                            <!-- <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell"><i class="pi pi-check"></i></th>
+                                        <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">Produk</th>
                                         <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">qty</th>
                                         <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">harga</th>
                                         <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell">total</th>
                                         <th class="bg-gray-100 p-2 text-left font-medium block md:table-cell"><i class="pi pi-cog"></i></th>
                                     </tr>
-                                </thead>
-                                <tbody class="block md:table-row-group">
-                                    <tr *ngFor="let item of cart"
+                                </thead> -->
+                            <!-- <tbody class="block md:table-row-group"> -->
+                            <!-- Repeatable Row Structure -->
+                            <!-- <tr *ngFor="let item of cart" class="bg-white border border-gray-200 md:border-none md:table-row">
+                                        <tr *ngFor="let item of cart"
                                         class="bg-white border border-gray-200 md:border-none md:table-row">
                                         <td class="p-2 block md:table-cell">
                                             <input type="checkbox" [checked]="item.checked=='1'"
@@ -46,46 +49,111 @@
                                         </td>
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table> -->
+                            <div class="overflow-x-auto w-full">
+                                <table class="min-w-full border-collapse inline-block lg:table">
+                                    <thead class="lg:block hidden lg:table-header-group">
+                                        <tr class="border border-gray-200 lg:border-none lg:table-row">
+                                            <!-- Table Headers -->
+                                            <th class="bg-gray-100 p-2 text-left font-medium block lg:table-cell">
+                                                <i class="pi pi-check"></i>
+                                            </th>
+                                            <th class="bg-gray-100 p-2 text-left font-medium block lg:table-cell">Produk
+                                            </th>
+                                            <th class="bg-gray-100 p-2 text-left font-medium block lg:table-cell">Qty
+                                            </th>
+                                            <th class="bg-gray-100 p-2 text-left font-medium block lg:table-cell">Harga
+                                            </th>
+                                            <th class="bg-gray-100 p-2 text-left font-medium block lg:table-cell">Total
+                                            </th>
+                                            <th class="bg-gray-100 p-2 text-left font-medium block lg:table-cell">
+                                                <i class="pi pi-cog"></i>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="block lg:table-row-group">
+                                        <!-- Repeatable Row Structure -->
+                                        <tr *ngFor="let item of cart"
+                                            class="bg-white border border-gray-200 lg:border-none lg:table-row">
+                                            <td class="p-2 block lg:table-cell">
+                                                <input type="checkbox" [checked]="item.checked=='1'"
+                                                    (change)="updateQty(item,1)">
+                                            </td>
+                                            <td class="p-2 block lg:table-cell">
+                                                <div class="flex items-center">
+                                                    <img [src]="item.product.image" alt="Product"
+                                                        class="w-20 h-20 rounded mr-4">
+                                                    <div>
+                                                        <h2 class="text-lg font-semibold">{{item.product.nama_product}}
+                                                        </h2>
+                                                        <p class="text-gray-500">{{item.product.category.nama_category}}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="p-2 block lg:table-cell">
+                                                <input type="number" [(ngModel)]='item.qty'
+                                                    (change)="updateQty_(item,1)" class="w-20">
+                                            </td>
+                                            <td class="p-2 block lg:table-cell font-semibold">Rp. {{item.product.harga |
+                                                number}}</td>
+                                            <td class="p-2 block lg:table-cell font-semibold">Rp. {{item.product.harga *
+                                                item.qty | number}}</td>
+                                            <td class="p-2 flex justify-center lg:table-cell text-red-500">
+                                                <button class="cursor-pointer" (click)="hapus(item.id_cart)">
+                                                    <i class="pi pi-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="w-4/12 m-3">
+
+                <!-- Sidebar / Invoice Section -->
+                <div class="w-full lg:w-4/12 lg:m-3">
                     <div class="invoice">
                         <div class="flex flex-col w-full h-max p-3">
-                            <div class="card-body w-full h-full relative rounded-xl shadow-md mr-5 border-gray-500">
-                                <button class="btn" id="openModal" onclick="my_modal_2.showModal()">
-                                    <div class="flex flex-row w-full h-auto items-center">
+                            <div class="card-body w-full h-full relative rounded-xl shadow-md lg:mr-5 border-gray-500">
+                                <!-- Address Selection Button -->
+                                <button class="btn w-full lg:w-auto h-max p-2" id="openModal" onclick="my_modal_2.showModal()">
+                                    <div class="flex flex-col lg:flex-row w-full h-auto items-center">
                                         <i class="pi pi-map-marker mx-3"></i>
-                                        <p class="text-start p-3"> {{selectedAlamat}}</p>
+                                        <p class="text-start p-3">{{selectedAlamat}}</p>
                                     </div>
-
                                 </button>
                                 <dialog id="my_modal_2" class="modal w-full">
 
                                     <div class="modal-box w-11/12 max-w-5xl">
-                                        <div class="grid grid-cols-2 gap-3 w-full">
+                                        <div class="grid grid-cols-2 gap-3 w-full" *ngIf="largeScreen == true"
+                                            #LargeScreen>
                                             <div class="list-alamat w-full border h-full">
                                                 <div class="flex flex-col w-full p-2 m-2">
-                                                    <p class="text-lg font-bold">Alamat Saya</p>
+                                                    <p class="text-sm lg:text-lg font-bold">Alamat Saya</p>
                                                     <div *ngFor="let almt of alamat"
                                                         (dblclick)="onDoubleClick($event,almt)"
                                                         class="card-list mt-2 w-full border overflow-y-auto flex p-3 items-center hover:bg-gray-400 cursor-pointer transition-all duration-100">
-                                                        <i class="pi pi-map-marker mx-4 p-2"></i>
-                                                        <p class="text-md font-semibold p-2 mt-2" id="alamat_lengkap">
+                                                        <i class="pi pi-map-marker lg:mx-4 p-2 text-sm lg:text-lg"></i>
+                                                        <p class="text-sm lg:text-md font-semibold p-2 mt-2"
+                                                            id="alamat_lengkap">
                                                             {{almt.nama_lengkap}}, {{almt.alamat_lengkap}}, provinsi
-                                                            {{almt.provinsi}}, kota {{almt.kota}}, no hp ({{almt.no_hp}})
+                                                            {{almt.provinsi}}, kota {{almt.kota}}, no hp
+                                                            ({{almt.no_hp}})
                                                         </p>
-                                                        <button class="btn p-3 mx-2" (click)="EditAlamat(almt)">
-                                                            <i class="pi pi-file-edit text-yellow-500"></i>
+                                                        <button class="btn lg:p-3 lg:mx-2 " (click)="EditAlamat(almt)">
+                                                            <i
+                                                                class="pi pi-file-edit text-yellow-500 text-sm lg:text-lg"></i>
                                                         </button>
-                                                        <button  class="btn p-3" (click)="hapusAlamat(almt.id_alamat_customer)">
-                                                            <i class="pi pi-trash text-red-500"></i>
+                                                        <button class="btn lg:p-3"
+                                                            (click)="hapusAlamat(almt.id_alamat_customer)">
+                                                            <i class="pi pi-trash text-red-500 text-sm lg:text-lg"></i>
                                                         </button>
-                                                    
+
                                                     </div>
                                                 </div>
-                                             
+
                                             </div>
                                             <div class="input-alamat w-full border h-full">
                                                 <form [formGroup]="FormInputAlamat">
@@ -101,7 +169,8 @@
                                                                 </div>
                                                                 <div class="w-7/12">
                                                                     <div class="flex w-full">
-                                                                        <input type="text" id="first_name" formControlName="nama_lengkap"
+                                                                        <input type="text" id="first_name"
+                                                                            formControlName="nama_lengkap"
                                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                                             required />
 
@@ -116,7 +185,8 @@
                                                                 </div>
                                                                 <div class="w-7/12">
                                                                     <div class="flex w-full">
-                                                                        <input type="tel" id="phone" formControlName="no_hp"
+                                                                        <input type="tel" id="phone"
+                                                                            formControlName="no_hp"
                                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                                             placeholder=""
                                                                             pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
@@ -132,7 +202,8 @@
                                                                 </div>
                                                                 <div class="w-7/12">
                                                                     <div class="flex w-full">
-                                                                        <textarea id="message" rows="4" formControlName="alamat_lengkap"
+                                                                        <textarea id="message" rows="4"
+                                                                            formControlName="alamat_lengkap"
                                                                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                                             placeholder="Write your thoughts here..."></textarea>
 
@@ -147,7 +218,8 @@
                                                                 </div>
                                                                 <div class="w-7/12">
                                                                     <div class="flex w-full">
-                                                                        <select (change)="handleChangeProvinsi($event)" formControlName="id_provinsi"
+                                                                        <select (change)="handleChangeProvinsi($event)"
+                                                                            formControlName="id_provinsi"
                                                                             [(ngModel)]="selectedProvinsi"
                                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                                             <option selected>Pilih Privovinsi</option>
@@ -179,16 +251,180 @@
 
                                                             <div
                                                                 class="flex flex-row w-full h-full items-center justify-end  p-3">
-                                                                <button  (click)="onResetForm()" class="btn btn-error text-white mr-4">
+                                                                <button (click)="onResetForm()"
+                                                                    class="btn btn-error text-white mr-4">
                                                                     Reset <i class="pi pi-sync"></i></button>
-                                                                <button *ngIf="FormInputAlamatState == 'Edit'" (click)="HandleEditAlamat(FormInputAlamat.value)" class="btn btn-warning text-white mr-4">
+                                                                <button *ngIf="FormInputAlamatState == 'Edit'"
+                                                                    (click)="HandleEditAlamat(FormInputAlamat.value)"
+                                                                    class="btn btn-warning text-white mr-4">
                                                                     Edit Alamat <i class="pi pi-file-edit"></i></button>
-                                                                <button *ngIf="FormInputAlamatState == 'Tambah'" (click)="handleTambahAlamat(FormInputAlamat.value)" class="btn btn-success text-white mr-4">Tambah
+                                                                <button *ngIf="FormInputAlamatState == 'Tambah'"
+                                                                    (click)="handleTambahAlamat(FormInputAlamat.value)"
+                                                                    class="btn btn-success text-white mr-4">Tambah
                                                                     Alamat <i class="pi pi-plus"></i></button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </form>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="isSmallScreen == true" #SmallScreen>
+                                            <div class="flex flex-col w-auto h-full">
+                                                <div class="flex flex-col h-full w-full ">
+                                                    <p class="text-sm lg:text-lg font-bold">Alamat Saya</p>
+                                                    <div class="list-alamat h-64 overflow-y-auto">
+                                                        <div *ngFor="let almt of alamat">
+                                                            <div (dblclick)="onDoubleClick($event,almt)"
+                                                                class="card-list mt-2 w-full border overflow-y-auto p-3 items-center hover:bg-gray-400 cursor-pointer transition-all duration-100">
+                                                                <div class="flex w-full h-auto items-center">
+                                                                    <i
+                                                                        class="pi pi-map-marker lg:mx-4 p-2 text-sm lg:text-lg"></i>
+                                                                    <p class="text-sm lg:text-md font-semibold p-2 mt-2"
+                                                                        id="alamat_lengkap">
+                                                                        {{almt.nama_lengkap}}, {{almt.alamat_lengkap}},
+                                                                        provinsi
+                                                                        {{almt.provinsi}}, kota {{almt.kota}}, no hp
+                                                                        ({{almt.no_hp}})
+                                                                    </p>
+                                                                </div>
+                                                                <div
+                                                                    class="flex w-full h-auto justify-end items-center gap-3">
+                                                                     <button class="btn " (click)="onPilihAlamat($event,almt)">
+                                                                   PILIH
+                                                                </button> 
+                                                                    <button class="btn " (click)="EditAlamat(almt)">
+                                                                        <i
+                                                                            class="pi pi-file-edit text-yellow-500 text-sm"></i>
+                                                                    </button>
+                                                                    <button class="btn"
+                                                                        (click)="hapusAlamat(almt.id_alamat_customer)">
+                                                                        <i class="pi pi-trash text-red-500 text-sm"></i>
+                                                                    </button>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    
+                                                    <div class="flex flex-col w-full h-auto my-2">
+                                                        <div class="input-alamat w-full border h-full">
+                                                            <form [formGroup]="FormInputAlamat">
+                                                                <div class="flex flex-col w-full p-2 m-2">
+                                                                    <p class="text-sm font-bold">Tambah Alamat Baru</p>
+                                                                    <div class="flex flex-col w-full">
+            
+                                                                        <div class="flex flex-row w-full items-center p-2 h-auto">
+                                                                            <div class="w-5/12">
+                                                                                <p class="text-sm">
+                                                                                    Nama Lengkap
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="w-7/12">
+                                                                                <div class="flex w-full">
+                                                                                    <input type="text" id="first_name"
+                                                                                        formControlName="nama_lengkap"
+                                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                                        required />
+            
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="flex flex-row w-full items-center p-2 h-auto">
+                                                                            <div class="w-5/12">
+                                                                                <p class="text-sm">
+                                                                                    No Telpon
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="w-7/12">
+                                                                                <div class="flex w-full">
+                                                                                    <input type="tel" id="phone"
+                                                                                        formControlName="no_hp"
+                                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                                        placeholder=""
+                                                                                        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                                                                                        required />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="flex flex-row w-full items-center p-2 h-auto">
+                                                                            <div class="w-5/12">
+                                                                                <p class="text-sm">
+                                                                                    Alamat Lengkap
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="w-7/12">
+                                                                                <div class="flex w-full">
+                                                                                    <textarea id="message" rows="4"
+                                                                                        formControlName="alamat_lengkap"
+                                                                                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                                        placeholder="Write your thoughts here..."></textarea>
+            
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="flex flex-row w-full items-center p-2 h-auto">
+                                                                            <div class="w-5/12">
+                                                                                <p class="text-sm">
+                                                                                    Provinsi
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="w-7/12">
+                                                                                <div class="flex w-full">
+                                                                                    <select (change)="handleChangeProvinsi($event)"
+                                                                                        formControlName="id_provinsi"
+                                                                                        [(ngModel)]="selectedProvinsi"
+                                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                                        <option selected>Pilih Privovinsi</option>
+                                                                                        <option *ngFor="let prov of prov"
+                                                                                            [value]="prov.province_id">
+                                                                                            {{prov.province}}</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="flex flex-row w-full items-center p-2 h-auto">
+                                                                            <div class="w-5/12">
+                                                                                <p class="text-sm">
+                                                                                    Kota
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="w-7/12">
+                                                                                <div class="flex w-full">
+                                                                                    <select id="countries" formControlName="id_kota"
+                                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                                        <option selected>Pilih Kota</option>
+                                                                                        <option *ngFor="let city of city"
+                                                                                            [value]="city.city_id">
+                                                                                            {{city.city_name}}</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+            
+                                                                        <div
+                                                                            class="flex flex-row w-full h-full items-center gap-3 justify-end p-3">
+                                                                            <button (click)="onResetForm()"
+                                                                                class="btn btn-error text-white  text-sm">
+                                                                                Reset <i class="pi pi-sync"></i></button>
+                                                                            <button *ngIf="FormInputAlamatState == 'Edit'"
+                                                                                (click)="HandleEditAlamat(FormInputAlamat.value)"
+                                                                                class="btn btn-warning text-white  text-sm">
+                                                                                Edit Alamat <i class="pi pi-file-edit"></i></button>
+                                                                            <button *ngIf="FormInputAlamatState == 'Tambah'"
+                                                                                (click)="handleTambahAlamat(FormInputAlamat.value)"
+                                                                                class="btn btn-success text-white  text-sm">Tambah
+                                                                                Alamat <i class="pi pi-plus"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -197,31 +433,32 @@
                                         <button id="closeModal">close</button>
                                     </form>
                                 </dialog>
-                                <div class="grid grid-cols-1 w-full">
-
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 w-full gap-4">
+                                    <!-- Berat /Kg Section -->
                                     <div class="flex flex-row w-full items-center p-2 h-auto">
                                         <div class="w-5/12">
-                                            <p class="text-lg">Berat /Kg </p>
+                                            <p class="text-lg md:text-xl">Berat /Kg</p>
                                         </div>
                                         <div class="w-7/12">
                                             <div class="flex w-full justify-end font-bold text-xl ">
                                                 <input type="number" (change)="handleChangeBerat($event)"
                                                     [value]="berat" id="visitors"
-                                                    class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                     placeholder="" required />
-
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Ekspedisi Section -->
                                     <div class="flex flex-row w-full items-center p-2 h-auto">
                                         <div class="w-5/12">
-                                            <p class="text-lg">Ekspedisi </p>
+                                            <p class="text-lg md:text-xl">Ekspedisi</p>
                                         </div>
                                         <div class="w-7/12">
                                             <div class="flex w-full justify-end font-semibold text-xl">
                                                 <select id="countries" (change)="handleChangeEkspedisi($event)"
                                                     [(ngModel)]="selectedEkspedisi"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                                     <option selected>Pilih Ekspedisi</option>
                                                     <option *ngFor="let ekspds of ekspedisi" [value]="ekspds.code">
                                                         {{ekspds.description}}</option>
@@ -229,15 +466,17 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Pilih Paket Kirim Section -->
                                     <div class="flex flex-row w-full items-center p-2 h-auto">
                                         <div class="w-5/12">
-                                            <p class="text-lg">Pilih Paket Kirim </p>
+                                            <p class="text-lg md:text-xl">Pilih Paket Kirim</p>
                                         </div>
                                         <div class="w-7/12">
                                             <div class="flex w-full justify-end font-semibold text-xl">
                                                 <select id="countries" (change)="handleChangePaketKirim($event)"
                                                     [(ngModel)]="selectedPaketKirim"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                                     <option selected>Pilih Paket Pengiriman</option>
                                                     <option *ngFor="let package of paketPengiriman" [ngValue]="package">
                                                         {{package.name}}</option>
@@ -245,15 +484,17 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Layanan Kirim Section -->
                                     <div class="flex flex-row w-full items-center p-2 h-auto">
                                         <div class="w-5/12">
-                                            <p class="text-lg">Layanan Kirim </p>
+                                            <p class="text-lg md:text-xl">Layanan Kirim</p>
                                         </div>
                                         <div class="w-7/12">
                                             <div class="flex w-full justify-end font-semibold text-xl">
                                                 <select id="countries" (change)="handleChangeLayananKirim($event)"
                                                     [(ngModel)]="selectedLayananKirim"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                                     <option selected>Pilih Layanan Pengiriman</option>
                                                     <option *ngFor="let ongkir of selectedPaketKirim.costs"
                                                         [ngValue]="ongkir">{{ongkir.description}}</option>
@@ -261,15 +502,17 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Ongkos Kirim Section -->
                                     <div class="flex flex-row w-full items-center p-2 h-auto">
                                         <div class="w-5/12">
-                                            <p class="text-lg">Ongkos Kirim </p>
+                                            <p class="text-lg md:text-xl">Ongkos Kirim</p>
                                         </div>
                                         <div class="w-7/12">
                                             <div class="flex w-full justify-end font-semibold text-xl">
                                                 <select id="countries" (change)="handleChangeOngkir()"
                                                     [(ngModel)]="SelectedOngkir"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                                     <option selected>--Ongkir--</option>
                                                     <option *ngFor="let ongkir of selectedLayananKirim.cost"
                                                         [ngValue]="ongkir">(Rp. {{ongkir.value}}) - {{ongkir.etd}} day
@@ -278,9 +521,11 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Harga Section -->
                                     <div class="flex flex-row w-full items-center p-2 h-auto">
                                         <div class="w-5/12">
-                                            <p class="text-lg">Harga </p>
+                                            <p class="text-lg md:text-xl">Harga</p>
                                         </div>
                                         <div class="w-7/12">
                                             <div class="flex w-full justify-end font-bold text-xl">
@@ -288,9 +533,11 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Biaya Kirim Section -->
                                     <div class="flex flex-row w-full items-center p-2 h-auto">
-                                        <div class="w-5/12 ">
-                                            <p class="text-lg">Biaya Kirim </p>
+                                        <div class="w-5/12">
+                                            <p class="text-lg md:text-xl">Biaya Kirim</p>
                                         </div>
                                         <div class="w-7/12">
                                             <div class="flex w-full justify-end font-bold text-xl">
@@ -298,9 +545,11 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Total Section -->
                                     <div class="flex flex-row w-full items-center p-2 h-auto">
-                                        <div class="w-5/12 ">
-                                            <p class="text-lg">Total </p>
+                                        <div class="w-5/12">
+                                            <p class="text-lg md:text-xl">Total</p>
                                         </div>
                                         <div class="w-7/12">
                                             <div class="flex w-full justify-end font-bold text-xl">
@@ -309,10 +558,13 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- Button Section -->
                                 <div class="flex flex-row mt-3 w-full h-auto items-center">
                                     <button (click)="handleClickBayar(total)"
-                                        class="w-full rounded-lg border border-gray-300 shadow-md h-16 hover:bg-gray-300  transtion-all duration-100 ">
-                                        <p class="text-2xl font-semibold">Bayar <i class="pi pi-credit-card text-2xl font-semibold"></i></p>
+                                        class="w-full rounded-lg border border-gray-300 shadow-md h-16 hover:bg-gray-300 transition-all duration-100">
+                                        <p class="text-2xl font-semibold">Bayar <i
+                                                class="pi pi-credit-card text-2xl font-semibold"></i></p>
                                     </button>
                                 </div>
                             </div>
@@ -322,7 +574,7 @@
 
             </div>
         </div>
-        <div class="flex flex-row w-full">
+        <div class="flex flex-row w-auto">
             <app-footer></app-footer>
         </div>
 

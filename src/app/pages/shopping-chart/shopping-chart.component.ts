@@ -49,6 +49,8 @@ export class ShoppingChartComponent implements OnInit {
 
   FormInputAlamatState: 'Tambah' | 'Edit' ='Tambah'
 
+  showSpinner:boolean = false
+
   navbarMenu: any[] = [
     { label: 'Home', icon: 'pi pi-home' },
     { label: 'Product', icon: 'pi pi-receipt' },
@@ -267,6 +269,7 @@ export class ShoppingChartComponent implements OnInit {
   }
 
   handleClickBayar(args: any): void {
+    this.showSpinner = true
     this.orderService.OnPayMidtrans({
       "id_customer": 1,
       "id_alamat_customer": 1,
@@ -301,11 +304,12 @@ export class ShoppingChartComponent implements OnInit {
         },
         
         onClose: function () {
-        
+          
           console.log('Customer closed the popup without finishing the payment');
         
-        }
+        },
       })
+      this.showSpinner = false
     })
   }
 

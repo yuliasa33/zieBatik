@@ -563,8 +563,9 @@
                                 <div class="flex flex-row mt-3 w-full h-auto items-center">
                                     <button (click)="handleClickBayar(total)"
                                         class="w-full rounded-lg border border-gray-300 shadow-md h-16 hover:bg-gray-300 transition-all duration-100">
-                                        <p class="text-2xl font-semibold">Bayar <i
-                                                class="pi pi-credit-card text-2xl font-semibold"></i></p>
+                                        <p class="text-2xl font-semibold">Bayar <i *ngIf="showSpinner == false"
+                                                class="pi pi-credit-card text-2xl font-semibold"></i> <i *ngIf="showSpinner == true"
+                                                class="pi pi-spin pi-spinner text-2xl font-semibold"></i></p>
                                     </button>
                                 </div>
                             </div>

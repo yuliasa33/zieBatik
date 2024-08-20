@@ -72,6 +72,11 @@ export class EventRegisterComponent implements OnInit ,AfterViewInit {
       this.isLogin()
   }
 
+  handelClose():void{
+    let close = document.getElementById('closeModal') as HTMLElement
+    close.click()
+  }
+
   ngAfterViewInit(): void {
     this.id = this.activatedRoute.snapshot.params['id']
     this.utilityService.onShowLoadingBeforeSend()

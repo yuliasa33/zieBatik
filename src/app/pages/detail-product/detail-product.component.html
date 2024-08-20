@@ -14,7 +14,7 @@
               <div class="deskripsi">
                 <div class="flex flex-col w-full h-full p-3">
                   <p class="font-bold text-2xl sm:text-3xl lg:text-5xl">Batik Kemeja XL</p>
-                  <p class="font-bold text-2xl sm:text-3xl lg:text-5xl my-4">Rp {{detail.harga}}</p>
+                  <p class="font-bold text-2xl sm:text-3xl lg:text-5xl my-4">Rp {{detail.harga | number}}</p>
                   <p class="font-semibold text-xl sm:text-2xl mt-5 mb-3">Kategori: {{detail.category.nama_category}}</p>
                   <div class="flex flex-row w-full border-b p-3 mt-4">
                     <p class="font-semibold text-lg text-gray-700">Deskripsi Produk</p>
@@ -47,13 +47,13 @@
           
                     <div class="flex flex-row justify-between w-full mt-5">
                       <p class="text-gray-400 text-xl sm:text-2xl">Subtotal</p>
-                      <p class="text-2xl sm:text-3xl">Rp. {{subtotal}}</p>
+                      <p class="text-2xl sm:text-3xl">Rp. {{subtotal | number}}</p>
                     </div>
           
                     <div class="flex flex-row mt-3 w-full">
                       <button (click)="addcart()"
                         class="w-full rounded-sm h-12 sm:h-16 bg-gray-800 hover:bg-gray-500 transition-all duration-100">
-                        <p class="text-xl sm:text-2xl text-white">+ Keranjang</p>
+                        <p class="text-xl sm:text-2xl text-white"><i *ngIf="showSpinner == true" class="pi pi-spin pi-spinner"></i><i *ngIf="showSpinner == false" class="pi pi-plus"></i> Keranjang</p>
                       </button>
                     </div>
                   </div>
@@ -63,4 +63,22 @@
           </div>
         <app-footer></app-footer>
     </div>
+
+    <div class="sidebar flex flex-row w-5/12  h-screen fixed top-0 right-0 justify-end mt-20 bg-white transition-all duration-500"
+    *ngIf="layoutService.showSidebar$ | async">
+    <div class="sidebar-content text-center justify-center">
+        <div *ngFor="let nav of navbarMenu" class="sidebar-item  opacity-100">
+            <div class="flex flex-row w-full items-center">
+                <i [class]="nav.icon"></i>
+                <button (click)="handleClickSidbar(nav.label)"><p class="text-sm p-3 font-bold  opacity-100" >{{nav.label}}</p></button>
+            </div>
+            <div class="sidebar-child" *ngIf="nav.children">
+                <div class="flex flex-row w-full items-center" *ngFor="let data of nav.children">
+                    <i [class]="data.icon"></i>
+                    <button (click)="handleClickSidbar(data.label)"><p class="text-sm p-3 font-bold  opacity-100" >{{data.label}}</p></button>
+                </div>
+                </div>
+        </div>
+    </div>
+</div> 
 </app-layouts>

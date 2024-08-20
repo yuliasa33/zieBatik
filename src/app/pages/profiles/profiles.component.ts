@@ -7,13 +7,14 @@ import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { LayoutService } from 'src/app/service/layout-service/layout.service';
 import { AuthenticationService } from 'src/app/service/authentication-service/authentication.service';
+import { FooterComponent } from "../footer/footer.component";
 
 @Component({
   selector: 'app-profiles',
   templateUrl: './profiles.component.html',
   styleUrls: ['./profiles.component.css'],
   standalone:true,
-  imports: [LayoutsComponent,CommonModule,InputTextModule]
+  imports: [LayoutsComponent, CommonModule, InputTextModule, FooterComponent]
 })
 export class ProfilesComponent implements OnInit {
 

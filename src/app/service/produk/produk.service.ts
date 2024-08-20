@@ -31,7 +31,10 @@ export class ProdukService {
   }
 
   addcart(data:any):Observable<any>{
-    return this.httpOperationService.onPostRequest(environment.url+'cart/create',data);
+    return this.httpOperationService.onPostRequest(environment.url+'cart/create',data)
+    .pipe(catchError((error:any):any=>{
+      this.toastService.showError(error.status,error.message)
+    }));
   }
 
   getcart():Observable<any>{

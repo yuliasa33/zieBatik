@@ -69,12 +69,12 @@ p {
     z-index: -1; /* Place it behind the content */
   }
 
-  .container {
+  /* .container {
     /* display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem; */
-  }
+
 
   .navbar.scrolled{
      background: rgba(255, 255, 255, 0.9);

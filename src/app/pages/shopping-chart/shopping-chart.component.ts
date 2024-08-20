@@ -43,6 +43,8 @@ export class ShoppingChartComponent implements OnInit {
   isSmallScreen?:boolean
   largeScreen?:boolean
 
+  selectedDestination:any
+
   FormInputAlamat!: FormGroup
 
   FormInputAlamatState: 'Tambah' | 'Edit' ='Tambah'
@@ -174,6 +176,8 @@ export class ShoppingChartComponent implements OnInit {
    
     let alamat = document.getElementById('alamat_lengkap') as HTMLElement
 
+    this.selectedDestination = almt.id_kota
+
     this.selectKota = almt.id_kota
 
     this.selectProv = almt.id_provinsi
@@ -192,6 +196,8 @@ export class ShoppingChartComponent implements OnInit {
     let close = document.getElementById('closeModal') as HTMLInputElement
 
     this.selectedAlamat = alamat.innerText
+
+    this.selectedDestination = almt.id_kota
 
     console.log('almt',almt)
 
@@ -225,8 +231,8 @@ export class ShoppingChartComponent implements OnInit {
     console.log(args)
     console.log(this.selectedEkspedisi)
     let payload = {
-      "origin": '1',
-      "destination": this,
+      "origin": '398',
+      "destination": this.selectedDestination,
       "weight": this.berat,
       "courier": this.selectedEkspedisi
     }

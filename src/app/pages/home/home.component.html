@@ -149,15 +149,23 @@
             </div>
           </div> --> 
 
-        <div class="sidebar flex flex-row w-4/12 h-screen fixed top-0 right-0 justify-end mt-28 bg-white transition-all duration-500"
+        <div class="sidebar flex flex-row w-5/12  h-screen fixed top-0 right-0 justify-end mt-20 bg-white transition-all duration-500"
             *ngIf="layoutService.showSidebar$ | async">
             <div class="sidebar-content text-center justify-center">
                 <div *ngFor="let nav of navbarMenu" class="sidebar-item  opacity-100">
-                    <p class="text-lg p-3 font-bold  opacity-100">{{nav.label}}</p>
+                    <div class="flex flex-row w-full items-center">
+                        <i [class]="nav.icon"></i>
+                        <button (click)="handleClickSidbar(nav.label)"><p class="text-sm p-3 font-bold  opacity-100" >{{nav.label}}</p></button>
+                    </div>
+                    <div class="sidebar-child" *ngIf="nav.children">
+                        <div class="flex flex-row w-full items-center" *ngFor="let data of nav.children">
+                            <i [class]="data.icon"></i>
+                            <button (click)="handleClickSidbar(data.label)"><p class="text-sm p-3 font-bold  opacity-100" >{{data.label}}</p></button>
+                        </div>
+                        </div>
                 </div>
             </div>
-            <!-- <button class="close-btn" (click)="toggleSidebar()">Close</button> -->
-        </div>
+        </div> 
         <div class="container w-screen h-screen">
             <div class="grid grid-cols-1 lg:grid-cols-2 w-screen">
               <div class="h-64 lg:h-screen lg:w-full">

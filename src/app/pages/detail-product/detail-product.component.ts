@@ -23,6 +23,16 @@ export class DetailProductComponent implements OnInit {
 
   detail:any ;
 
+  
+
+  navbarMenu: any[] = [
+    { label: 'Home', icon: 'pi pi-home' },
+    { label: 'Product', icon: 'pi pi-receipt' },
+    { label: 'Events', icon: 'pi pi-flag' },
+    { label: 'Login', icon: 'pi pi-user' },
+  ]
+
+
   constructor(
     private currencyPipe: CurrencyPipe,
     private produkService: ProdukService,

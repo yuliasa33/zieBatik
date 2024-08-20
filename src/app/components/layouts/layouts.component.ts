@@ -26,10 +26,14 @@ export class LayoutsComponent implements OnInit {
   largeScreen?: boolean
   navbarMenu: any[] = [
     { label: 'Home', icon: 'pi pi-home' },
-    { label: 'Product', icon: 'pi pi-dollar' },
-    { label: 'Events', icon: 'pi pi-wrench' },
-    { label: 'Login', icon: 'pi pi-wrench' },
+    { label: 'Product', icon: 'pi pi-receipt' },
+    { label: 'Events', icon: 'pi pi-flag' },
+    { label: 'Login', icon: 'pi pi-user' },
   ]
+
+  isShowSidebar:boolean = false
+  
+  
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -95,7 +99,9 @@ export class LayoutsComponent implements OnInit {
   toggleSidebar() {
     // this.showSidebar$ = !this.showSidebar$;
     // console.log(this.showSidebar$)
-    this.layoutService.toggleState()
+     this.layoutService.toggleState()
+    // this.isShowSidebar = !this.isShowSidebar
+    // console.log(this.isShowSidebar)
   }
 
   handleClickNavbar(args: any): void {
@@ -132,6 +138,10 @@ export class LayoutsComponent implements OnInit {
 
   onClickChart(): void {
     this.router.navigateByUrl('shoping-chart')
+  }
+
+  handleClickSidbar(args:any):void{
+    console.log(args)
   }
 
 }

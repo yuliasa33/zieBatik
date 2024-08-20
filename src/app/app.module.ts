@@ -25,6 +25,7 @@ import { ListEventComponent } from './pages/list-event/list-event.component';
 import {ToastModule} from 'primeng/toast'
 import { MessageService } from 'primeng/api';
 import { ProfilesComponent } from './pages/profiles/profiles.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ProfilesComponent } from './pages/profiles/profiles.component';
     LayoutsComponent,
     HttpClientModule,
     ReactiveFormsModule,
-    ToastModule
+    ToastModule,
+    DropdownModule
 ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true},

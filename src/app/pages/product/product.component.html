@@ -39,4 +39,27 @@
         </div>
       </div>
 
+      <div
+    class="sidebar flex flex-row w-5/12  h-screen fixed top-0 right-0 justify-end mt-20 bg-white transition-all duration-500"
+    *ngIf="layoutService.showSidebar$ | async">
+    <div class="sidebar-content text-center justify-center">
+      <div *ngFor="let nav of navbarMenu" class="sidebar-item  opacity-100">
+        <div class="flex flex-row w-full items-center">
+          <i [class]="nav.icon"></i>
+          <button (click)="handleClickSidbar(nav.label)">
+            <p class="text-sm p-3 font-bold  opacity-100">{{nav.label}}</p>
+          </button>
+        </div>
+        <div class="sidebar-child" *ngIf="nav.children">
+          <div class="flex flex-row w-full items-center" *ngFor="let data of nav.children">
+            <i [class]="data.icon"></i>
+            <button (click)="handleClickSidbar(data.label)">
+              <p class="text-sm p-3 font-bold  opacity-100">{{data.label}}</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </app-layouts>

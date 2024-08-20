@@ -8,6 +8,8 @@ import { ProdukService } from 'src/app/service/produk/produk.service';
 import { FooterComponent } from "../footer/footer.component";
 import { UtilityService } from 'src/app/service/utility/utility.service';
 import Swal from 'sweetalert2';
+import { LayoutService } from 'src/app/service/layout-service/layout.service';
+import { AuthenticationService } from 'src/app/service/authentication-service/authentication.service';
 
 @Component({
   selector: 'app-shopping-chart',
@@ -45,12 +47,22 @@ export class ShoppingChartComponent implements OnInit {
 
   FormInputAlamatState: 'Tambah' | 'Edit' ='Tambah'
 
+  navbarMenu: any[] = [
+    { label: 'Home', icon: 'pi pi-home' },
+    { label: 'Product', icon: 'pi pi-receipt' },
+    { label: 'Events', icon: 'pi pi-flag' },
+    { label: 'Login', icon: 'pi pi-user' },
+  ]
+
+
   constructor(
     private router: Router,
     private produkService: ProdukService,
     private orderService: OrderService,
     private formBuilder: FormBuilder,
-    private utilityService: UtilityService
+    private utilityService: UtilityService,
+    public layoutService:LayoutService,
+              private authenticationService:AuthenticationService,
   ) { }
 
   ngOnInit(): void {
@@ -63,6 +75,8 @@ export class ShoppingChartComponent implements OnInit {
 
     this.setAtributeTambahAlamat()
     this.checkScreenSize()
+    this.checkIsLogin()
+    this.isthisLogin()
   }
 
   setAtributeTambahAlamat(): void {
@@ -166,6 +180,10 @@ export class ShoppingChartComponent implements OnInit {
 
     this.selectedAlamat = args.target.innerText
 
+    console.log('almt',almt)
+
+    console.log('args',args)
+
     close.click()
   }
 
@@ -174,6 +192,8 @@ export class ShoppingChartComponent implements OnInit {
     let close = document.getElementById('closeModal') as HTMLInputElement
 
     this.selectedAlamat = alamat.innerText
+
+    console.log('almt',almt)
 
     close.click()
   }
@@ -206,7 +226,7 @@ export class ShoppingChartComponent implements OnInit {
     console.log(this.selectedEkspedisi)
     let payload = {
       "origin": '1',
-      "destination": "3",
+      "destination": this,
       "weight": this.berat,
       "courier": this.selectedEkspedisi
     }
@@ -436,6 +456,69 @@ export class ShoppingChartComponent implements OnInit {
     } else {
       this.largeScreen = false
     }
+  }
+
+  checkIsLogin():void{
+    const isLogin = localStorage.getItem('BATIK_')
+    console.log(isLogin)
+    if(isLogin == null){
+      this.utilityService.onShowCustomAlert('warning','Perhatian','Maaf Anda Belum Login')
+      .then(()=>{
+        this.router.navigateByUrl('')
+      })
+    }
+  }
+
+  isthisLogin():void{
+    const item = localStorage.getItem('BATIK_');
+    let data: any;
+    if (item) {
+      data = JSON.parse(item);
+    } else {
+      data = {}; // or any default value you want to assign
+    }
+    if (localStorage.getItem('BATIK_')) {
+      this.navbarMenu = [
+        { label: 'Home',icon:'pi pi-home' },
+        // { label: 'About', },
+        { label: 'Product',icon:'pi pi-receipt' },
+        { label: 'Events',icon:'pi pi-flag' },
+        {
+          icon: 'pi pi-user', label: data?.nama, children: [
+            { label: 'Order Status', icon: 'pi pi-shopping-bag' },
+            { label: 'Log Out', icon: 'pi pi-power-off' }
+          ]
+        },
+
+      ]
+    }
+
+  }
+
+  handleClickSidbar(args:any):void{
+    console.log(args)
+    let select = args
+    if (select == 'Product') {
+      this.router.navigateByUrl('Product')
+    }
+    if (select == 'Home') {
+      this.router.navigateByUrl('')
+    }
+
+    if (select == 'Events') {
+      this.router.navigateByUrl('list-event')
+    }
+
+    if (select == 'Log Out') {
+      this.authenticationService.SignOut()
+    } if (select == 'Order Status') {
+      this.router.navigateByUrl('profil')
+    }
+
+    if (select == 'Login') {
+      this.router.navigateByUrl('login')
+    }
+
   }
 
   get nama_lengkap(): AbstractControl { return this.FormInputAlamat.get('nama_lengkap') as AbstractControl }

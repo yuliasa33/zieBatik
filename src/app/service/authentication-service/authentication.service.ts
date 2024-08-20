@@ -6,6 +6,7 @@ import { UtilityService } from '../utility/utility.service';
 import { HttpOperationService } from '../httpOperation/http-operation.service';
 import { environment } from 'src/environment/environment';
 import { Router } from '@angular/router';
+import { ToastService } from '../taost/toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class AuthenticationService {
 
   constructor(private httpOperationService:HttpOperationService,
               private utilityService:UtilityService,
-              private router:Router
+              private router:Router,
+              private toastService:ToastService
   ){
 
   }
@@ -55,6 +57,14 @@ export class AuthenticationService {
       window.location.reload()
     })
     
+  }
+
+
+  Register(data:any):Observable<any>{
+    return this.httpOperationService.onPostRequest(environment.url+`customer/register`,data)
+    .pipe(catchError((error:any):any=>{
+      this.toastService.showError(error.status,error.message)
+    }))
   }
 
 

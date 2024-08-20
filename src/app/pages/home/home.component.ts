@@ -42,11 +42,11 @@ export class HomeComponent implements OnInit,AfterViewInit {
   isSmallScreen?:boolean
   largeScreen?:boolean
 
-  navbarMenu:any[] = [
-    {label:'Home'},
-    {label:'About'},
-    {label:'Pricing'},
-    {label:'Service'},
+  navbarMenu: any[] = [
+    { label: 'Home', icon: 'pi pi-home' },
+    { label: 'Product', icon: 'pi pi-receipt' },
+    { label: 'Events', icon: 'pi pi-flag' },
+    { label: 'Login', icon: 'pi pi-user' },
   ]
 
   loopitem:any[] = []
@@ -121,6 +121,59 @@ export class HomeComponent implements OnInit,AfterViewInit {
     console.log(this.authenticationService.isLoginState)
     this.getAllProdukDashboard()
     this.checkScreenSize()
+    this.isLogin()
+  }
+
+  isLogin():void{
+    const item = localStorage.getItem('BATIK_');
+    let data: any;
+    if (item) {
+      data = JSON.parse(item);
+    } else {
+      data = {}; // or any default value you want to assign
+    }
+    if (localStorage.getItem('BATIK_')) {
+      this.navbarMenu = [
+        { label: 'Home',icon:'pi pi-home' },
+        // { label: 'About', },
+        { label: 'Product',icon:'pi pi-receipt' },
+        { label: 'Events',icon:'pi pi-flag' },
+        {
+          icon: 'pi pi-user', label: data?.nama, children: [
+            { label: 'Order Status', icon: 'pi pi-shopping-bag' },
+            { label: 'Log Out', icon: 'pi pi-power-off' }
+          ]
+        },
+
+      ]
+    }
+
+  }
+
+  handleClickSidbar(args:any):void{
+    console.log(args)
+    let select = args
+    if (select == 'Product') {
+      this.router.navigateByUrl('Product')
+    }
+    if (select == 'Home') {
+      this.router.navigateByUrl('')
+    }
+
+    if (select == 'Events') {
+      this.router.navigateByUrl('list-event')
+    }
+
+    if (select == 'Log Out') {
+      this.authenticationService.SignOut()
+    } if (select == 'Order Status') {
+      this.router.navigateByUrl('profil')
+    }
+
+    if (select == 'Login') {
+      this.router.navigateByUrl('login')
+    }
+
   }
 
   getAllProdukDashboard():void{

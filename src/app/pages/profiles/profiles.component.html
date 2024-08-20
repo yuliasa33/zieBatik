@@ -1,46 +1,89 @@
 <app-layouts>
-    <div class="flex flex-row mt-20 w-screen">
-        <div class="container">
-            <div class="flex flex-row w-screen gap-3 h-max border-b-gray-500">
-                <div class="w-2/12">
-                    <img src="../../../assets/images/profile.png" alt="">
+    <div class="flex flex-col lg:flex-row mt-20 w-full">
+        <div class="container mx-auto">
+            <div class="flex flex-col lg:flex-row w-full gap-3 h-max border-b-gray-500">
+                <div class="w-full lg:w-2/12">
+                    <img src="../../../assets/images/profile.png" alt="" class="mx-auto lg:mx-0">
                 </div>
-                <div class="w-10/12">
-                    <div class="flex flex-row w-11/12 p-5 mt-10 mx-5  border shadow-lg shadow-gray-200 rounded-lg h-full">
+                <div class="w-full lg:w-10/12">
+                    <div
+                        class="flex flex-col lg:flex-row w-full p-5 mt-10 lg:mx-5 border shadow-lg shadow-gray-200 rounded-lg">
                         <div class="flex flex-col w-full gap-3">
-                            <div class="text-xl font-semibold ">My Order's</div>
-                            <div class="card-order flex flex-col w-auto m-5 p-5 border border-gray-300 rounded-md gap-6">
-                                <p class="text-lg font-semibold">ORDER NUMBER 93XXXX</p>
-                                <p class="text-lg font-semibold">STATUS ORDER : DITERIMA</p>
-                                <ol class="flex items-center w-full mt-3 m-5">
-                                    <li class="flex w-full items-center text-white dark:text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b after:border-green-200 after:border-4 after:inline-block dark:after:border-blue-800">
-                                        <span class="flex items-center justify-center w-10 h-10 bg-green-300 rounded-full lg:h-20 lg:w-20 dark:bg-blue-800 shrink-0">
-                                            <!-- <p>PACKING</p> -->
-                                             <i class="pi pi-box"></i>
-                                        </span>
-                                    </li>
-                                    <li class="flex w-full items-center text-white after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-100 after:border-4 after:inline-block dark:after:border-gray-700 after:border-green-200">
-                                        <span class="flex items-center justify-center w-10 h-10 bg-gray-100 bg-green-300 rounded-full lg:h-20 lg:w-20 dark:bg-gray-700 shrink-0">
-                                            <!-- <p>DELIVERED</p> -->
-                                             <i class="pi pi-truck"></i>
-                                        </span>
-                                    </li>
-                                    <li class="flex items-center w-full text-white">
-                                        <span class="flex items-center justify-center w-10 h-10 bg-gray-100 bg-green-300 rounded-full lg:h-20 lg:w-20 dark:bg-gray-700 shrink-0">
-                                           <!-- <p>ARRIVAL</p> -->
-                                           <i class="pi pi-check"></i>
-                                        </span>
-                                    </li>
-                                </ol>
+                            <div class="text-xl font-semibold">My Orders</div>
+                            <div class="card-order flex flex-col w-full m-5 p-5 border border-gray-300 rounded-md gap-3"
+                                *ngFor="let data of Data">
+                                <div class="grid grid-cols-1 md:grid-cols-2 w-full">
+                                    <div class="flex flex-col w-full">
+                                        <div class="flex flex-row mt-5 w-full items-center">
+                                            <div class="w-full md:w-4/12">
+                                                <p class="text-lg font-semibold">ORDER NUMBER</p>
+                                            </div>
+                                            <div class="w-full md:w-8/12">
+                                                <p class="text-lg font-semibold">: {{data.nomor_order}}</p>
+                                            </div>
+                                        </div>
+    
+                                        <div class="flex flex-row mt-5 w-full items-center">
+                                            <div class="w-full md:w-4/12">
+                                                <p class="text-lg font-semibold">TOTAL</p>
+                                            </div>
+                                            <div class="w-full md:w-8/12">
+                                                <p class="text-lg font-semibold">: Rp. {{data.total | number}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col w-full">
+                                        <div class="flex flex-row mt-5 w-full items-center">
+                                            <div class="w-full md:w-4/12">
+                                                <p class="text-lg font-semibold">STATUS ORDER</p>
+                                            </div>
+                                            <div class="w-full md:w-8/12">
+                                                <div *ngIf="data.status == 'OPEN'">
+                                                    <span
+                                                        class="inline-flex items-center bg-green-100 justify-center text-green-500 text-xs font-medium ml-1 px-2 py-0.5 w-28 h-6 rounded-full">
+                                                        <span class="w-1.5 h-1.5 mr-1 bg-green-400 rounded-full"></span>
+                                                        OPEN
+                                                    </span>
+                                                </div>
+                                                <div *ngIf="data.status == 'paid'">
+                                                    <span
+                                                        class="inline-flex items-center bg-yellow-400 text-amber-100 text-xs justify-center font-medium ml-1 px-2 py-0.5 rounded-full w-28 h-6">
+                                                        <span class="w-1.5 h-1.5 mr-1 bg-amber-400 rounded-full"></span>
+                                                        PAID
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-              
             </div>
-           
         </div>
-       
     </div>
-  
-    </app-layouts>
+    <div
+    class="sidebar flex flex-row w-5/12  h-screen fixed top-0 right-0 justify-end mt-20 bg-white transition-all duration-500"
+    *ngIf="layoutService.showSidebar$ | async">
+    <div class="sidebar-content text-center justify-center">
+      <div *ngFor="let nav of navbarMenu" class="sidebar-item  opacity-100">
+        <div class="flex flex-row w-full items-center">
+          <i [class]="nav.icon"></i>
+          <button (click)="handleClickSidbar(nav.label)">
+            <p class="text-sm p-3 font-bold  opacity-100">{{nav.label}}</p>
+          </button>
+        </div>
+        <div class="sidebar-child" *ngIf="nav.children">
+          <div class="flex flex-row w-full items-center" *ngFor="let data of nav.children">
+            <i [class]="data.icon"></i>
+            <button (click)="handleClickSidbar(data.label)">
+              <p class="text-sm p-3 font-bold  opacity-100">{{data.label}}</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</app-layouts>

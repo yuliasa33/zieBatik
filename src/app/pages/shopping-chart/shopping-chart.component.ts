@@ -232,20 +232,27 @@ export class ShoppingChartComponent implements OnInit {
   handleChangeEkspedisi(args: any): void {
     console.log(args)
     console.log(this.selectedEkspedisi)
-    let payload = {
-      "origin": '398',
-      "destination": this.selectedDestination,
-      "weight": this.berat,
-      "courier": this.selectedEkspedisi
+    if(this.selectedAlamat == "Pilih Alamat Pengiriman"){
+      this.utilityService.onShowCustomAlert('warning','Perhatian','Alamat tujuan belum di isi')
+    }else{
+      
+      let payload = {
+        "origin": '398',
+        "destination": this.selectedDestination,
+        "weight": this.berat,
+        "courier": this.selectedEkspedisi
+      }
+  
+      this.produkService.cekOngkir(payload).subscribe(result => {
+        console.log(result)
+        this.paketPengiriman = result.data.rajaongkir.results
+        // result.data.rajaongkir.results.forEach((res: any) => {
+        //   this.costOngkir.push(...res.costs)
+        // })
+      })
+      
     }
-
-    this.produkService.cekOngkir(payload).subscribe(result => {
-      console.log(result)
-      this.paketPengiriman = result.data.rajaongkir.results
-      // result.data.rajaongkir.results.forEach((res: any) => {
-      //   this.costOngkir.push(...res.costs)
-      // })
-    })
+    
     console.log("COSTONGKIR==>", this.costOngkir)
   }
 
@@ -270,47 +277,54 @@ export class ShoppingChartComponent implements OnInit {
 
   handleClickBayar(args: any): void {
     this.showSpinner = true
-    this.orderService.OnPayMidtrans({
-      "id_customer": 1,
-      "id_alamat_customer": 1,
-      "total": args,
-      "total_qty": 1,
-      "id_type_payment": 1,
-      "data_order": [
-        {
-          "id_product": 1,
-          "qty": 2,
-          "subtotal": 2000
-        }
-      ]
-    }).subscribe((result: any) => {
-      window.snap.pay(result.snap.token, {
-        onSuccess: function (result: any) {
-        
-          console.log('Success:', result);
-        
-        },
-        
-        onPending: function (result: any) {
-        
-          console.log('Pending:', result);
-        
-        },
-        
-        onError: function (result: any) {
-        
-          console.log('Error:', result);
-        
-        },
-        
-        onClose: function () {
-          
-          console.log('Customer closed the popup without finishing the payment');
-        
-        },
+    if(!this.selectedEkspedisi){
+      this.utilityService.onShowCustomAlert('warning','Perhatian','Silahkan pilih ongkos kirim terlebih dahulu').then(()=>{
+        this.showSpinner = false
       })
-      this.showSpinner = false
-    })
+    }else{
+      this.orderService.OnPayMidtrans({
+        "id_customer": 1,
+        "id_alamat_customer": 1,
+        "total": args,
+        "total_qty": 1,
+        "id_type_payment": 1,
+        "data_order": [
+          {
+            "id_product": 1,
+            "qty": 2,
+            "subtotal": 2000
+          }
+        ]
+      }).subscribe((result: any) => {
+        window.snap.pay(result.snap.token, {
+          onSuccess: function (result: any) {
+          
+            console.log('Success:', result);
+          
+          },
+          
+          onPending: function (result: any) {
+          
+            console.log('Pending:', result);
+          
+          },
+          
+          onError: function (result: any) {
+          
+            console.log('Error:', result);
+          
+          },
+          
+          onClose: function () {
+            
+            console.log('Customer closed the popup without finishing the payment');
+          
+          },
+        })
+        this.showSpinner = false
+      })
+    }
+    
   }
 
   handleTambahAlamat(Form: any): void {

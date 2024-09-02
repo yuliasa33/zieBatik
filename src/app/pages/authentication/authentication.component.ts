@@ -55,6 +55,11 @@ export class AuthenticationComponent implements OnInit {
 
   }
 
+  moveToLogin():void{
+    this.FormState = 'Login'
+    this.ResetFormRegister()
+  }
+
   onLogin(FormInputLogin:any):void{
      this.authenticationService.SignInService(FormInputLogin).subscribe(result=>{
        console.log("test",result)

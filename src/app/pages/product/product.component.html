@@ -2,10 +2,16 @@
     <div class="flex flex-col w-screen h-screen gap-3 justify-normal" @fadeIn>
         <div class="flex flex-row w-full h-20 justify-center mt-24">
           <div class="header-box-product h-16 w-10/12 bg-base-200 shadow-lg rounded-sm">
-            <div class="flex flex-row h-full items-center p-3 mx-9">
-              <p>URUTKAN</p>
+            <div class="flex lg:flex-row  h-full items-center lg:p-3 lg:mx-9">
+              <!-- <p class="lg:text-xl text-md p-3 text-gray-600 font-semibold">URUTKAN</p> -->
+               <i class="pi pi-sort text-lg ml-5"></i>
               <div class="dropdown dropdown-bottom ml-3">
-                
+                <p-dropdown 
+                [options]="sex" 
+                optionLabel="label" 
+                placeholder="Urutkan" 
+                styleClass=" p-input-sm w-full text-sm" class=" p-input-sm w-full bg-gray-200 text-sm" (onChange)="handleChangeUrutkan($event)"  >
+                </p-dropdown>
               </div>
             </div>
           </div>
@@ -17,7 +23,7 @@
               <div *ngFor="let data of produk" class="items-per-content border shadow-lg rounded-lg flex flex-col gap-5 w-full">
                 <img [src]="data.image" [id]="item" class="w-full h-52 lg:h-80 object-cover" alt="">
                 <div class="flex flex-col w-full mx-4">
-                  <p class="text-md font-semibold lg:mt-3">{{data.nama_product}}</p>
+                  <p class="lg:text-lg text-md font-semibold lg:mt-3 lg:mb-2">{{data.nama_product}}</p>
                   <div class="rate">
                     <!-- Rating content -->
                   </div>

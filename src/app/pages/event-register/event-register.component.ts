@@ -14,6 +14,9 @@ import { EventService } from 'src/app/service/event/event.service';
 import { ToastService } from 'src/app/service/taost/toast.service';
 import Swal from 'sweetalert2';
 import { AuthenticationService } from 'src/app/service/authentication-service/authentication.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { CookiesserviceService } from 'src/app/service/cookiesservice/cookiesservice.service';
+// import { CookieService } from 'src/app/service/cookie-service/cookie.service';
 
 @Component({
   selector: 'app-event-register',
@@ -57,6 +60,8 @@ export class EventRegisterComponent implements OnInit ,AfterViewInit {
               private toastService:ToastService,
               private router:Router,
               private authenticationService:AuthenticationService,
+              private domsanitizer: DomSanitizer,
+              private cookieService:CookiesserviceService
               
   ) {
 
@@ -86,7 +91,7 @@ export class EventRegisterComponent implements OnInit ,AfterViewInit {
         this.StateContentByGet =  {
           nama_event:result.data.nama_event,
           images:result.data.path_foto,
-          deskripsi:result.data.deskripsi
+          deskripsi:this.domsanitizer.bypassSecurityTrustHtml(result.data.deskripsi)
         }
         console.log(this.StateContentByGet)
       }else{
@@ -135,14 +140,14 @@ export class EventRegisterComponent implements OnInit ,AfterViewInit {
   }
 
   isLogin():void{
-    const item = localStorage.getItem('BATIK_');
+    const item = this.cookieService.get('BATIK_');
     let data: any;
     if (item) {
       data = JSON.parse(item);
     } else {
       data = {}; // or any default value you want to assign
     }
-    if (localStorage.getItem('BATIK_')) {
+    if (this.cookieService.get('BATIK_')) {
       this.navbarMenu = [
         { label: 'Home',icon:'pi pi-home' },
         // { label: 'About', },

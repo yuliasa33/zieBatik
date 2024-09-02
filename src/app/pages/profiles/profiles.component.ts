@@ -8,6 +8,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { LayoutService } from 'src/app/service/layout-service/layout.service';
 import { AuthenticationService } from 'src/app/service/authentication-service/authentication.service';
 import { FooterComponent } from "../footer/footer.component";
+import { CookiesserviceService } from 'src/app/service/cookiesservice/cookiesservice.service';
+// import { CookieService } from 'src/app/service/cookie-service/cookie.service';
 
 @Component({
   selector: 'app-profiles',
@@ -32,6 +34,7 @@ export class ProfilesComponent implements OnInit {
               private profileService:ProfileService,
               public layoutService:LayoutService,
               private authenticationService:AuthenticationService,
+              private cookieService:CookiesserviceService
   ){
 
   }
@@ -54,7 +57,7 @@ export class ProfilesComponent implements OnInit {
   }
 
   checkIsLogin():void{
-    const isLogin = localStorage.getItem('BATIK_')
+    const isLogin = this.cookieService.get('BATIK_')
     console.log(isLogin)
     if(isLogin == null){
       this.utilityService.onShowCustomAlert('warning','Perhatian','Maaf Anda Belum Login')
@@ -65,14 +68,14 @@ export class ProfilesComponent implements OnInit {
   }
 
   isthisLogin():void{
-    const item = localStorage.getItem('BATIK_');
+    const item = this.cookieService.get('BATIK_');
     let data: any;
     if (item) {
       data = JSON.parse(item);
     } else {
       data = {}; // or any default value you want to assign
     }
-    if (localStorage.getItem('BATIK_')) {
+    if (this.cookieService.get('BATIK_')) {
       this.navbarMenu = [
         { label: 'Home',icon:'pi pi-home' },
         // { label: 'About', },

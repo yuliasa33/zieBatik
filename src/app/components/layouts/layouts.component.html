@@ -16,13 +16,12 @@
           <div class="flex flex-row w-full mx-5  justify-end">
             <div class="flex flex-col transition-all items-center text-end cursor-pointer p-3"
               *ngFor="let nav of navbarMenu">
-
               <div *ngIf="largeScreen" #largeScreen>
                 <ul>
                   <li>
                     <button (click)="handleClickNavbar($event)">
                       <div class="flex flex-row w-full h-full items-center gap-3 hover:border-b hover:border-gray-500">
-                        <p class="text-lg text-end p-3 font-bold">{{nav.label}}</p>
+                        <p class="text-lg text-end p-3 font-bold text-gray-700">{{nav.label}}</p>
 
                         <button class="" *ngIf="nav.children" (click)="toggleDropdown()">
                           <i [class]="nav.icon"></i>
@@ -66,7 +65,7 @@
       
 
 
-        <div class="flex w-screen h-full lg:h-screen lg:flex my-0">
+        <div class="flex w-screen h-full lg:h-screen lg:flex">
 
           <ng-content>
 
@@ -76,7 +75,7 @@
 
       </div>
 
-      <div class=" fixed bottom-0 right-0 lg:mx-4 lg:p-4 my-4 mx-2 p-1">
+      <div class=" fixed bottom-0 right-0 lg:mx-4 lg:p-4 my-4 mx-2 p-1" *ngIf="PersonLoggedIn == true">
         <button class="button fixed bottom-0 right-0 mx-4 p-4 my-4" (click)="onClickChart()">
           <svg class="svgIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path

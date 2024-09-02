@@ -1,4 +1,4 @@
-import { Component , OnInit,AfterViewInit } from '@angular/core';
+import { Component , OnInit,AfterViewInit, OnDestroy } from '@angular/core';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { LayoutsComponent } from 'src/app/components/layouts/layouts.component';
 import { AboutComponent } from '../about/about.component';
@@ -14,6 +14,13 @@ import * as Aos from 'aos';
 import { AuthenticationService } from 'src/app/service/authentication-service/authentication.service';
 import { Router } from '@angular/router';
 import { ProdukService } from 'src/app/service/produk/produk.service';
+import { DampakComponent } from "../dampak/dampak.component";
+import { CarouselComponent } from "../../components/carousel/carousel.component";
+// import { CookieService } from 'src/app/service/cookie-service/cookie.service';
+import { CookiesserviceService } from 'src/app/service/cookiesservice/cookiesservice.service';
+import { ArticleComponent } from "../article/article.component";
+import { Subject, takeUntil } from 'rxjs';
+import { VisitUsComponent } from '../visit-us/visit-us.component';
 
 
 @Component({
@@ -28,11 +35,15 @@ import { ProdukService } from 'src/app/service/produk/produk.service';
     CommonModule,
     TestimonialComponent,
     GalleryComponent,
-    EventsComponent
+    EventsComponent,
+    DampakComponent,
+    CarouselComponent,
+    ArticleComponent,
+    VisitUsComponent
 ],
   animations:[fadeInAnimation,fadeInAnimationForComponent]
 })
-export class HomeComponent implements OnInit,AfterViewInit {
+export class HomeComponent implements OnInit,AfterViewInit ,OnDestroy{
 
   currentSlide = 0;
   interval: any;
@@ -41,6 +52,8 @@ export class HomeComponent implements OnInit,AfterViewInit {
 
   isSmallScreen?:boolean
   largeScreen?:boolean
+
+  destroy$ = new Subject<void>()
 
   navbarMenu: any[] = [
     { label: 'Home', icon: 'pi pi-home' },
@@ -51,12 +64,17 @@ export class HomeComponent implements OnInit,AfterViewInit {
 
   loopitem:any[] = []
 
+  testProps = {
+    desc:'TEST'
+  }
+
 
   constructor(public layoutService:LayoutService,
               private authenticationService:AuthenticationService,
               private router:Router,
               private produkService:ProdukService,
               private domsanitizer: DomSanitizer,
+              private cookieService:CookiesserviceService
   ){
     document.addEventListener('DOMContentLoaded', () => {
     const items: CarouselItem[] = [
@@ -122,17 +140,20 @@ export class HomeComponent implements OnInit,AfterViewInit {
     this.getAllProdukDashboard()
     this.checkScreenSize()
     this.isLogin()
+    console.log("SUBJECT==>",this.destroy$.subscribe(result=>{
+      return result
+    }))
   }
 
   isLogin():void{
-    const item = localStorage.getItem('BATIK_');
+    const item = this.cookieService.get('BATIK_');
     let data: any;
     if (item) {
       data = JSON.parse(item);
     } else {
       data = {}; // or any default value you want to assign
     }
-    if (localStorage.getItem('BATIK_')) {
+    if (this.cookieService.get('BATIK_')) {
       this.navbarMenu = [
         { label: 'Home',icon:'pi pi-home' },
         // { label: 'About', },
@@ -177,7 +198,8 @@ export class HomeComponent implements OnInit,AfterViewInit {
   }
 
   getAllProdukDashboard():void{
-    this.produkService.getAllDashbord().subscribe(result=>{
+    this.produkService.getAllDashbord()
+    .pipe(takeUntil(this.destroy$)).subscribe(result=>{
       console.log(result)
       result.data.product.forEach((result:any)=>{
         result.deskripsi_product = this.domsanitizer.bypassSecurityTrustHtml(result.deskripsi_product)
@@ -205,6 +227,8 @@ export class HomeComponent implements OnInit,AfterViewInit {
 
   ngOnDestroy(): void {
     clearInterval(this.interval);
+    this.destroy$.complete()
+    this.destroy$.next()
   }
 
   startLoop(): void {
@@ -241,5 +265,6 @@ export class HomeComponent implements OnInit,AfterViewInit {
   handleClickLihatOpsi(args:any):void{
     this.router.navigate(['product/',args])
   }
+
 
 }

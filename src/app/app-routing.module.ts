@@ -39,7 +39,7 @@ const routes:Routes = [
         component:ShoppingChartComponent
     },{
         path:'list-event',
-        component:ListEventComponent
+        component:ListEventComponent,
     },{
         path:'event/:id',
         component:EventsComponent

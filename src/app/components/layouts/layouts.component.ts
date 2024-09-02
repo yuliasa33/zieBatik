@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from 'src/app/service/authentication-service/authentication.service';
+
+import { CookiesserviceService } from 'src/app/service/cookiesservice/cookiesservice.service';
 import { LayoutService } from 'src/app/service/layout-service/layout.service';
 
 @Component({
@@ -33,7 +35,7 @@ export class LayoutsComponent implements OnInit {
 
   isShowSidebar:boolean = false
   
-  
+  PersonLoggedIn:boolean = false
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -43,7 +45,8 @@ export class LayoutsComponent implements OnInit {
 
   constructor(public layoutService: LayoutService,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private cookieService:CookiesserviceService
   ) {
     this.checkScreenSize()
   }
@@ -51,7 +54,7 @@ export class LayoutsComponent implements OnInit {
   ngOnInit(): void {
 
     this.isScrolled = window.scrollY > 50
-    const item = localStorage.getItem('BATIK_');
+    const item = this.cookieService.get('BATIK_');
     let data: any;
 
     if (item) {
@@ -59,7 +62,7 @@ export class LayoutsComponent implements OnInit {
     } else {
       data = {}; // or any default value you want to assign
     }
-    if (localStorage.getItem('BATIK_')) {
+    if (this.cookieService.get('BATIK_')) {
       this.navbarMenu = [
         { label: 'Home', },
         // { label: 'About', },
@@ -73,6 +76,7 @@ export class LayoutsComponent implements OnInit {
         },
 
       ]
+      this.PersonLoggedIn = true
     }
 
 

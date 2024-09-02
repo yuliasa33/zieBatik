@@ -7,6 +7,8 @@ import { HttpOperationService } from '../httpOperation/http-operation.service';
 import { environment } from 'src/environment/environment';
 import { Router } from '@angular/router';
 import { ToastService } from '../taost/toast.service';
+import { CookiesserviceService } from '../cookiesservice/cookiesservice.service';
+// import { CookieService } from '../cookie-service/cookie.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,8 @@ export class AuthenticationService {
   constructor(private httpOperationService:HttpOperationService,
               private utilityService:UtilityService,
               private router:Router,
-              private toastService:ToastService
+              private toastService:ToastService,
+              private cookieService:CookiesserviceService
   ){
 
   }
@@ -50,7 +53,7 @@ export class AuthenticationService {
   }
 
   SignOut():void{
-    localStorage.clear()
+    this.cookieService.deleteAll()
     this.utilityService.onShowCustomAlert('success','Berhasil','LogOut Success')
     .then(()=>{
       this.router.navigateByUrl('')
@@ -69,8 +72,8 @@ export class AuthenticationService {
 
 
    handleSignIn(data:any):void{
-    localStorage.clear()
-    localStorage.setItem("BATIK_",JSON.stringify(data));
+    this.cookieService.deleteAll()
+    this.cookieService.set("BATIK_",JSON.stringify(data));
   }
 
 }

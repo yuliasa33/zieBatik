@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { UtilityService } from '../utility/utility.service';
+// import { CookieService } from '../cookie-service/cookie.service';
+import { CookiesserviceService } from '../cookiesservice/cookiesservice.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,8 @@ export class HttpOperationService {
 
   constructor(
     private _httpClient: HttpClient,
-    private _utilityService:UtilityService
+    private _utilityService:UtilityService,
+    private cookieService:CookiesserviceService
   ) { }
 
   getRequest(url: string): Observable<any> {
@@ -31,7 +34,7 @@ export class HttpOperationService {
   }
 
   getRequestwithToken(url:any):Observable<any>{
-    const item = localStorage.getItem('BATIK_');
+    const item = this.cookieService.get('BATIK_');
     let data: any;
 
     if (item) {
@@ -55,7 +58,7 @@ export class HttpOperationService {
   }
 
   onPostRequest(url:any,data:any){
-    const item = localStorage.getItem('BATIK_');
+    const item = this.cookieService.get('BATIK_');
     let token: any;
 
     if (item) {

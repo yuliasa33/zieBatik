@@ -118,7 +118,8 @@
                         <div class="flex flex-col w-full h-max p-3">
                             <div class="card-body w-full h-full relative rounded-xl shadow-md lg:mr-5 border-gray-500">
                                 <!-- Address Selection Button -->
-                                <button class="btn w-full lg:w-auto h-max p-2" id="openModal" onclick="my_modal_2.showModal()">
+                                <button class="btn w-full lg:w-auto h-max p-2" id="openModal"
+                                    onclick="my_modal_2.showModal()">
                                     <div class="flex flex-col lg:flex-row w-full h-auto items-center">
                                         <i class="pi pi-map-marker mx-3"></i>
                                         <p class="text-start p-3">{{selectedAlamat}}</p>
@@ -285,14 +286,16 @@
                                                                         {{almt.nama_lengkap}}, {{almt.alamat_lengkap}},
                                                                         provinsi
                                                                         {{almt.provinsi}}, kota {{almt.kota}}, no hp
-                                                                        ({{almt.no_hp}}) <span class="hidden">{{almt.id_kota}}</span>
+                                                                        ({{almt.no_hp}}) <span
+                                                                            class="hidden">{{almt.id_kota}}</span>
                                                                     </p>
                                                                 </div>
                                                                 <div
                                                                     class="flex w-full h-auto justify-end items-center gap-3">
-                                                                     <button class="btn " (click)="onPilihAlamat($event,almt)">
-                                                                   PILIH
-                                                                </button> 
+                                                                    <button class="btn "
+                                                                        (click)="onPilihAlamat($event,almt)">
+                                                                        PILIH
+                                                                    </button>
                                                                     <button class="btn " (click)="EditAlamat(almt)">
                                                                         <i
                                                                             class="pi pi-file-edit text-yellow-500 text-sm"></i>
@@ -308,15 +311,16 @@
                                                         </div>
 
                                                     </div>
-                                                    
+
                                                     <div class="flex flex-col w-full h-auto my-2">
                                                         <div class="input-alamat w-full border h-full">
                                                             <form [formGroup]="FormInputAlamat">
                                                                 <div class="flex flex-col w-full p-2 m-2">
                                                                     <p class="text-sm font-bold">Tambah Alamat Baru</p>
                                                                     <div class="flex flex-col w-full">
-            
-                                                                        <div class="flex flex-row w-full items-center p-2 h-auto">
+
+                                                                        <div
+                                                                            class="flex flex-row w-full items-center p-2 h-auto">
                                                                             <div class="w-5/12">
                                                                                 <p class="text-sm">
                                                                                     Nama Lengkap
@@ -328,11 +332,12 @@
                                                                                         formControlName="nama_lengkap"
                                                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                                                         required />
-            
+
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="flex flex-row w-full items-center p-2 h-auto">
+                                                                        <div
+                                                                            class="flex flex-row w-full items-center p-2 h-auto">
                                                                             <div class="w-5/12">
                                                                                 <p class="text-sm">
                                                                                     No Telpon
@@ -349,7 +354,8 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="flex flex-row w-full items-center p-2 h-auto">
+                                                                        <div
+                                                                            class="flex flex-row w-full items-center p-2 h-auto">
                                                                             <div class="w-5/12">
                                                                                 <p class="text-sm">
                                                                                     Alamat Lengkap
@@ -361,11 +367,12 @@
                                                                                         formControlName="alamat_lengkap"
                                                                                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                                                         placeholder="Write your thoughts here..."></textarea>
-            
+
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="flex flex-row w-full items-center p-2 h-auto">
+                                                                        <div
+                                                                            class="flex flex-row w-full items-center p-2 h-auto">
                                                                             <div class="w-5/12">
                                                                                 <p class="text-sm">
                                                                                     Provinsi
@@ -373,19 +380,23 @@
                                                                             </div>
                                                                             <div class="w-7/12">
                                                                                 <div class="flex w-full">
-                                                                                    <select (change)="handleChangeProvinsi($event)"
+                                                                                    <select
+                                                                                        (change)="handleChangeProvinsi($event)"
                                                                                         formControlName="id_provinsi"
                                                                                         [(ngModel)]="selectedProvinsi"
                                                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                                                        <option selected>Pilih Privovinsi</option>
-                                                                                        <option *ngFor="let prov of prov"
+                                                                                        <option selected>Pilih
+                                                                                            Privovinsi</option>
+                                                                                        <option
+                                                                                            *ngFor="let prov of prov"
                                                                                             [value]="prov.province_id">
                                                                                             {{prov.province}}</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="flex flex-row w-full items-center p-2 h-auto">
+                                                                        <div
+                                                                            class="flex flex-row w-full items-center p-2 h-auto">
                                                                             <div class="w-5/12">
                                                                                 <p class="text-sm">
                                                                                     Kota
@@ -393,30 +404,38 @@
                                                                             </div>
                                                                             <div class="w-7/12">
                                                                                 <div class="flex w-full">
-                                                                                    <select id="countries" formControlName="id_kota"
+                                                                                    <select id="countries"
+                                                                                        formControlName="id_kota"
                                                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                                                        <option selected>Pilih Kota</option>
-                                                                                        <option *ngFor="let city of city"
+                                                                                        <option selected>Pilih Kota
+                                                                                        </option>
+                                                                                        <option
+                                                                                            *ngFor="let city of city"
                                                                                             [value]="city.city_id">
                                                                                             {{city.city_name}}</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-            
+
                                                                         <div
                                                                             class="flex flex-row w-full h-full items-center gap-3 justify-end p-3">
                                                                             <button (click)="onResetForm()"
                                                                                 class="btn btn-error text-white  text-sm">
-                                                                                Reset <i class="pi pi-sync"></i></button>
-                                                                            <button *ngIf="FormInputAlamatState == 'Edit'"
+                                                                                Reset <i
+                                                                                    class="pi pi-sync"></i></button>
+                                                                            <button
+                                                                                *ngIf="FormInputAlamatState == 'Edit'"
                                                                                 (click)="HandleEditAlamat(FormInputAlamat.value)"
                                                                                 class="btn btn-warning text-white  text-sm">
-                                                                                Edit Alamat <i class="pi pi-file-edit"></i></button>
-                                                                            <button *ngIf="FormInputAlamatState == 'Tambah'"
+                                                                                Edit Alamat <i
+                                                                                    class="pi pi-file-edit"></i></button>
+                                                                            <button
+                                                                                *ngIf="FormInputAlamatState == 'Tambah'"
                                                                                 (click)="handleTambahAlamat(FormInputAlamat.value)"
                                                                                 class="btn btn-success text-white  text-sm">Tambah
-                                                                                Alamat <i class="pi pi-plus"></i></button>
+                                                                                Alamat <i
+                                                                                    class="pi pi-plus"></i></button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -457,7 +476,8 @@
                                         <div class="w-7/12">
                                             <div class="flex w-full justify-end font-semibold text-xl">
                                                 <select id="countries" (change)="handleChangeEkspedisi($event)"
-                                                    [(ngModel)]="selectedEkspedisi" [disabled]="selectedAlamat == 'Pilih Alamat Pengiriman'"
+                                                    [(ngModel)]="selectedEkspedisi"
+                                                    [disabled]="selectedAlamat == 'Pilih Alamat Pengiriman'"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                                     <option selected>Pilih Ekspedisi</option>
                                                     <option *ngFor="let ekspds of ekspedisi" [value]="ekspds.code">
@@ -475,12 +495,16 @@
                                         <div class="w-7/12">
                                             <div class="flex w-full justify-end font-semibold text-xl">
                                                 <select id="countries" (change)="handleChangePaketKirim($event)"
-                                                    [(ngModel)]="selectedPaketKirim"
+                                                    *ngIf="!Loading" [(ngModel)]="selectedPaketKirim"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                                     <option selected>Pilih Paket Pengiriman</option>
                                                     <option *ngFor="let package of paketPengiriman" [ngValue]="package">
                                                         {{package.name}}</option>
                                                 </select>
+
+                                            </div>
+                                            <div class="flex w-full justify-center" *ngIf="Loading">
+                                                <i class="pi pi-spin pi-spinner text-center"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -564,7 +588,8 @@
                                     <button (click)="handleClickBayar(total)"
                                         class="w-full rounded-lg border border-gray-300 shadow-md h-16 hover:bg-gray-300 transition-all duration-100">
                                         <p class="text-2xl font-semibold">Bayar <i *ngIf="showSpinner == false"
-                                                class="pi pi-credit-card text-2xl font-semibold"></i> <i *ngIf="showSpinner == true"
+                                                class="pi pi-credit-card text-2xl font-semibold"></i> <i
+                                                *ngIf="showSpinner == true"
                                                 class="pi pi-spin pi-spinner text-2xl font-semibold"></i></p>
                                     </button>
                                 </div>
@@ -581,27 +606,26 @@
 
     </div>
 
-    <div
-    class="sidebar flex flex-row w-5/12  h-screen fixed top-0 right-0 justify-end mt-20 bg-white transition-all duration-500"
-    *ngIf="layoutService.showSidebar$ | async">
-    <div class="sidebar-content text-center justify-center">
-      <div *ngFor="let nav of navbarMenu" class="sidebar-item  opacity-100">
-        <div class="flex flex-row w-full items-center">
-          <i [class]="nav.icon"></i>
-          <button (click)="handleClickSidbar(nav.label)">
-            <p class="text-sm p-3 font-bold  opacity-100">{{nav.label}}</p>
-          </button>
+    <div class="sidebar flex flex-row w-5/12  h-screen fixed top-0 right-0 justify-end mt-20 bg-white transition-all duration-500"
+        *ngIf="layoutService.showSidebar$ | async">
+        <div class="sidebar-content text-center justify-center">
+            <div *ngFor="let nav of navbarMenu" class="sidebar-item  opacity-100">
+                <div class="flex flex-row w-full items-center">
+                    <i [class]="nav.icon"></i>
+                    <button (click)="handleClickSidbar(nav.label)">
+                        <p class="text-sm p-3 font-bold  opacity-100">{{nav.label}}</p>
+                    </button>
+                </div>
+                <div class="sidebar-child" *ngIf="nav.children">
+                    <div class="flex flex-row w-full items-center" *ngFor="let data of nav.children">
+                        <i [class]="data.icon"></i>
+                        <button (click)="handleClickSidbar(data.label)">
+                            <p class="text-sm p-3 font-bold  opacity-100">{{data.label}}</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="sidebar-child" *ngIf="nav.children">
-          <div class="flex flex-row w-full items-center" *ngFor="let data of nav.children">
-            <i [class]="data.icon"></i>
-            <button (click)="handleClickSidbar(data.label)">
-              <p class="text-sm p-3 font-bold  opacity-100">{{data.label}}</p>
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
 
 </app-layouts>

@@ -1,6 +1,6 @@
 <app-layouts>
     <div class="flex flex-col w-screen h-screen">
-    <div class="flex flex-col lg:flex-row mt-20 w-full h-full">
+    <div class="flex flex-col lg:flex-row mt-20 w-full h-max">
         <div class="container mx-auto h-max">
             <div class="flex flex-col lg:flex-row w-full gap-3 h-max border-b-gray-500">
                 <div class="w-full lg:w-2/12">
@@ -39,6 +39,27 @@
                                                 <p class="text-lg font-semibold">STATUS ORDER</p>
                                             </div>
                                             <div class="w-full md:w-8/12">
+                                                <div *ngIf="data.status == 'DALAM PENGIRIMAN'">
+                                                    <span
+                                                        class="inline-flex items-center bg-indigo-200 justify-center text-indigo-500 text-xs font-medium ml-1 px-2 py-0.5 w-28 h-6 rounded-full">
+                                                        <span class="w-1.5 h-1.5 mr-1 bg-indigo-400 rounded-full"></span>
+                                                        PENGIRIMAN
+                                                    </span>
+                                                </div>
+                                                <div *ngIf="data.status == 'CANCEL'">
+                                                    <span
+                                                        class="inline-flex items-center bg-red-200 justify-center text-red-500 text-xs font-medium ml-1 px-2 py-0.5 w-28 h-6 rounded-full">
+                                                        <span class="w-1.5 h-1.5 mr-1 bg-red-400 rounded-full"></span>
+                                                        CANCEL
+                                                    </span>
+                                                </div>
+                                                <div *ngIf="data.status == 'PENDING'">
+                                                    <span
+                                                        class="inline-flex items-center bg-slate-200 justify-center text-slate-500 text-xs font-medium ml-1 px-2 py-0.5 w-28 h-6 rounded-full">
+                                                        <span class="w-1.5 h-1.5 mr-1 bg-slate-400 rounded-full"></span>
+                                                        PENDING
+                                                    </span>
+                                                </div>
                                                 <div *ngIf="data.status == 'DALAM PROSES PACKING'">
                                                     <span
                                                         class="inline-flex items-center bg-blue-200 justify-center text-blue-500 text-xs font-medium ml-1 px-2 py-0.5 w-28 h-6 rounded-full">
@@ -53,7 +74,7 @@
                                                         OPEN
                                                     </span>
                                                 </div>
-                                                <div *ngIf="data.status == 'paid'">
+                                                <div *ngIf="data.status == 'PAID'">
                                                     <span
                                                         class="inline-flex items-center bg-yellow-400 text-amber-100 text-xs justify-center font-medium ml-1 px-2 py-0.5 rounded-full w-28 h-6">
                                                         <span class="w-1.5 h-1.5 mr-1 bg-amber-400 rounded-full"></span>

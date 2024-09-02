@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,OnDestroy} from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LayoutsComponent } from 'src/app/components/layouts/layouts.component';
@@ -10,6 +10,9 @@ import { UtilityService } from 'src/app/service/utility/utility.service';
 import Swal from 'sweetalert2';
 import { LayoutService } from 'src/app/service/layout-service/layout.service';
 import { AuthenticationService } from 'src/app/service/authentication-service/authentication.service';
+import { CookiesserviceService } from 'src/app/service/cookiesservice/cookiesservice.service';
+import { Subject, takeUntil } from 'rxjs';
+// import { CookieService } from 'src/app/service/cookie-service/cookie.service';
 
 @Component({
   selector: 'app-shopping-chart',
@@ -18,7 +21,7 @@ import { AuthenticationService } from 'src/app/service/authentication-service/au
   standalone: true,
   imports: [LayoutsComponent, FooterComponent, CommonModule, FormsModule, ReactiveFormsModule]
 })
-export class ShoppingChartComponent implements OnInit {
+export class ShoppingChartComponent implements OnInit ,OnDestroy{
 
   selectedAlamat: any = "Pilih Alamat Pengiriman";
   cart: any = [];
@@ -51,12 +54,16 @@ export class ShoppingChartComponent implements OnInit {
 
   showSpinner:boolean = false
 
+  destroy$ = new Subject<void>()
+
   navbarMenu: any[] = [
     { label: 'Home', icon: 'pi pi-home' },
     { label: 'Product', icon: 'pi pi-receipt' },
     { label: 'Events', icon: 'pi pi-flag' },
     { label: 'Login', icon: 'pi pi-user' },
   ]
+
+  Loading:boolean = false
 
 
   constructor(
@@ -67,6 +74,7 @@ export class ShoppingChartComponent implements OnInit {
     private utilityService: UtilityService,
     public layoutService:LayoutService,
               private authenticationService:AuthenticationService,
+              private cookieService:CookiesserviceService
   ) { }
 
   ngOnInit(): void {
@@ -109,13 +117,15 @@ export class ShoppingChartComponent implements OnInit {
   }
 
   reload_alamat() {
-    this.produkService.get_alamat().subscribe(result => {
+    this.produkService.get_alamat()
+    .pipe(takeUntil(this.destroy$)).subscribe(result => {
       this.alamat = result.data
     })
   }
 
   reload() {
-    this.produkService.getcart().subscribe(result => {
+    this.produkService.getcart()
+    .pipe(takeUntil(this.destroy$)).subscribe(result => {
      
       this.cart = result.data
      
@@ -207,7 +217,8 @@ export class ShoppingChartComponent implements OnInit {
   }
 
   getEkspedisi(): void {
-    this.produkService.kurir().subscribe(result => {
+    this.produkService.kurir()
+    .pipe(takeUntil(this.destroy$)).subscribe(result => {
       
       console.log(result)
       
@@ -242,10 +253,13 @@ export class ShoppingChartComponent implements OnInit {
         "weight": this.berat,
         "courier": this.selectedEkspedisi
       }
-  
-      this.produkService.cekOngkir(payload).subscribe(result => {
+      this.Loading = true
+      this.produkService.cekOngkir(payload)
+      .pipe(takeUntil(this.destroy$)).subscribe(result => {
         console.log(result)
+        this.Loading = false
         this.paketPengiriman = result.data.rajaongkir.results
+   
         // result.data.rajaongkir.results.forEach((res: any) => {
         //   this.costOngkir.push(...res.costs)
         // })
@@ -483,9 +497,9 @@ export class ShoppingChartComponent implements OnInit {
   }
 
   checkIsLogin():void{
-    const isLogin = localStorage.getItem('BATIK_')
+    const isLogin = this.cookieService.get('BATIK_')
     console.log(isLogin)
-    if(isLogin == null){
+    if(!isLogin){
       this.utilityService.onShowCustomAlert('warning','Perhatian','Maaf Anda Belum Login')
       .then(()=>{
         this.router.navigateByUrl('')
@@ -494,14 +508,14 @@ export class ShoppingChartComponent implements OnInit {
   }
 
   isthisLogin():void{
-    const item = localStorage.getItem('BATIK_');
+    const item = this.cookieService.get('BATIK_');
     let data: any;
     if (item) {
       data = JSON.parse(item);
     } else {
       data = {}; // or any default value you want to assign
     }
-    if (localStorage.getItem('BATIK_')) {
+    if (this.cookieService.get('BATIK_')) {
       this.navbarMenu = [
         { label: 'Home',icon:'pi pi-home' },
         // { label: 'About', },
@@ -543,6 +557,11 @@ export class ShoppingChartComponent implements OnInit {
       this.router.navigateByUrl('login')
     }
 
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next()
+    this.destroy$.complete()
   }
 
   get nama_lengkap(): AbstractControl { return this.FormInputAlamat.get('nama_lengkap') as AbstractControl }

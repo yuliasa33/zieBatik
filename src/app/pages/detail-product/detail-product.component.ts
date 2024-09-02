@@ -8,6 +8,8 @@ import { FooterComponent } from "../footer/footer.component";
 import { AuthenticationService } from 'src/app/service/authentication-service/authentication.service';
 import { LayoutService } from 'src/app/service/layout-service/layout.service';
 import { UtilityService } from 'src/app/service/utility/utility.service';
+// import { CookieService } from 'src/app/service/cookie-service/cookie.service';
+import { CookiesserviceService } from 'src/app/service/cookiesservice/cookiesservice.service';
 
 @Component({
   selector: 'app-detail-product',
@@ -45,7 +47,8 @@ export class DetailProductComponent implements OnInit {
     private router:Router,
     private authenticationService:AuthenticationService,
     public layoutService:LayoutService,
-    private utilityService:UtilityService
+    private utilityService:UtilityService,
+    private cookieService:CookiesserviceService
   ) {
     this.subtotal = this.pricePerItem; // Initialize subtotal based on the price of one item
   }
@@ -65,14 +68,14 @@ export class DetailProductComponent implements OnInit {
   }
 
   isLogin():void{
-    const item = localStorage.getItem('BATIK_');
+    const item = this.cookieService.get('BATIK_');
     let data: any;
     if (item) {
       data = JSON.parse(item);
     } else {
       data = {}; // or any default value you want to assign
     }
-    if (localStorage.getItem('BATIK_')) {
+    if (this.cookieService.get('BATIK_')) {
       this.navbarMenu = [
         { label: 'Home',icon:'pi pi-home' },
         // { label: 'About', },

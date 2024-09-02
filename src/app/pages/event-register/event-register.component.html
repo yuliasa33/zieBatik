@@ -1,7 +1,7 @@
 <app-layouts>
     <div class="flex flex-col w-screen h-screen gap-2" @fadeIn>
         <div class="image-event flex justify-center w-full  mt-20 h-4/6 py-3">
-            <img [src]="StateContentByGet.images" alt="" class="h-full w-8/12 text-center ">
+            <img [src]="StateContentByGet.images" alt="" class="h-full w-6/12 text-center ">
         </div>
         <div class="flex flex-col w-full h-full gap-3 p-4 justify-center">
             <div class="judul">
@@ -10,7 +10,7 @@
                 </p>
             </div>
             <div class="content flex justify-center">
-                <p class="text-sm md:text-base lg:text-lg text-justify mx-20" >
+                <p class="text-sm md:text-base lg:text-lg text-justify mx-20" [innerHTML]="StateContentByGet.deskripsi">
                      <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat eos necessitatibus aliquam mollitia,
                     voluptatum cupiditate optio voluptas saepe, magnam obcaecati sint repudiandae placeat rem nisi
                     tempora nulla voluptates, ducimus ratione temporibus nostrum dolorem cum excepturi illum! Officia

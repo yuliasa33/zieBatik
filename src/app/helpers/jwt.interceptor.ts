@@ -2,16 +2,17 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/c
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environment/environment";
+import { CookiesserviceService } from "../service/cookiesservice/cookiesservice.service";
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor{
-    constructor() { }
+    constructor(private cookieService:CookiesserviceService) { }
 
     intercept(httpRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         const WebApiUrl = httpRequest.url.startsWith(`${environment.url}`);
 
-        const userData = localStorage.getItem("BATIK_");
+        const userData = this.cookieService.get("BATIK_");
 
         if (userData && WebApiUrl) {
             const UserData = JSON.parse(userData)
